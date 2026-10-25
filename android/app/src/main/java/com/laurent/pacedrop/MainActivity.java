@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.CancellationSignal;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import androidx.activity.OnBackPressedCallback;
@@ -31,6 +32,7 @@ public class MainActivity extends BridgeActivity {
     }
 
     private void demanderIdentifiants() {
+        Toast.makeText(this, "Recherche des mots de passe…", Toast.LENGTH_SHORT).show();
         try {
             CredentialManager gestionnaire = CredentialManager.create(this);
             GetCredentialRequest requete = new GetCredentialRequest.Builder()
@@ -53,12 +55,13 @@ public class MainActivity extends BridgeActivity {
 
                     @Override
                     public void onError(GetCredentialException e) {
-                        // Annulé ou aucun mot de passe enregistré : on laisse le formulaire tel quel.
+                        // Annulé ou aucun mot de passe : on affiche la raison (mise au point).
+                        Toast.makeText(MainActivity.this, "Mots de passe : " + e.getType() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             );
-        } catch (Exception e) {
-            // Pas bloquant : la connexion manuelle reste possible.
+        } catch (Throwable e) {
+            Toast.makeText(this, "Mots de passe : erreur " + e, Toast.LENGTH_LONG).show();
         }
     }
 
