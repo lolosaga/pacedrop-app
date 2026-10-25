@@ -16,6 +16,16 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        debug {
+            // Clé de TEST fixe (publique, sans valeur) : même empreinte à chaque build,
+            // nécessaire à l'association appli ↔ site (mots de passe) et aux mises à jour.
+            storeFile file('pacedrop-test.keystore')
+            storePassword 'pacedrop-test'
+            keyAlias 'pacedroptest'
+            keyPassword 'pacedrop-test'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
