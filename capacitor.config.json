@@ -1,0 +1,14 @@
+{
+  "appId": "com.laurent.pacedrop",
+  "appName": "PaceDrop",
+  "webDir": "www",
+  "server": {
+    "url": "https://pacedrop-backend-production.up.railway.app",
+    "cleartext": false,
+    "androidScheme": "https",
+    "allowNavigation": ["pacedrop-backend-production.up.railway.app", "pacedrop.app", "*.pacedrop.app"],
+    "errorPath": "hors-ligne.html"
+  },
+  "android": { "allowMixedContent": false },
+  "ios": { "contentInset": "always" }
+}
