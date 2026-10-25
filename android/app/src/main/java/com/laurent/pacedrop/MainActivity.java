@@ -9,6 +9,10 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Taille du texte alignée sur le rendu dans Chrome (115 %).
+        if (getBridge() != null && getBridge().getWebView() != null) {
+            getBridge().getWebView().getSettings().setTextZoom(115);
+        }
         // Bouton retour : revient à la page précédente du site, et ne quitte
         // l'appli que depuis la première page.
         getOnBackPressedDispatcher().addCallback(

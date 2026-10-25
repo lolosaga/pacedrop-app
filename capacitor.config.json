@@ -9,6 +9,6 @@
     "allowNavigation": ["pacedrop-backend-production.up.railway.app", "pacedrop.app", "*.pacedrop.app"],
     "errorPath": "hors-ligne.html"
   },
-  "android": { "allowMixedContent": false },
+  "android": { "allowMixedContent": false, "adjustMarginsForEdgeToEdge": "force" },
   "ios": { "contentInset": "always" }
 }
