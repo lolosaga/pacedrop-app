@@ -11,6 +11,8 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
+import androidx.credentials.CreateCredentialResponse;
+import androidx.credentials.CreatePasswordRequest;
 import androidx.credentials.Credential;
 import androidx.credentials.CredentialManager;
 import androidx.credentials.CredentialManagerCallback;
@@ -18,6 +20,7 @@ import androidx.credentials.GetCredentialRequest;
 import androidx.credentials.GetCredentialResponse;
 import androidx.credentials.GetPasswordOption;
 import androidx.credentials.PasswordCredential;
+import androidx.credentials.exceptions.CreateCredentialException;
 import androidx.credentials.exceptions.GetCredentialException;
 import com.getcapacitor.BridgeActivity;
 import org.json.JSONObject;
@@ -26,8 +29,43 @@ public class MainActivity extends BridgeActivity {
     /** Pont appelé par la page de connexion : ouvre le sélecteur de mots de passe de Google. */
     private class PontIdentifiants {
         @JavascriptInterface
+        public void enregistrer(final String identifiant, final String motDePasse) {
+            runOnUiThread(() -> enregistrerIdentifiants(identifiant, motDePasse));
+        }
+
+        @JavascriptInterface
         public void demander() {
             runOnUiThread(() -> demanderIdentifiants());
+        }
+    }
+
+    private void soumettreConnexion() {
+        WebView web = getBridge() != null ? getBridge().getWebView() : null;
+        if (web != null) web.evaluateJavascript("window.__pdSoumettre && window.__pdSoumettre();", null);
+    }
+
+    /** Propose à Google d'enregistrer l'identifiant, puis laisse la connexion continuer. */
+    private void enregistrerIdentifiants(String identifiant, String motDePasse) {
+        try {
+            CredentialManager.create(this).createCredentialAsync(
+                this,
+                new CreatePasswordRequest(identifiant, motDePasse),
+                new CancellationSignal(),
+                ContextCompat.getMainExecutor(this),
+                new CredentialManagerCallback<CreateCredentialResponse, CreateCredentialException>() {
+                    @Override
+                    public void onResult(CreateCredentialResponse reponse) {
+                        soumettreConnexion();
+                    }
+
+                    @Override
+                    public void onError(CreateCredentialException e) {
+                        soumettreConnexion();
+                    }
+                }
+            );
+        } catch (Throwable e) {
+            soumettreConnexion();
         }
     }
 
