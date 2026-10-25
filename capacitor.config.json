@@ -3,7 +3,7 @@
   "appName": "PaceDrop",
   "webDir": "www",
   "server": {
-    "url": "https://pacedrop-backend-production.up.railway.app",
+    "url": "https://pacedrop-backend-production.up.railway.app/activities/upload",
     "cleartext": false,
     "androidScheme": "https",
     "allowNavigation": ["pacedrop-backend-production.up.railway.app", "pacedrop.app", "*.pacedrop.app"],
