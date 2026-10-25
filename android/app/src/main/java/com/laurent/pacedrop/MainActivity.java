@@ -1,6 +1,8 @@
 package com.laurent.pacedrop;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.core.view.WindowCompat;
@@ -14,6 +16,11 @@ public class MainActivity extends BridgeActivity {
         // Taille du texte alignée sur le rendu dans Chrome (115 %).
         if (getBridge() != null && getBridge().getWebView() != null) {
             getBridge().getWebView().getSettings().setTextZoom(115);
+            // Saisie automatique : demande explicite au gestionnaire de mots de passe.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                getBridge().getWebView().setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_YES);
+                getWindow().getDecorView().setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_YES);
+            }
         }
         // Fond clair : icônes de la barre d'état (heure, batterie, réseau) en foncé.
         WindowInsetsControllerCompat controleur = WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
