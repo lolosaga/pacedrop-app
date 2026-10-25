@@ -4,8 +4,8 @@ Coque Capacitor : l'application ouvre le serveur PaceDrop (`capacitor.config.jso
 Chaque déploiement du backend est donc visible tout de suite, sans reconstruire l'APK.
 
 ## Récupérer l'APK de test
-1. GitHub → onglet **Actions** → workflow **APK Android** → dernier run (ou **Run workflow**).
-2. En bas de la page du run, télécharger **pacedrop-apk** (un zip contenant `app-debug.apk`).
+1. GitHub → **Releases** → « APK de test PaceDrop » → télécharger **pacedrop.apk** (il est remplacé à chaque compilation).
+   Sinon : onglet **Actions** → dernier run → « Artifacts » → `pacedrop-apk` (un zip).
 3. Sur le téléphone : ouvrir l'APK, autoriser l'installation depuis cette source.
 
 ## Changer l'adresse du serveur
