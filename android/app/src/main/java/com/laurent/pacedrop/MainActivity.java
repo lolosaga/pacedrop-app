@@ -75,7 +75,16 @@ public class MainActivity extends BridgeActivity {
         // Taille du texte alignée sur le rendu dans Chrome (115 %).
         if (getBridge() != null && getBridge().getWebView() != null) {
             getBridge().getWebView().getSettings().setTextZoom(115);
-            getBridge().getWebView().addJavascriptInterface(new PontIdentifiants(), "PaceDropNative");
+            final WebView web = getBridge().getWebView();
+            web.addJavascriptInterface(new PontIdentifiants(), "PaceDropNative");
+            // Un pont ajouté après le début du chargement n'apparaît qu'à la page suivante :
+            // on recharge une fois la première page pour qu'il y soit présent.
+            web.post(new Runnable() {
+                @Override
+                public void run() {
+                    web.reload();
+                }
+            });
             // Saisie automatique : demande explicite au gestionnaire de mots de passe.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 getBridge().getWebView().setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_YES);
