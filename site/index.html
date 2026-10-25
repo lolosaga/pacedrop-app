@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PaceDrop — Coach IA pour route, trail, swimrun et triathlon</title>
+<meta name="description" content="PaceDrop analyse chaque séance, construit votre plan et prépare votre course : route, trail, swimrun, triathlon, backyard. 14 jours gratuits, sans carte.">
+<meta name="theme-color" content="#4b76a8">
+<meta property="og:title" content="PaceDrop — Coach IA pour route, trail, swimrun et triathlon">
+<meta property="og:description" content="Importez une sortie, PaceMind l'analyse, PaceMap prépare votre course. 14 jours gratuits, sans carte.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og-image.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f7f9fc;color:#0f172a;font-family:"Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+*,*::before,*::after{box-sizing:border-box}
+h1,h2,h3,h4{font-family:"Space Grotesk",sans-serif;letter-spacing:-.02em}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border-radius:18px;font-weight:700;font-size:17px;text-decoration:none;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.btn-or{background:#e8761a;color:#fff}
+.btn-or:hover{background:#d76a12}
+.btn-bl{background:#4b76a8;color:#fff}
+.btn-bl:hover{background:#3f6899}
+.btn-ln{border:2px solid #4b76a8;color:#35598f;background:#fff}
+.btn-ln:hover{background:#eaf0f8}
+.btn-wh{background:#fff;color:#2f5183}
+/* Bloc marque : identique à l'en-tête de l'appli */
+.lock{display:flex;align-items:center;gap:16px;text-decoration:none;min-width:0}
+.lg{flex:none;width:var(--s,80px);height:var(--s,80px);background:#fff;border-radius:calc(var(--s,80px)*.275);border:3px solid #4b76a8;box-shadow:0 0 16px rgba(75,118,168,.35);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.lg img{width:130%;height:130%;max-width:none;object-fit:contain;display:block;flex:none}
+.lock b{display:block;font-weight:800;font-size:var(--t,34px);color:#4b76a8;text-transform:uppercase;letter-spacing:.5px;line-height:1}
+.lock small{display:block;margin-top:7px;font-size:var(--u,14px);color:#56657a;letter-spacing:.12em;text-transform:uppercase}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(247,249,252,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:2px solid #dde5f0}
+nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:84px;gap:16px}
+nav.top .lock{--s:56px;--t:24px;--u:10.5px}
+.links{display:flex;align-items:center;gap:28px}
+.links a{color:#33445f;text-decoration:none;font-size:16px;font-weight:600}
+.links a:hover{color:#4b76a8}
+.links a.btn{color:#fff;min-height:46px;padding:0 22px;font-size:15px;border-radius:14px}
+.hero{position:relative;overflow:hidden;background:radial-gradient(900px 560px at 76% 38%,#d9e7f8 0%,rgba(217,231,248,0) 70%),radial-gradient(560px 380px at 0% 100%,#fde3cc 0%,rgba(253,227,204,0) 70%),#f7f9fc;padding:56px 0 88px}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 20px;padding:7px 14px;border-radius:999px;background:#fff;border:2px solid #dde5f0;font-size:14px;font-weight:600;color:#35598f}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:#e8761a}
+.hero h1{margin:0 0 22px;font-size:66px;line-height:1.02;font-weight:700;color:#1b2f52}
+.hero h1 em{font-style:normal;color:#e8761a}
+.hero p.lead{margin:0 0 32px;font-size:21px;line-height:1.5;color:#40516c;max-width:520px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.plat{margin:20px 0 0;font-size:15px;color:#56657a;display:flex;flex-wrap:wrap;gap:6px 18px}
+.plat span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#2aa3b8;margin-right:8px}
+.stage{position:relative;height:660px}
+.orb{position:absolute;left:50%;top:50px;margin-left:-250px;width:500px;height:500px;border-radius:50%;background:linear-gradient(140deg,#cfe0f6 0%,#fde3cc 100%)}
+.di{width:100%;height:100%;display:block}
+.dchip{position:absolute;z-index:4;display:flex;align-items:center;gap:8px;background:#fff;border:2px solid #dde5f0;border-radius:999px;padding:7px 16px 7px 7px;font-weight:700;font-size:15px;color:#1b2f52;box-shadow:0 12px 28px rgba(27,47,82,.16)}
+.dchip i{flex:none;width:34px;height:34px;border-radius:50%;background:var(--f);display:grid;place-items:center}
+.dchip i svg{width:19px;height:19px}
+.dgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:44px}
+.dc{background:#fff;border:2px solid #dde5f0;border-radius:24px;padding:24px}
+.dic{width:72px;height:72px;border-radius:20px;display:grid;place-items:center;background:var(--f)}
+.dic svg{width:38px;height:38px}
+.dc h3{margin:18px 0 6px;font-size:22px;color:#1b2f52}
+.dc p{margin:0;font-size:16px;line-height:1.45;color:#40516c}
+.phone{position:absolute;left:50%;margin-left:-159px;bottom:0;width:318px;height:600px;border-radius:42px;background:#1b2f52;padding:10px;box-shadow:0 30px 70px rgba(27,47,82,.42);z-index:3}
+.scr{height:100%;background:#fff;border-radius:33px;overflow:hidden}
+.sbar{height:24px;background:#4b76a8}
+.scr .in{padding:12px}
+.hdr{display:flex;align-items:center;gap:12px;background:#f8fafc;border-radius:20px;padding:12px}
+.hdr .lock{gap:12px;--s:56px;--t:22px;--u:8.5px}
+.hdr .lock small{margin-top:5px}
+.card{background:#f7f9fc;border:1.5px solid #dde5f0;border-radius:16px;padding:11px 13px;margin-top:10px}
+.card em{display:block;font-style:italic;font-weight:700;font-size:13px;line-height:1.3;color:#f7640b}
+.card b{display:block;margin-top:8px;font-size:15px;font-weight:800}
+.card span{font-size:13px}
+.mr{display:flex;align-items:center;gap:11px;background:#f7f9fc;border:2px solid #dde5f0;border-radius:16px;padding:8px 12px 8px 8px;margin-top:9px}
+.mi{flex:none;width:92px;height:68px;border-radius:18px;background:linear-gradient(135deg,#ddebfa 0%,#f6f9fe 100%);border:1px solid #cfddf0;display:flex;align-items:center;justify-content:center}
+.mi svg{width:80px;height:58px;display:block}
+.phone .mi{width:70px;height:52px;border-radius:14px}
+.phone .mi svg{width:60px;height:44px}
+.mr strong{display:block;font-size:15px;font-weight:700}
+.phone .mr strong{font-size:13.5px}
+.mr small{display:block;margin-top:1px;font-size:12.5px;color:#56657a;line-height:1.3}
+.phone .mr small{font-size:11px}
+.float{position:absolute;z-index:4;background:#fff;border:2px solid #dde5f0;border-radius:18px;padding:12px 14px;box-shadow:0 18px 40px rgba(27,47,82,.2);display:flex;gap:11px;align-items:center}
+.float .lg{--s:40px;border-width:2px;border-radius:11px}
+.float b{display:block;font-size:14px}
+.float span{font-size:13px;color:#56657a}
+.f1{right:-30px;top:372px;max-width:190px}
+.f2{left:-40px;bottom:12px;max-width:190px;border-color:#f3d2b5}
+.f2 i{flex:none;width:34px;height:34px;border-radius:50%;background:#e8761a;display:grid;place-items:center}
+.f2 i svg{width:18px;height:18px;fill:#fff}
+h2.big{margin:0 0 16px;font-size:46px;line-height:1.06;font-weight:700;color:#1b2f52;max-width:760px}
+p.sub{margin:0;font-size:20px;line-height:1.55;color:#40516c;max-width:620px}
+.idx{display:flex;align-items:center;gap:14px;margin:0 0 14px}
+.idx span{font-size:14px;font-weight:700;color:#4b76a8;letter-spacing:.14em}
+.idx i{flex:none;width:48px;height:3px;border-radius:3px;background:#e8761a}
+section.s{padding:112px 0 0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:120px}
+.row.rev .txt{order:2}
+.txt .tag{display:inline-block;margin-bottom:14px;padding:6px 14px;border-radius:999px;background:#e3edf9;color:#35598f;font-size:14px;font-weight:700}
+.txt h3{margin:0 0 14px;font-size:40px;line-height:1.08;color:#1b2f52}
+.txt p{margin:0 0 16px;font-size:19px;line-height:1.55;color:#40516c}
+.ticks{margin:18px 0 0;padding:0;list-style:none}
+.ticks li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px;font-size:18px;line-height:1.45;color:#2b3d5a}
+.ticks li::before{content:"";flex:none;width:22px;height:22px;margin-top:2px;border-radius:50%;background:#e8761a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+.panel{background:#fff;border:2px solid #dde5f0;border-radius:28px;padding:26px;box-shadow:0 24px 60px rgba(27,47,82,.1)}
+.deb-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.deb-top h4{margin:0;font-size:22px;color:#1b2f52}
+.pill{padding:4px 10px;border-radius:999px;background:#eef2f8;color:#51617d;font-size:12px;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.kpis div{background:#f2f6fb;border-radius:12px;padding:10px}
+.kpis small{display:block;font-size:12px;color:#5d6c86;font-weight:600;margin-bottom:2px}
+.kpis b{font-size:17px;color:#1b2f52}
+.zbar{display:flex;height:14px;border-radius:8px;overflow:hidden;gap:2px;margin:8px 0 10px}
+.zbar i{display:block}
+.zleg{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:#51617d;font-weight:600;margin-bottom:18px}
+.zleg span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;background:var(--c)}
+.lbl{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#4b76a8}
+.panel p.t{margin:4px 0 14px;font-size:15.5px;line-height:1.5;color:#33435e}
+.river{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:22px}
+.river div{border-radius:14px;padding:12px 10px;color:#14213a;background:var(--c)}
+.river small{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;opacity:.75}
+.river b{font-size:18px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.week div{text-align:center;font-size:12.5px;font-weight:700;color:#5d6c86}
+.week div span{display:grid;place-items:center;height:76px;margin-top:6px;border-radius:12px;background:#f1f5fa;color:#14213a;font-size:11.5px;line-height:1.25;padding:4px}
+.week div span.e{background:#d6eef4}
+.week div span.q{background:#ffd9b8}
+.week div span.l{background:#cfe0fb}
+.week div span.r{background:transparent;border:1.5px dashed #c3cfe0;color:#8a99b2}
+.story-wrap{display:flex;gap:22px;align-items:flex-end;justify-content:center;flex-wrap:wrap}
+.story{width:250px;aspect-ratio:9/13;border-radius:28px;background:linear-gradient(170deg,#5f86bb,#1b2f52 62%);color:#fff;padding:20px 18px;box-shadow:0 30px 70px rgba(27,47,82,.35);overflow:hidden}
+.story .bars{display:flex;gap:4px;margin-bottom:16px}
+.story .bars i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.35)}
+.story .bars i:first-child{background:#fff}
+.story small{font-size:11px;letter-spacing:.16em;color:#bfe6ee;font-weight:700}
+.story h4{margin:6px 0 14px;font-size:26px;line-height:1.05}
+.story h4 em{font-style:normal;color:#ffb26b}
+.sr{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:#e3ecfa}
+.sr b{flex:none;width:56px;color:#fff}
+.sr i{display:block;height:8px;border-radius:8px;background:linear-gradient(90deg,#8fd6e6,#5aa8f5)}
+.sr i.r{background:linear-gradient(90deg,#e8761a,#ffb26b)}
+.notif{display:flex;gap:12px;align-items:center;background:#fff;border:2px solid #dde5f0;border-radius:18px;padding:12px 16px;box-shadow:0 14px 30px rgba(27,47,82,.12);max-width:340px}
+.notif .lg{--s:44px;border-width:2px;border-radius:12px}
+.notif b{display:block;font-size:15px}
+.notif span{font-size:14px;color:#51617d}
+.also{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:120px}
+.also>div{background:#fff;border:2px solid #dde5f0;border-radius:24px;padding:20px}
+.also .mi{width:100%}
+.also h3{margin:16px 0 6px;font-size:21px;color:#1b2f52}
+.also p{margin:0;font-size:16px;line-height:1.5;color:#40516c}
+.who{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;padding:0;list-style:none}
+.who li{padding:11px 22px;border-radius:14px;background:#fff;border:2px solid #dde5f0;font-weight:700;font-size:18px;color:#1b2f52}
+.start{background:#e9f0f9;margin-top:120px;padding:112px 0;border-top:2px solid #d3e0f2;border-bottom:2px solid #d3e0f2}
+.steps{margin-top:52px;display:grid;gap:18px}
+.stp{display:grid;grid-template-columns:76px 1fr;gap:24px;background:#fff;border:2px solid #dde5f0;border-radius:28px;padding:30px}
+.stp>b{display:grid;place-items:center;width:60px;height:60px;border-radius:18px;background:#4b76a8;color:#fff;font-size:30px}
+.stp h3{margin:0 0 10px;font-size:28px;color:#1b2f52}
+.stp p{margin:0 0 12px;font-size:18px;line-height:1.55;color:#40516c}
+.stp ol{margin:6px 0 14px;padding-left:22px}
+.stp li{margin:0 0 9px;font-size:18px;line-height:1.5;color:#2b3d5a}
+.stp li strong{color:#0f172a}
+.stp code{font-family:ui-monospace,Menlo,monospace;font-size:15px;background:#e9f0f9;padding:2px 8px;border-radius:6px;color:#1b2f52}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0 0}
+.two>div{background:#f2f6fb;border-radius:20px;padding:22px}
+.two h4{margin:0 0 8px;font-size:21px;color:#1b2f52}
+.two p{font-size:17px;margin:0 0 14px}
+.note{margin-top:14px;padding:14px 16px;border-radius:14px;background:#e3f2f7;color:#1c5a6b;font-size:16px;line-height:1.5}
+.note.warm{background:#fdeadb;color:#8a4410}
+.alt{margin-top:22px;padding:22px 26px;border-radius:22px;border:2px dashed #aebfd8;font-size:18px;line-height:1.5;color:#2b3d5a;background:rgba(255,255,255,.6)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;align-items:stretch}
+.pc{position:relative;background:#fff;border:2px solid #dde5f0;border-radius:28px;padding:30px}
+.pc.hot{border-color:#e8761a;box-shadow:0 24px 60px rgba(232,118,26,.18)}
+.pc .badge{position:absolute;top:-14px;left:28px;padding:6px 14px;border-radius:999px;background:#e8761a;color:#fff;font-size:13px;font-weight:700}
+.pc h3{margin:0 0 6px;font-size:24px;color:#1b2f52}
+.pc .amt{margin:10px 0 4px;font-size:46px;font-weight:700;color:#1b2f52;line-height:1}
+.pc .amt small{font-size:17px;font-weight:500;color:#56657a}
+.pc .eq{margin:0 0 18px;font-size:15px;color:#56657a;min-height:22px}
+.pc .ticks{margin:0 0 22px}
+.pc .btn{width:100%}
+.price-note{margin:22px 0 0;font-size:15px;color:#56657a}
+.final{position:relative;overflow:hidden;padding:104px 28px;text-align:center;background:#4b76a8;color:#fff}
+.final::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 360px at 85% 0%,rgba(255,255,255,.18),rgba(255,255,255,0) 70%),radial-gradient(500px 300px at 0% 100%,rgba(232,118,26,.35),rgba(232,118,26,0) 70%)}
+.final>*{position:relative}
+.final .lock{justify-content:center;margin:0 auto 28px;--s:84px;--t:36px;--u:14px;text-align:left;width:max-content;max-width:100%}
+.final .lock b{color:#fff}
+.final .lock small{color:#d3e0f2}
+.final h2{margin:0 auto 14px;font-size:48px;line-height:1.05;max-width:700px}
+.final p{margin:0 auto 30px;max-width:540px;font-size:20px;line-height:1.5;color:#e3edf9}
+.final .cta{justify-content:center}
+.final .soon{margin-top:24px;font-size:15px;color:#d3e0f2}
+.final .tarif{margin-top:10px;font-size:14px;color:#c4d6ee}
+footer.f{background:#1b2f52;color:#b4c4dc;text-align:center;padding:30px 28px;font-size:15px}
+footer.f a{color:#bfe6ee;text-decoration:none}
+footer.f p{margin:6px 0}
+@media (max-width:860px){
+  .wrap{padding:0 20px}
+  nav.top .wrap{height:72px}
+  nav.top .lock{--s:46px;--t:20px;--u:8px;gap:12px}
+  .links a.hm{display:none}
+  .links a.btn{min-height:42px;padding:0 16px;font-size:14px}
+  .hero{padding:32px 0 64px}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero h1{font-size:42px}
+  .hero p.lead{font-size:18px}
+  .btn{width:100%}
+  .stage{height:640px}
+  .orb{width:380px;height:380px;margin-left:-190px;top:70px}
+  .dchip{display:none}
+  .f1{right:0;top:auto;bottom:6px;max-width:230px}
+  .f2{display:none}
+  section.s{padding-top:76px}
+  h2.big{font-size:34px}
+  p.sub{font-size:18px}
+  .dgrid{grid-template-columns:1fr 1fr}
+  .row{grid-template-columns:minmax(0,1fr);gap:34px;margin-top:80px}
+  .row>*{min-width:0}
+  .river{grid-template-columns:repeat(2,1fr)}
+  .week{gap:3px}
+  .week div span{font-size:10px;padding:2px;height:68px}
+  .panel{padding:18px}
+  .row.rev .txt{order:0}
+  .txt h3{font-size:32px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .also{grid-template-columns:1fr 1fr;margin-top:80px}
+  .start{margin-top:80px;padding:76px 0}
+  .stp{grid-template-columns:1fr;gap:14px;padding:24px 20px}
+  .two{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:1fr}
+  .final{padding:76px 20px}
+  .final h2{font-size:34px}
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+.links a:not(.btn):not(.hm){display:inline}
+@media (max-width:860px){.links a.hm{display:none}}
+</style>
+</head>
+<body>
+<div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ic-auj" viewBox="0 0 80 58"><g stroke-linecap="round" stroke-width="4"><path d="M5 14H25" stroke="#38B6F0"/><path d="M7 23H29" stroke="#1F3A8A"/><path d="M11 32H21" stroke="#E8761A"/><path d="M7 41H29" stroke="#1F3A8A"/><path d="M5 50H25" stroke="#38B6F0"/></g><g stroke="#1F3A8A" stroke-width="3.6" stroke-linecap="round"><path d="M71 29H76"/><path d="M66.9 38.9L70.4 42.4"/><path d="M57 43V48"/><path d="M47.1 38.9L43.6 42.4"/><path d="M43 29H38"/><path d="M47.1 19.1L43.6 15.6"/><path d="M57 15V10"/><path d="M66.9 19.1L70.4 15.6"/></g><circle cx="57" cy="29" r="10" fill="#fff" stroke="#E8761A" stroke-width="4.5"/></symbol>
+    <symbol id="ic-plan" viewBox="0 0 80 58"><g stroke-linecap="round" stroke-width="4"><path d="M5 14H25" stroke="#38B6F0"/><path d="M7 23H29" stroke="#1F3A8A"/><path d="M11 32H21" stroke="#E8761A"/><path d="M7 41H29" stroke="#1F3A8A"/><path d="M5 50H25" stroke="#38B6F0"/></g><path d="M50 8v6M63 8v6" stroke="#38B6F0" stroke-width="3.5" stroke-linecap="round"/><rect x="43" y="11" width="27" height="34" rx="5" fill="#1F3A8A"/><rect x="46.5" y="21" width="20" height="20.5" rx="2.5" fill="#fff"/><path d="M52 31l4.5 4.5L63 28" fill="none" stroke="#E8761A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-profil" viewBox="0 0 80 58"><g stroke-linecap="round" stroke-width="4"><path d="M5 14H25" stroke="#38B6F0"/><path d="M7 23H29" stroke="#1F3A8A"/><path d="M11 32H21" stroke="#E8761A"/><path d="M7 41H29" stroke="#1F3A8A"/><path d="M5 50H25" stroke="#38B6F0"/></g><circle cx="57" cy="29" r="16" fill="#fff" stroke="#1F3A8A" stroke-width="5"/><circle cx="57" cy="29" r="9" fill="none" stroke="#38B6F0" stroke-width="4"/><circle cx="57" cy="29" r="3.6" fill="#E8761A"/></symbol>
+    <symbol id="ic-renfo" viewBox="0 0 80 58"><g stroke-linecap="round" stroke-width="4"><path d="M5 14H25" stroke="#38B6F0"/><path d="M7 23H29" stroke="#1F3A8A"/><path d="M11 32H21" stroke="#E8761A"/><path d="M7 41H29" stroke="#1F3A8A"/><path d="M5 50H25" stroke="#38B6F0"/></g><path d="M44 34h26M47 27v14M67 27v14M42 31v6M72 31v6" fill="none" stroke="#1F3A8A" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-course" viewBox="0 0 80 58"><g stroke-linecap="round" stroke-width="4"><path d="M5 14H25" stroke="#38B6F0"/><path d="M7 23H29" stroke="#1F3A8A"/><path d="M11 32H21" stroke="#E8761A"/><path d="M7 41H29" stroke="#1F3A8A"/><path d="M5 50H25" stroke="#38B6F0"/></g><circle cx="53" cy="25" r="11" fill="#fff" stroke="#1F3A8A" stroke-width="5"/><rect x="47.6" y="26" width="2.8" height="5" rx="1.4" fill="#38B6F0"/><rect x="51.6" y="23" width="2.8" height="8" rx="1.4" fill="#1F3A8A"/><rect x="55.6" y="20" width="2.8" height="11" rx="1.4" fill="#E8761A"/><path d="M61 33L70 42" stroke="#1F3A8A" stroke-width="5" stroke-linecap="round"/></symbol>
+    <symbol id="ic-debrief" viewBox="0 0 80 58"><g stroke-linecap="round" stroke-width="4"><path d="M5 14H25" stroke="#38B6F0"/><path d="M7 23H29" stroke="#1F3A8A"/><path d="M11 32H21" stroke="#E8761A"/><path d="M7 41H29" stroke="#1F3A8A"/><path d="M5 50H25" stroke="#38B6F0"/></g><path d="M38 50H76" stroke="#1F3A8A" stroke-width="3.5" stroke-linecap="round"/><rect x="42" y="36" width="7" height="12" rx="3.5" fill="#1F3A8A"/><rect x="52" y="28" width="7" height="20" rx="3.5" fill="#38B6F0"/><rect x="62" y="19" width="7" height="29" rx="3.5" fill="#E8761A"/></symbol>
+    <symbol id="ic-nutri" viewBox="0 0 80 58"><g stroke-linecap="round" stroke-width="4"><path d="M5 14H25" stroke="#38B6F0"/><path d="M7 23H29" stroke="#1F3A8A"/><path d="M11 32H21" stroke="#E8761A"/><path d="M7 41H29" stroke="#1F3A8A"/><path d="M5 50H25" stroke="#38B6F0"/></g><path d="M57 46c-7.5 0-13.5-5.5-13.5-12.5 0-6.5 4.5-10.5 8.5-10.5 2 0 3.2 1 4 1 .8 0 2-1 4-1 4 0 8.5 4 8.5 10.5C68.5 40.5 64.5 46 57 46z" fill="#fff" stroke="#1F3A8A" stroke-width="4" stroke-linejoin="round"/><path d="M57 22c0-4 2-7 6-8.5" fill="none" stroke="#E8761A" stroke-width="3.5" stroke-linecap="round"/><path d="M63.5 28c2 3 2 7 0 10.5" fill="none" stroke="#38B6F0" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="ic-q" viewBox="0 0 80 58"><g stroke-linecap="round" stroke-width="4"><path d="M5 8.5H25" stroke="#38B6F0"/><path d="M7 16.5H29" stroke="#1F3A8A"/><path d="M11 24.5H21" stroke="#E8761A"/><path d="M7 32.5H29" stroke="#1F3A8A"/><path d="M5 40.5H25" stroke="#38B6F0"/></g><path d="M57 7 Q58.7 19.3 71 21 Q58.7 22.7 57 35 Q55.3 22.7 43 21 Q55.3 19.3 57 7 Z" fill="#1F3A8A"/><path d="M69 32 Q69.9 38.1 76 39 Q69.9 39.9 69 46 Q68.1 39.9 62 39 Q68.1 38.1 69 32 Z" fill="#E8761A"/></symbol>
+    <symbol id="d-route" viewBox="0 0 24 24"><path d="M5.5 20 9.5 4"/><path d="M18.5 20 14.5 4"/><path d="M12 5.5v2.6"/><path d="M12 11.2v2.8"/><path d="M12 17v3"/></symbol>
+    <symbol id="d-trail" viewBox="0 0 24 24"><path d="M2.5 18.8 9 8l4 6 2.5-3.6 6 8.4Z"/><circle cx="17.2" cy="5.4" r="2.2"/></symbol>
+    <symbol id="d-swimrun" viewBox="0 0 24 24"><circle cx="17" cy="7.2" r="2"/><path d="M4 12.4c2.3-1.6 4.4-2.1 6.4-1.3l3.5 1.7c1.2.6 2.6.7 3.9.3"/><path d="M3 16.6c2-1.4 4-1.4 6 0s4 1.4 6 0 4-1.4 6 0"/><path d="M3 20.2c2-1.4 4-1.4 6 0s4 1.4 6 0 4-1.4 6 0"/></symbol>
+    <symbol id="d-tri" viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1.2"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></symbol>
+    <symbol id="d-backyard" viewBox="0 0 24 24"><path d="m17 2.5 3.5 3.5-3.5 3.5"/><path d="M3.5 11.5v-1a4 4 0 0 1 4-4h13"/><path d="m7 21.5-3.5-3.5L7 14.5"/><path d="M20.5 12.5v1a4 4 0 0 1-4 4h-13"/></symbol>
+  </defs>
+</svg>
+
+<nav class="top">
+  <div class="wrap">
+    <a class="lock" href="#haut"><span class="lg"><img src="logo-nouveau.png" alt=""></span><span><b>PaceDrop</b><small>AI Coach Running</small></span></a>
+    <div class="links">
+      <a class="hm" href="#fonctions">Fonctions</a>
+      <a class="hm" href="#tarifs">Tarifs</a>
+      <a class="hm" href="#demarrer">Démarrer</a>
+      <a class="hm" href="https://pacedrop-backend-production.up.railway.app/login">Se connecter</a>
+      <a class="btn btn-or" href="#demarrer">Télécharger</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="haut">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow"><i></i>Coach IA · route, trail, swimrun, triathlon</p>
+      <h1>Courez <em>plus malin.</em> Votre coach IA lit chaque séance.</h1>
+      <p class="lead">Importez une sortie, PaceDrop l'analyse, prépare votre course et pose la semaine dans votre calendrier.</p>
+      <div class="cta">
+        <a class="btn btn-or" href="#demarrer"><svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 11 12 15.5 16.5 11"/><path d="M5 19h14"/></svg>Télécharger l'appli</a>
+        <a class="btn btn-ln" href="https://pacedrop-backend-production.up.railway.app/signup">Créer mon compte</a>
+      </div>
+      <div class="plat"><span>14 jours gratuits, sans carte</span><span>Android et iPhone</span><span>Intervals.icu, Strava, Suunto, FIT et GPX</span></div>
+    </div>
+    <div class="stage">
+      <div class="orb" aria-hidden="true"></div>
+      <div class="dchip" style="--f:#ece8f8;left:0;top:70px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#5B45B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-tri"/></svg></i>Triathlon</div>
+      <div class="dchip" style="--f:#dff2f6;right:0;top:30px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-swimrun"/></svg></i>Swimrun</div>
+      <div class="dchip" style="--f:#e3f3ea;right:6px;bottom:90px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#1F7A4A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-trail"/></svg></i>Trail</div>
+      <div class="phone" aria-label="Aperçu de l'écran d'accueil de l'appli">
+        <div class="scr">
+          <div class="sbar"></div>
+          <div class="in">
+            <div class="hdr"><span class="lock"><span class="lg"><img src="logo-nouveau.png" alt=""></span><span><b>PaceDrop</b><small>AI Coach Running</small></span></span></div>
+            <div class="card"><em>« Il n'y a plus de séance à rattraper, seulement une course à vivre »</em><b>Salut,</b><span>Comment va la machine aujourd'hui ?</span></div>
+            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-auj"/></svg></span><span><strong>Aujourd'hui</strong><small>Séance du jour, repos ou sortie improvisée</small></span></div>
+            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-plan"/></svg></span><span><strong>Plan &amp; Calendrier</strong><small>PaceMap et PaceCalendar</small></span></div>
+            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-profil"/></svg></span><span><strong>Mon profil</strong><small>Profil, sources, compte</small></span></div>
+            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-renfo"/></svg></span><span><strong>Renfo</strong><small>Séance guidée de 20 à 30 min</small></span></div>
+            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-course"/></svg></span><span><strong>Ma prochaine course</strong><small>Objectifs, documents, stratégie</small></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="float f1"><span class="lg"><img src="logo-nouveau.png" alt=""></span><p style="margin:0"><b>PaceHebdo</b><span>Ta semaine est prête. Dimanche, 21 h.</span></p></div>
+      <div class="float f2"><i><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></i><p style="margin:0"><b>PaceMind</b><span>Footing facile demain, la qualité reste jeudi.</span></p></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="fonctions">
+
+  <section class="s">
+    <div class="idx"><span>01</span><i></i></div>
+    <h2 class="big">Pour toutes les lignes d'arrivée</h2>
+    <p class="sub">Route, trail, swimrun, triathlon ou backyard : le plan s'appuie sur vos vraies séances, jamais sur un modèle générique.</p>
+    <div class="dgrid">
+      <div class="dc"><span class="dic" style="--f:#EAF0F9"><svg viewBox="0 0 24 24" fill="none" stroke="#3D5F94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-route"/></svg></span><h3>Route</h3><p>Du 5 km au marathon.</p></div>
+      <div class="dc"><span class="dic" style="--f:#E3F3EA"><svg viewBox="0 0 24 24" fill="none" stroke="#1F7A4A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-trail"/></svg></span><h3>Trail</h3><p>Avec le D+ qu'il faut.</p></div>
+      <div class="dc"><span class="dic" style="--f:#DFF2F6"><svg viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-swimrun"/></svg></span><h3>Swimrun</h3><p>Chaque nage, chaque transition.</p></div>
+      <div class="dc"><span class="dic" style="--f:#ECE8F8"><svg viewBox="0 0 24 24" fill="none" stroke="#5B45B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-tri"/></svg></span><h3>Triathlon</h3><p>Nage, vélo, course à pied.</p></div>
+      <div class="dc"><span class="dic" style="--f:#F6EBDD"><svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-backyard"/></svg></span><h3>Backyard</h3><p>Une boucle après l'autre.</p></div>
+    </div>
+  </section>
+
+  <div class="row">
+    <div class="txt">
+      <span class="tag">PaceMind</span>
+      <h3>Chaque séance est lue, pas seulement enregistrée</h3>
+      <p>Après chaque sortie, un débrief clair, toujours construit de la même façon : résumé, zones, points forts, points à travailler, suite du plan.</p>
+      <ul class="ticks"><li>Comparé à la séance prévue au calendrier</li><li>Une question ? Posez-la à PaceMind, il connaît vos séances</li></ul>
+    </div>
+    <div class="panel" aria-label="Exemple de débrief de séance">
+      <div class="deb-top"><h4>Débrief · Sortie longue</h4><span class="pill">Exemple</span></div>
+      <div class="kpis">
+        <div><small>Distance</small><b>24,0 km</b></div>
+        <div><small>Durée</small><b>1:52:00</b></div>
+        <div><small>Allure</small><b>4:40 /km</b></div>
+        <div><small>FC moy.</small><b>148</b></div>
+      </div>
+      <div class="lbl">Zones</div>
+      <div class="zbar"><i style="width:6%;background:#8fb0dc"></i><i style="width:58%;background:#2aa3b8"></i><i style="width:28%;background:#4b76a8"></i><i style="width:8%;background:#e8761a"></i></div>
+      <div class="zleg"><span style="--c:#8fb0dc">Z1</span><span style="--c:#2aa3b8">Z2</span><span style="--c:#4b76a8">Z3</span><span style="--c:#e8761a">Z4</span></div>
+      <div class="lbl">Point fort</div>
+      <p class="t">Allure très régulière sur toute la sortie.</p>
+      <div class="lbl">À travailler</div>
+      <p class="t">La fréquence cardiaque dérive sur la dernière heure.</p>
+      <div class="lbl">Suite du plan</div>
+      <p class="t" style="margin-bottom:0">Footing facile demain, la qualité reste jeudi.</p>
+    </div>
+  </div>
+
+  <div class="row rev">
+    <div class="txt">
+      <span class="tag">PaceMap · PaceCalendar</span>
+      <h3>Un plan qui avance comme une rivière</h3>
+      <p>Quatre blocs mènent à la course : Source, Crue, Torrent, Étiage. Chaque bloc donne le ton des séances de la semaine.</p>
+      <ul class="ticks"><li>Route, trail, swimrun, triathlon ou backyard</li><li>Une séance sautée ne se rattrape pas</li><li>Sans course datée, vous restez en Source</li></ul>
+    </div>
+    <div class="panel" aria-label="Exemple de plan en quatre blocs et de semaine">
+      <div class="river">
+        <div style="--c:#bfe6ee"><small>BLOC 1</small><b>Source</b></div>
+        <div style="--c:#c4dafb"><small>BLOC 2</small><b>Crue</b></div>
+        <div style="--c:#ffd0a8"><small>BLOC 3</small><b>Torrent</b></div>
+        <div style="--c:#dbe5f3"><small>BLOC 4</small><b>Étiage</b></div>
+      </div>
+      <div class="week">
+        <div>Lun<span class="r">Repos</span></div>
+        <div>Mar<span class="e">Endurance</span></div>
+        <div>Mer<span class="q">Seuil</span></div>
+        <div>Jeu<span class="e">Footing</span></div>
+        <div>Ven<span class="r">Repos</span></div>
+        <div>Sam<span class="q">Allure cible</span></div>
+        <div>Dim<span class="l">Sortie longue</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="txt">
+      <span class="tag">PaceHebdo</span>
+      <h3>Votre semaine, racontée en story</h3>
+      <p>Chaque dimanche à 21 h, le bilan arrive tout seul, par notification ou par e-mail. La semaine d'une course, une édition spéciale détaille chaque tronçon.</p>
+      <ul class="ticks"><li>Kilomètres, séances, progression</li><li>Notification et e-mail au choix</li></ul>
+    </div>
+    <div class="story-wrap">
+      <div class="story" aria-label="Exemple de story PaceHebdo">
+        <div class="bars"><i></i><i></i><i></i><i></i></div>
+        <small>ÉDITION SPÉCIALE</small>
+        <h4>Semaine de <em>course</em></h4>
+        <div class="sr"><b>Nage 1</b><i style="width:34%"></i></div>
+        <div class="sr"><b>Course 1</b><i class="r" style="width:62%"></i></div>
+        <div class="sr"><b>Nage 2</b><i style="width:28%"></i></div>
+        <div class="sr"><b>Course 2</b><i class="r" style="width:74%"></i></div>
+        <div class="sr"><b>Nage 3</b><i style="width:22%"></i></div>
+        <div class="sr"><b>Course 3</b><i class="r" style="width:52%"></i></div>
+      </div>
+      <div class="notif"><span class="lg"><img src="logo-nouveau.png" alt=""></span><p style="margin:0"><b>PaceHebdo</b><span>Ta semaine est prête. Dimanche, 21 h.</span></p></div>
+    </div>
+  </div>
+
+  <div class="also">
+    <div><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-course"/></svg></span><h3>Ma prochaine course</h3><p>Objectifs, documents, stratégie.</p></div>
+    <div><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-debrief"/></svg></span><h3>Drop ta Race</h3><p>Analyse de ta course avec PaceMind.</p></div>
+    <div><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-nutri"/></svg></span><h3>Ma nutrition</h3><p>Glucides, eau et sodium selon l'effort.</p></div>
+    <div><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-renfo"/></svg></span><h3>Renfo</h3><p>Séance guidée de 20 à 30 minutes.</p></div>
+  </div>
+
+</main>
+
+<section class="wrap" id="tarifs" style="padding-top:112px">
+  <div class="idx"><span>02</span><i></i></div>
+  <h2 class="big">Essayez 14 jours, sans carte</h2>
+  <p class="sub">Créez votre compte, importez vos séances et jugez par vous-même. Ensuite, vous choisissez.</p>
+  <div class="price-grid">
+    <div class="pc">
+      <h3>Essai</h3>
+      <p class="amt">0 €</p>
+      <p class="eq">14 jours, sans carte bancaire</p>
+      <ul class="ticks"><li>Toutes les fonctions</li><li>Aucun engagement</li></ul>
+      <a class="btn btn-ln" href="https://pacedrop-backend-production.up.railway.app/signup">Commencer l'essai</a>
+    </div>
+    <div class="pc">
+      <h3>Mensuel</h3>
+      <p class="amt">6,90 € <small>par mois</small></p>
+      <p class="eq">Sans engagement</p>
+      <ul class="ticks"><li>Toutes les fonctions</li><li>Résiliable quand vous voulez</li></ul>
+      <a class="btn btn-bl" href="https://pacedrop-backend-production.up.railway.app/signup">Choisir le mensuel</a>
+    </div>
+    <div class="pc hot">
+      <span class="badge">2 mois offerts</span>
+      <h3>Annuel</h3>
+      <p class="amt">69 € <small>par an</small></p>
+      <p class="eq">Soit 5,75 € par mois, facturés annuellement</p>
+      <ul class="ticks"><li>Toutes les fonctions</li><li>Le meilleur prix</li></ul>
+      <a class="btn btn-or" href="https://pacedrop-backend-production.up.railway.app/signup">Choisir l'annuel</a>
+    </div>
+  </div>
+</section>
+
+<section class="start" id="demarrer">
+  <div class="wrap">
+    <div class="idx"><span>03</span><i></i></div>
+    <h2 class="big">Démarrer en quatre étapes</h2>
+    <p class="sub">Comptez une dizaine de minutes. Intervals.icu relie votre montre à PaceDrop.</p>
+
+    <div class="steps">
+      <div class="stp">
+        <b>1</b>
+        <div>
+          <h3>Installer PaceDrop</h3>
+          <div class="two">
+            <div><h4>iPhone</h4><p>Ouvrez PaceDrop dans <strong>Safari</strong>, touchez Partager, puis « Sur l'écran d'accueil ». Les notifications demandent iOS 16.4 ou plus.</p><a class="btn btn-bl" style="min-height:48px;font-size:16px" href="https://pacedrop-backend-production.up.railway.app/installer">Guide iPhone pas à pas</a></div>
+            <div><h4>Android</h4><p>Téléchargez le fichier, ouvrez-le et touchez Installer. Version de test, avant le Play Store.</p><a class="btn btn-or" style="min-height:48px;font-size:16px" href="https://github.com/lolosaga/pacedrop-app/releases/download/apk-latest/pacedrop.apk">Télécharger pour Android</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stp">
+        <b>2</b>
+        <div>
+          <h3>Créer votre compte Intervals.icu</h3>
+          <p>Intervals.icu est un site d'entraînement qui reçoit les séances de votre montre. PaceDrop les y lit.</p>
+          <ol>
+            <li>Allez sur <strong>intervals.icu</strong> et choisissez de créer un compte.</li>
+            <li>Inscrivez-vous avec votre <strong>e-mail</strong>, ou connectez-vous avec Google ou Strava.</li>
+            <li>Confirmez l'e-mail reçu, puis renseignez votre profil : sport principal, poids, date de naissance.</li>
+          </ol>
+          <div class="note">Les libellés peuvent légèrement changer, Intervals.icu fait évoluer son site.</div>
+        </div>
+      </div>
+
+      <div class="stp">
+        <b>3</b>
+        <div>
+          <h3>Brancher votre montre</h3>
+          <ol>
+            <li>Dans Intervals.icu, ouvrez <strong>Settings</strong> (réglages), puis la partie <strong>Connections</strong>.</li>
+            <li>Choisissez la marque de votre montre (Garmin, Suunto, Polar, Coros...) et autorisez l'accès.</li>
+            <li>Lancez une synchronisation : vos dernières sorties apparaissent dans le calendrier.</li>
+          </ol>
+          <div class="note warm">Branchez la montre directement. Les sorties qui viennent de Strava dans Intervals.icu ne sont pas transmises à PaceDrop.</div>
+        </div>
+      </div>
+
+      <div class="stp">
+        <b>4</b>
+        <div>
+          <h3>Relier Intervals.icu à PaceDrop</h3>
+          <ol>
+            <li>Dans Intervals.icu, ouvrez <strong>Settings</strong>, puis <strong>Developer Settings</strong>.</li>
+            <li>Copiez votre <strong>identifiant d'athlète</strong>, de la forme <code>i123456</code>, et créez une <strong>clé API</strong>.</li>
+            <li>Dans PaceDrop, ouvrez <strong>Mon profil</strong>, puis <strong>Sources</strong>, et touchez <strong>Connecter Intervals.icu</strong>.</li>
+            <li>Collez l'identifiant et la clé, puis validez. Vos séances s'importent.</li>
+          </ol>
+          <div class="note">La clé est chiffrée par PaceDrop et ne s'affiche plus ensuite. Vous pouvez la révoquer à tout moment.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alt"><strong>Pas envie de créer un compte Intervals.icu ?</strong> Déposez simplement un fichier FIT ou GPX dans PaceDrop, ou connectez Strava ou Suunto depuis votre profil.</div>
+  </div>
+</section>
+
+<section class="final">
+  <a class="lock" href="#haut"><span class="lg"><img src="logo-nouveau.png" alt=""></span><span><b>PaceDrop</b><small>AI Coach Running</small></span></a>
+  <h2>Votre prochaine séance mérite un vrai coach</h2>
+  <p>Téléchargez PaceDrop et importez votre première sortie en quelques minutes.</p>
+  <div class="cta">
+    <a class="btn btn-or" href="https://github.com/lolosaga/pacedrop-app/releases/download/apk-latest/pacedrop.apk"><svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 11 12 15.5 16.5 11"/><path d="M5 19h14"/></svg>Télécharger pour Android</a>
+    <a class="btn btn-wh" href="https://pacedrop-backend-production.up.railway.app/installer">Installer sur iPhone</a>
+  </div>
+  <p class="soon">Bientôt sur Google Play et l'App Store.</p>
+  <p class="tarif">14 jours d'essai gratuit, sans carte · puis 6,90 € par mois ou 69 € par an</p>
+</section>
+
+<footer class="f">
+  <p><strong style="color:#fff">PaceDrop</strong> &mdash; <a href="privacy.html">Politique de confidentialité</a> &middot; <a href="mentions.html">Mentions légales</a></p>
+  <p>Contact : <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a></p>
+</footer>
+</div>
+</body>
+</html>
