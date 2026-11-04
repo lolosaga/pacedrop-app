@@ -1,6 +1,12 @@
 package com.laurent.pacedrop;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.widget.Toast;
 import android.os.CancellationSignal;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +27,11 @@ import androidx.credentials.GetPasswordOption;
 import androidx.credentials.PasswordCredential;
 import androidx.credentials.exceptions.CreateCredentialException;
 import androidx.credentials.exceptions.GetCredentialException;
+import androidx.core.content.FileProvider;
 import com.getcapacitor.BridgeActivity;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import org.json.JSONObject;
 
 public class MainActivity extends BridgeActivity {
@@ -35,6 +45,61 @@ public class MainActivity extends BridgeActivity {
         @JavascriptInterface
         public void demander() {
             runOnUiThread(() -> demanderIdentifiants());
+        }
+
+        /** Ouvre le partage Android avec l'image PNG (base64) générée par la page. */
+        @JavascriptInterface
+        public boolean partagerImage(final String base64, final String nom) {
+            try {
+                final byte[] octets = Base64.decode(base64, Base64.DEFAULT);
+                File dossier = new File(getCacheDir(), "images");
+                if (!dossier.exists() && !dossier.mkdirs()) return false;
+                final File fichier = new File(dossier, nomSur(nom));
+                try (FileOutputStream sortie = new FileOutputStream(fichier)) { sortie.write(octets); }
+                runOnUiThread(() -> {
+                    try {
+                        Uri uri = FileProvider.getUriForFile(MainActivity.this, getPackageName() + ".fileprovider", fichier);
+                        Intent envoi = new Intent(Intent.ACTION_SEND);
+                        envoi.setType("image/png");
+                        envoi.putExtra(Intent.EXTRA_STREAM, uri);
+                        envoi.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        startActivity(Intent.createChooser(envoi, "Partager"));
+                    } catch (Throwable e) {
+                        Toast.makeText(MainActivity.this, "Partage impossible", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return true;
+            } catch (Throwable e) {
+                return false;
+            }
+        }
+
+        /** Enregistre l'image PNG (base64) dans la galerie (Pictures/PaceDrop) ; avant Android 10, ouvre le partage. */
+        @JavascriptInterface
+        public boolean enregistrerImage(final String base64, final String nom) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return partagerImage(base64, nom);
+            try {
+                final byte[] octets = Base64.decode(base64, Base64.DEFAULT);
+                ContentValues valeurs = new ContentValues();
+                valeurs.put(MediaStore.Images.Media.DISPLAY_NAME, nomSur(nom));
+                valeurs.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
+                valeurs.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/PaceDrop");
+                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, valeurs);
+                if (uri == null) return false;
+                try (OutputStream sortie = getContentResolver().openOutputStream(uri)) {
+                    if (sortie == null) return false;
+                    sortie.write(octets);
+                }
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "Image enregistrée dans Pictures/PaceDrop", Toast.LENGTH_SHORT).show());
+                return true;
+            } catch (Throwable e) {
+                return false;
+            }
+        }
+
+        private String nomSur(String nom) {
+            String propre = nom == null ? "" : nom.replaceAll("[^A-Za-z0-9._-]", "_");
+            return propre.isEmpty() ? "pacedrop.png" : propre;
         }
     }
 
