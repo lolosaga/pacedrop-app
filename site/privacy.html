@@ -1,436 +1,297 @@
-<!DOCTYPE html><html lang="fr">
+<!doctype html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Politique de confidentialité — PaceDrop</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      color: #222;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 30px 20px;
-      background: #fff;
-    }h1, h2 {
-  color: #111;
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Politique de confidentialité de PaceDrop : données collectées, IA, connexion de Claude, durées de conservation, vos droits.">
+<title>Politique de confidentialité – PaceDrop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Rajdhani:wght@500;600;700&family=Barlow+Condensed:ital,wght@1,800&display=swap" rel="stylesheet">
+<style>
+html { color-scheme: light; }
+.band a.home { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+/* Layout: a single reading column under a brand band, numbered legal sections, tables for processors and retention */
+:root {
+  --bg: #f6f9fd;
+  --surface: #ffffff;
+  --ink: #16213d;
+  --muted: #55607c;
+  --line: #d6deec;
+  --accent: #1c78c8;
+  --accent-ink: #ffffff;
+  --note-bg: #fff3e9;
+  --note-line: #f26a21;
+  --f-display: "Rajdhani", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Newsreader", Georgia, "Times New Roman", serif;
 }
-
-h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1424; --surface: #161d33; --ink: #e8ecf8; --muted: #9ba6c6;
+    --line: #29335a; --accent: #5db1f5; --accent-ink: #0e1424;
+    --note-bg: #2a1d14; --note-line: #f2843f;
+    color-scheme: dark;
+  }
 }
-
-h2 {
-  font-size: 22px;
-  margin-top: 35px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 8px;
+:root[data-theme="dark"] {
+  --bg: #0e1424; --surface: #161d33; --ink: #e8ecf8; --muted: #9ba6c6;
+  --line: #29335a; --accent: #5db1f5; --accent-ink: #0e1424;
+  --note-bg: #2a1d14; --note-line: #f2843f;
+  color-scheme: dark;
 }
-
-p, li {
-  font-size: 16px;
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 1rem; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 1.0625rem; line-height: 1.65;
 }
-
-ul {
-  padding-left: 25px;
+.wrap {
+  max-width: 46rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
+.band { background: #3D5F94; border-bottom: 0; }
+.band .wrap { padding-block: 10px; }
+.band a.home { color: #fff; }
+.band img { width: 34px; height: 34px; border-radius: 9px; }
+.band span { font-family: "Barlow Condensed", "Rajdhani", sans-serif; font-style: italic; font-weight: 800; font-size: 1.6rem; letter-spacing: .02em; text-transform: uppercase; color: #fff; }
+main { padding-block: 28px 56px; }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: 2.4rem; line-height: 1.1; margin: 0 0 6px; text-wrap: balance; }
+h2 { font-family: var(--f-display); font-weight: 700; font-size: 1.55rem; line-height: 1.2; margin: 2.4rem 0 .5rem; padding-top: 1.1rem; border-top: 1px solid var(--line); text-wrap: balance; }
+h3 { font-family: var(--f-display); font-weight: 600; font-size: 1.15rem; letter-spacing: .02em; margin: 1.3rem 0 .2rem; }
+p { margin: .6rem 0; }
+ul { margin: .5rem 0 .8rem; padding-left: 1.3rem; }
+li { margin: .3rem 0; }
+a { color: var(--accent); }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.meta { color: var(--muted); margin: 0 0 1.2rem; }
+.note { background: var(--note-bg); border-left: 4px solid var(--note-line); padding: 10px 16px; margin: 1.1rem 0; border-radius: 0 6px 6px 0; }
+.note p { margin: .4rem 0; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 18px; margin: 1.2rem 0 0; }
+nav.toc summary { cursor: pointer; font-family: var(--f-display); font-weight: 600; font-size: 1.1rem; letter-spacing: .02em; }
+nav.toc ol { margin: .6rem 0 0; padding-left: 1.4rem; }
+.table-wrap { overflow-x: auto; margin: .8rem 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: .97rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--f-display); font-weight: 600; font-size: 1rem; letter-spacing: .03em; color: var(--muted); }
+footer { padding-block: 0 40px; color: var(--muted); font-size: .95rem; }
+@media (max-width: 480px) { h1 { font-size: 2rem; } }
+</style>
 
-.updated {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 30px;
-}
+</head>
+<body>
+<div class="band"><div class="wrap"><a class="home" href="index.html" aria-label="Accueil PaceDrop"><img src="data:image/png;base64,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" alt="" width="36" height="36"><span>PaceDrop</span></a></div></div>
+<main><div class="wrap">
+<h1>Politique de confidentialité</h1>
+<p class="meta">Dernière mise à jour : 5 novembre 2026</p>
 
-.important {
-  background: #f5f5f5;
-  padding: 15px;
-  border-left: 4px solid #222;
-  margin: 20px 0;
-}
+<p>Cette politique explique comment PaceDrop collecte, utilise, conserve et protège vos données personnelles. PaceDrop traite des données d'entraînement et de bien-être (fréquence cardiaque, sommeil, poids, parcours GPS, blessures, etc.). Certaines peuvent révéler des informations sur votre santé. Nous les traitons avec une attention particulière et uniquement avec votre accord explicite lorsque la loi l'exige.</p>
 
-a {
-  color: inherit;
-}
+<nav class="toc">
+<details>
+<summary>Sommaire</summary>
+<ol>
+<li><a href="#s1">Responsable du traitement</a></li>
+<li><a href="#s2">Données collectées</a></li>
+<li><a href="#s3">Données de santé et consentement explicite</a></li>
+<li><a href="#s4">Finalités et bases légales</a></li>
+<li><a href="#s5">Intelligence artificielle : PaceMind et Claude</a></li>
+<li><a href="#s6">Destinataires et prestataires</a></li>
+<li><a href="#s7">Transferts hors Union européenne</a></li>
+<li><a href="#s8">Durées de conservation</a></li>
+<li><a href="#s9">Télécharger vos données, fermer ou supprimer le compte</a></li>
+<li><a href="#s10">Vos droits</a></li>
+<li><a href="#s11">Intervals.icu, Strava, Suunto, Garmin et import de fichiers</a></li>
+<li><a href="#s12">Notifications et e-mails</a></li>
+<li><a href="#s13">Cookies et technologies similaires</a></li>
+<li><a href="#s14">Sécurité</a></li>
+<li><a href="#s15">Âge minimum</a></li>
+<li><a href="#s16">Profilage et recommandations</a></li>
+<li><a href="#s17">Évolutions et contact</a></li>
+</ol>
+</details>
+</nav>
 
-  </style>
-<link rel="icon" type="image/png" href="favicon.png">
-</head><body>  <p><a href="index.html" style="text-decoration:none;font-weight:bold;display:inline-flex;align-items:center;gap:8px"><img src="favicon.png" width="28" height="28" alt="">PaceDrop</a> &middot; <a href="index.html">&larr; Accueil</a> &middot; <a href="mentions.html">Mentions légales</a></p>  <h1>Politique de confidentialité</h1>  <p class="updated">
-    Dernière mise à jour : 21 septembre 2026
-  </p>  <p>
-    La présente politique de confidentialité explique comment PaceDrop
-    collecte, utilise, conserve et protège les données personnelles de ses
-    utilisateurs.
-  </p>  <p>
-    PaceDrop accorde une importance particulière à la protection des données
-    relatives à l'activité sportive, notamment lorsque celles-ci peuvent
-    permettre de déduire certaines informations concernant la santé ou les
-    habitudes de vie.
-  </p>  <h2>1. Responsable du traitement</h2>  <p>
-    Le responsable du traitement des données personnelles traitées dans le
-    cadre de PaceDrop est :
-  </p>  <p>
-    <strong>Laurent Montagono</strong><br>
-    71 boulevard de Cessole<br>
-    06100 Nice<br>
-    France
-  </p>  <p>
-    Contact :
-    <a href="mailto:laurent@pacedrop.app">
-      laurent@pacedrop.app
-    </a>
-  </p>  <h2>2. Données personnelles collectées</h2>  <p>
-    Selon les fonctionnalités que vous utilisez, PaceDrop peut traiter les
-    catégories de données suivantes.
-  </p>  <h3>2.1. Données de compte</h3>  <ul>
-    <li>Nom ou pseudonyme ;</li>
-    <li>Adresse e-mail ;</li>
-    <li>Mot de passe sous forme hachée lorsqu'un mot de passe est utilisé ;</li>
-    <li>Informations nécessaires à la gestion du compte.</li>
-  </ul>  <h3>2.2. Données relatives à l'activité sportive</h3>  <p>
-    Lorsqu'une activité est importée dans PaceDrop, nous pouvons traiter
-    notamment :
-  </p>  <ul>
-    <li>date et heure de l'activité ;</li>
-    <li>durée ;</li>
-    <li>distance ;</li>
-    <li>allure et vitesse ;</li>
-    <li>fréquence cardiaque ;</li>
-    <li>puissance ;</li>
-    <li>cadence ;</li>
-    <li>dénivelé ;</li>
-    <li>altitude ;</li>
-    <li>coordonnées GPS et parcours ;</li>
-    <li>laps et intervalles ;</li>
-    <li>autres métriques contenues dans les fichiers sportifs importés.</li>
-  </ul>  <h3>2.3. Fichiers FIT et GPX</h3>  <p>
-    PaceDrop permet actuellement aux utilisateurs d'importer manuellement
-    des fichiers sportifs, notamment au format FIT ou GPX, provenant de
-    leur montre ou de leur équipement sportif.
-  </p>  <p>
-    Le contenu de ces fichiers peut contenir les données sportives et de
-    localisation décrites ci-dessus.
-  </p>  <h3>2.4. Données provenant de Strava</h3>  <p>
-    PaceDrop permet actuellement de connecter un compte Strava afin de
-    récupérer certaines données d'activité autorisées par l'utilisateur.
-  </p>  <p>
-    Les données récupérées peuvent notamment comprendre les informations
-    relatives aux activités sportives, telles que la date, la durée,
-    la distance, l'allure, la fréquence cardiaque, le parcours GPS,
-    le dénivelé et les autres informations auxquelles l'utilisateur
-    a autorisé PaceDrop à accéder.
-  </p>  <p>
-    PaceDrop n'accède qu'aux données nécessaires au fonctionnement des
-    fonctionnalités proposées et aux autorisations accordées par
-    l'utilisateur.
-  </p>  <h3>2.5. Données techniques</h3>  <p>
-    PaceDrop peut également traiter certaines données techniques nécessaires
-    au fonctionnement, à la sécurité et à la maintenance du service,
-    notamment :
-  </p>  <ul>
-    <li>adresse IP ;</li>
-    <li>date et heure des connexions ;</li>
-    <li>type d'appareil et navigateur ou environnement applicatif ;</li>
-    <li>journaux techniques et erreurs ;</li>
-    <li>informations nécessaires à l'authentification et à la sécurité.</li>
-  </ul>  <h2>3. Données relatives à la santé et à la condition physique</h2>  <p>
-    Certaines données traitées par PaceDrop, notamment la fréquence
-    cardiaque et certaines informations relatives à l'entraînement,
-    peuvent, selon leur nature et leur utilisation, constituer des données
-    susceptibles de révéler des informations concernant la santé.
-  </p>  <p>
-    PaceDrop traite ces données uniquement dans le cadre des fonctionnalités
-    sportives proposées et afin de permettre à l'utilisateur de consulter,
-    analyser et exploiter ses propres données d'entraînement.
-  </p>  <div class="important">
-    <strong>Important :</strong>
-    PaceDrop n'a pas vocation à fournir un diagnostic médical.
-    Les analyses et recommandations générées par PaceMind sont des
-    informations destinées à accompagner la pratique sportive et ne
-    remplacent pas l'avis d'un professionnel de santé.
-  </div>  <h2>4. Finalités et bases légales</h2>  <p>
-    Les données personnelles sont traitées pour les finalités suivantes :
-  </p>  <ul>
-    <li>
-      <strong>Création et gestion du compte :</strong>
-      exécution du contrat conclu avec l'utilisateur et gestion du service.
-    </li><li>
-  <strong>Import et analyse des activités sportives :</strong>
-  exécution du service demandé par l'utilisateur.
-</li>
+<h2 id="s1">1. Responsable du traitement</h2>
+<p>Le responsable du traitement est :</p>
+<p>Laurent Montagono, entrepreneur individuel<br>
+71 boulevard de Cessole, 06100 Nice, France<br>
+SIREN : 878 484 336 – SIRET : 878 484 336 00028<br>
+Contact : <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a></p>
 
-<li>
-  <strong>Connexion à Strava :</strong>
-  exécution des fonctionnalités demandées par l'utilisateur et
-  autorisation accordée lors de la connexion du compte.
-</li>
+<h2 id="s2">2. Données collectées</h2>
+<h3>Données de compte</h3>
+<ul>
+<li>nom ou pseudonyme, adresse e-mail ;</li>
+<li>mot de passe stocké sous forme hachée, si vous en utilisez un ;</li>
+<li>photo de profil, si vous en ajoutez une : recadrée en carré 256×256 et compressée à l'envoi, stockée sur nos serveurs, liée à votre compte, affichée dans l'application ;</li>
+<li>statut de l'essai gratuit ou de l'abonnement ;</li>
+<li>vos réglages (langue, notifications, e-mails).</li>
+</ul>
+<h3>Profil sportif</h3>
+<p>Âge, sexe, taille, poids, fréquence cardiaque de repos et maximale, zones de fréquence cardiaque, seuils, allures de référence, records, objectifs de course, matériel, jours disponibles pour s'entraîner, blessures et points de vigilance que vous renseignez.</p>
+<h3>Activités sportives</h3>
+<p>Lorsque vous importez ou synchronisez une activité : date et heure, durée, distance, allure et vitesse, fréquence cardiaque, puissance, cadence, dénivelé, altitude, coordonnées GPS et parcours, laps et intervalles, météo de la séance, et les autres métriques contenues dans les fichiers ou fournies par les services connectés. Vous pouvez y ajouter votre ressenti, des notes et des douleurs.</p>
+<h3>Bien-être</h3>
+<p>Sommeil, variabilité de la fréquence cardiaque, fréquence cardiaque de repos, nombre de pas, poids, objectifs du quotidien, ainsi que les estimations de métabolisme et de nutrition de course calculées par PaceDrop. Ces données viennent de votre compte Intervals.icu ou de votre saisie.</p>
+<h3>Échanges avec PaceMind et signalements</h3>
+<p>Les messages que vous écrivez à PaceMind, les réponses générées et les signalements d'anomalie que vous envoyez.</p>
+<h3>Données techniques</h3>
+<ul>
+<li>adresse IP, date et heure des connexions ;</li>
+<li>type d'appareil, navigateur ou version de l'application ;</li>
+<li>journaux techniques et d'erreurs, informations d'authentification et de sécurité.</li>
+</ul>
+<h3>Paiements</h3>
+<p>Si vous souscrivez une offre payante, le paiement est traité par Stripe (sur le web) ou, depuis l'application mobile, par Apple (App Store) ou Google (Google Play) selon la boutique utilisée. PaceDrop ne reçoit ni ne conserve votre numéro de carte bancaire.</p>
 
-<li>
-  <strong>Fonctionnalités PaceMind :</strong>
-  fourniture des analyses et recommandations demandées par
-  l'utilisateur.
-</li>
+<h2 id="s3">3. Données de santé et consentement explicite</h2>
+<p>La fréquence cardiaque, le sommeil, le poids, les blessures et certaines informations d'entraînement peuvent, selon leur usage, révéler des informations concernant votre santé (article 9 du RGPD).</p>
+<div class="note">
+<p><strong>Votre consentement explicite est demandé avant tout envoi de vos données à la fonctionnalité PaceMind</strong>, par une case à cocher dans Profil › Compte › Mes données. Tant qu'elle n'est pas cochée, PaceMind reste désactivé et aucune donnée n'est envoyée aux prestataires d'IA. Vous pouvez retirer ce consentement à tout moment en décochant la même case, ou par e-mail. Le retrait n'affecte pas les traitements déjà réalisés, mais désactive PaceMind pour votre compte.</p>
+<p><strong>Relier votre propre Claude à PaceDrop est un acte volontaire.</strong> En le faisant, vous autorisez votre Claude à lire vos données PaceDrop, y compris celles qui touchent à la santé. Vous retirez cette autorisation en déconnectant Claude dans l'application.</p>
+</div>
+<p>PaceDrop n'a pas vocation à fournir un diagnostic médical. Les analyses et recommandations de PaceMind et de Claude sont des informations destinées à accompagner la pratique sportive. Elles ne remplacent pas l'avis d'un professionnel de santé.</p>
 
-<li>
-  <strong>Sécurité et prévention des abus :</strong>
-  intérêt légitime de PaceDrop à assurer la sécurité et l'intégrité
-  de son service.
-</li>
+<h2 id="s4">4. Finalités et bases légales</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Finalité</th><th>Base légale</th></tr></thead>
+<tbody>
+<tr><td>Création et gestion du compte, fourniture du service, plan d'entraînement</td><td>Exécution du contrat</td></tr>
+<tr><td>Import et analyse de vos activités sportives, suivi du bien-être</td><td>Exécution du contrat</td></tr>
+<tr><td>Connexion à Intervals.icu, à Strava ou à Suunto, envoi de séances vers votre montre</td><td>Exécution du contrat et autorisation que vous donnez au service concerné</td></tr>
+<tr><td>Analyses PaceMind à partir de données pouvant révéler des informations de santé</td><td>Votre consentement explicite (article 6.1.a et article 9.2.a du RGPD)</td></tr>
+<tr><td>Accès de votre Claude à vos données PaceDrop</td><td>Votre consentement explicite, donné en reliant Claude</td></tr>
+<tr><td>Notifications et e-mails de service (mot de passe, rappel avant effacement)</td><td>Exécution du contrat</td></tr>
+<tr><td>Récapitulatif hebdomadaire par e-mail</td><td>Votre choix, réglable dans l'application</td></tr>
+<tr><td>Sécurité, prévention des abus, suivi des erreurs</td><td>Intérêt légitime</td></tr>
+<tr><td>Comptabilité, facturation, obligations légales</td><td>Obligation légale</td></tr>
+</tbody>
+</table>
+</div>
 
-<li>
-  <strong>Obligations légales :</strong>
-  respect des obligations auxquelles PaceDrop est soumise.
-</li>
+<h2 id="s5">5. Intelligence artificielle : PaceMind et Claude</h2>
+<h3>PaceMind</h3>
+<p>PaceMind est l'assistant d'entraînement de PaceDrop. Il génère des analyses, des conseils et des réponses à vos questions à partir de vos données. Pour cela, PaceDrop fait appel à des modèles d'IA fournis par des prestataires : Cerebras, Groq, Mistral AI, Google (Gemini) et, pour certaines fonctions, Anthropic.</p>
+<ul>
+<li><strong>Données transmises :</strong> uniquement celles nécessaires à la demande en cours (par exemple distance, durée, allure, fréquence cardiaque, sommeil, objectif de course, votre question, et les images ou documents que vous joignez à une course lorsque vous en demandez la lecture). Nous n'envoyons ni votre nom ni votre adresse e-mail.</li>
+<li><strong>Réutilisation par les prestataires :</strong> selon l'offre utilisée et leurs propres conditions, les prestataires d'IA peuvent utiliser les contenus transmis pour améliorer leurs services et leurs modèles. C'est pourquoi aucune donnée d'identité n'est transmise.</li>
+<li><strong>Limites :</strong> les résultats générés par l'IA peuvent être inexacts. Ce sont des indications générales, pas un diagnostic, une prescription ni un avis médical. PaceMind n'est pas un dispositif médical.</li>
+<li><strong>Pas de décision automatisée :</strong> PaceMind ne prend aucune décision produisant des effets juridiques ou significatifs à votre égard. Il peut proposer une séance, que vous appliquez ou refusez vous-même.</li>
+</ul>
+<h3>Votre propre Claude (option)</h3>
+<p>Vous pouvez relier votre compte Claude à PaceDrop en quelques gestes, depuis Profil, Compte, « Relier Claude ». Cette connexion est facultative. L'application reste entièrement utilisable sans elle.</p>
+<ul>
+<li><strong>Ce que Claude peut lire :</strong> vos données PaceDrop (profil, séances, courses, plan, forme, bien-être, blessures, etc.). Ces données sont alors traitées par Claude dans le cadre de votre propre compte et des conditions d'Anthropic. PaceDrop ne contrôle pas ce traitement.</li>
+<li><strong>Ce que Claude peut modifier :</strong> uniquement par propositions. Un changement n'a lieu que si vous appuyez sur « Appliquer » dans PaceDrop, et vous pouvez ensuite l'annuler. Claude ne touche ni à votre abonnement, ni à votre compte, ni à vos connexions, et ne supprime aucune donnée.</li>
+<li><strong>Accès technique :</strong> la connexion utilise le protocole OAuth. L'accès est limité à une heure et se renouvelle pendant 30 jours. Les jetons ne sont conservés que sous forme d'empreinte.</li>
+<li><strong>Retrait :</strong> vous déconnectez Claude à tout moment depuis la même page. La suppression du compte efface aussi les connexions et les propositions de Claude.</li>
+</ul>
 
-  </ul>  <p>
-    Lorsque le traitement porte sur une catégorie particulière de données
-    personnelles au sens de l'article 9 du RGPD, PaceDrop applique une
-    condition de traitement prévue par cet article lorsque celle-ci est
-    nécessaire au regard de la nature du traitement concerné.
-  </p>  <h2>5. Utilisation de l'intelligence artificielle — PaceMind</h2>  <p>
-    PaceDrop utilise une fonctionnalité d'analyse assistée par intelligence
-    artificielle appelée <strong>PaceMind</strong> afin de générer des
-    analyses et recommandations personnalisées à partir des données
-    d'entraînement de l'utilisateur.
-  </p>  <p>
-    PaceMind utilise actuellement le service
-    <strong>Google Gemini API</strong>.
-  </p>  <p>
-    Lorsque vous utilisez PaceMind, certaines données nécessaires à la
-    réalisation de l'analyse peuvent être transmises à Google. Ces données
-    peuvent notamment comprendre des informations relatives à vos séances
-    d'entraînement telles que la distance, la durée, l'allure, la fréquence
-    cardiaque, la puissance, la cadence, le dénivelé ou d'autres métriques
-    nécessaires à l'analyse.
-  </p>  <p>
-    PaceDrop cherche à limiter les données transmises au service
-    d'intelligence artificielle aux informations nécessaires à la génération
-    de l'analyse demandée, dans la mesure techniquement possible.
-  </p>  <p>
-    PaceDrop utilise actuellement le niveau sans frais de l'API Gemini.
-    Les conditions de traitement applicables à ce niveau de service peuvent
-    permettre à Google d'utiliser les contenus transmis pour améliorer ses
-    produits et technologies d'intelligence artificielle.
-  </p>  <p>
-    Les modalités exactes de conservation et d'utilisation des données
-    transmises à Google sont celles applicables au service Gemini utilisé
-    par PaceDrop au moment du traitement.
-  </p>  <p>
-    PaceMind est destiné à fournir des informations et recommandations
-    relatives à l'entraînement sportif. Les résultats générés par
-    l'intelligence artificielle peuvent être inexacts et doivent être
-    considérés comme des indications générales.
-  </p>  <p>
-    PaceMind ne constitue pas un dispositif médical et ses résultats ne
-    constituent pas un diagnostic médical, une prescription ou un avis
-    médical.
-  </p>  <h2>6. Destinataires des données</h2>  <p>
-    Les données personnelles peuvent être accessibles, dans la mesure
-    nécessaire aux finalités décrites dans la présente politique, aux
-    catégories de destinataires suivantes :
-  </p>  <ul>
-    <li>
-      PaceDrop et les personnes éventuellement habilitées à administrer
-      le service ;
-    </li>
-    <li>
-      les prestataires techniques assurant l'hébergement, la sécurité,
-      le stockage ou le fonctionnement de l'application ;
-    </li>
-    <li>
-      Google, dans le cadre de l'utilisation de l'API Gemini par PaceMind ;
-    </li>
-    <li>
-      Strava, lorsque l'utilisateur choisit de connecter son compte Strava ;
-    </li>
-    <li>
-      les autorités ou organismes légalement habilités lorsque la
-      communication des données est imposée par la loi.
-    </li>
-  </ul>  <p>
-    PaceDrop ne vend pas les données personnelles de ses utilisateurs.
-  </p>  <h2>7. Transferts de données hors de l'Union européenne</h2>  <p>
-    L'utilisation de certains prestataires techniques peut entraîner le
-    traitement de données personnelles en dehors de l'Union européenne ou
-    de l'Espace économique européen.
-  </p>  <p>
-    Lorsque des données personnelles sont transférées vers un pays situé
-    en dehors de l'Union européenne ou de l'Espace économique européen,
-    PaceDrop met en œuvre les garanties prévues par le RGPD applicables
-    au transfert concerné.
-  </p>  <p>
-    Ces garanties peuvent notamment comprendre une décision d'adéquation
-    de la Commission européenne ou, lorsque cela est applicable, des
-    clauses contractuelles types adoptées par la Commission européenne.
-  </p>  <p>
-    Les modalités applicables peuvent dépendre du prestataire utilisé,
-    du service souscrit et de sa configuration technique.
-  </p>  <h2>8. Durée de conservation</h2>  <p>
-    PaceDrop conserve les données personnelles pendant une durée limitée
-    à ce qui est nécessaire aux finalités pour lesquelles elles sont
-    traitées.
-  </p>  <p>
-    Les données du compte et les données sportives associées sont conservées
-    pendant la durée d'utilisation du compte, sauf demande de suppression
-    ou obligation légale imposant une conservation plus longue.
-  </p>  <p>
-    Lorsq'un utilisateur demande la suppression de son compte, PaceDrop
-    supprime ou anonymise les données personnelles concernées dans un délai
-    raisonnable, sous réserve des données dont la conservation est imposée
-    par une obligation légale ou nécessaire à la constatation, à l'exercice
-    ou à la défense de droits en justice.
-  </p>  <p>
-    Les journaux techniques et données de sécurité peuvent être conservés
-    pendant une durée limitée correspondant aux besoins de sécurité,
-    de maintenance et de diagnostic du service.
-  </p>  <h2>9. Suppression du compte et des données</h2>  <p>
-    L'utilisateur peut demander la suppression de son compte PaceDrop et
-    des données personnelles qui y sont associées.
-  </p>  <p>
-    Pour exercer ce droit, il peut contacter PaceDrop à :
-  </p>  <p>
-    <a href="mailto:laurent@pacedrop.app">
-      laurent@pacedrop.app
-    </a>
-  </p>  <p>
-    Lorsque cela est techniquement disponible, PaceDrop peut également
-    proposer une fonctionnalité permettant à l'utilisateur de supprimer
-    directement son compte depuis l'application.
-  </p>  <h2>10. Vos droits</h2>  <p>
-    Conformément à la réglementation applicable, notamment au RGPD,
-    vous disposez, selon les conditions prévues par la réglementation,
-    des droits suivants :
-  </p>  <ul>
-    <li>
-      droit d'accès à vos données personnelles ;
-    </li>
-    <li>
-      droit de rectification des données inexactes ou incomplètes ;
-    </li>
-    <li>
-      droit à l'effacement de vos données ;
-    </li>
-    <li>
-      droit à la limitation de certains traitements ;
-    </li>
-    <li>
-      droit à la portabilité de certaines données ;
-    </li>
-    <li>
-      droit de vous opposer à certains traitements lorsque les conditions
-      prévues par le RGPD sont réunies ;
-    </li>
-    <li>
-      droit de retirer votre consentement lorsque le traitement repose
-      sur celui-ci.
-    </li>
-  </ul>  <p>
-    Pour exercer vos droits, vous pouvez contacter :
-  </p>  <p>
-    <a href="mailto:laurent@pacedrop.app">
-      laurent@pacedrop.app
-    </a>
-  </p>  <p>
-    PaceDrop peut demander les informations nécessaires permettant de
-    vérifier l'identité du demandeur lorsque cela est justifié par la
-    nature de la demande.
-  </p>  <p>
-    Vous disposez également du droit d'introduire une réclamation auprès
-    de la Commission Nationale de l'Informatique et des Libertés (CNIL)
-    si vous estimez que le traitement de vos données personnelles
-    constitue une violation de la réglementation applicable.
-  </p>  <h2>11. Connexion à Strava</h2>  <p>
-    PaceDrop permet à l'utilisateur de connecter volontairement son compte
-    Strava à PaceDrop.
-  </p>  <p>
-    Cette connexion repose sur le mécanisme d'autorisation proposé par
-    Strava. L'utilisateur peut refuser l'accès ou retirer ultérieurement
-    l'autorisation accordée à PaceDrop auprès de Strava, selon les
-    fonctionnalités proposées par cette plateforme.
-  </p>  <p>
-    La suppression de l'autorisation Strava empêche les futurs accès
-    autorisés aux données Strava. Les données déjà importées dans PaceDrop
-    peuvent rester enregistrées tant qu'elles n'ont pas été supprimées
-    conformément aux règles de conservation applicables à PaceDrop.
-  </p>  <h2>12. Import manuel de fichiers sportifs</h2>  <p>
-    PaceDrop permet actuellement l'import manuel de fichiers sportifs,
-    notamment au format FIT ou GPX.
-  </p>  <p>
-    L'utilisateur est responsable des fichiers qu'il choisit d'importer
-    dans PaceDrop et doit disposer des droits nécessaires pour transmettre
-    les données qu'ils contiennent.
-  </p>  <p>
-    Les fichiers importés peuvent contenir des données de localisation,
-    des informations temporelles et des données relatives à l'activité
-    sportive.
-  </p>  <h2>13. Cookies et technologies similaires</h2>  <p>
-    PaceDrop peut utiliser des cookies ou technologies similaires
-    strictement nécessaires au fonctionnement du service, notamment pour
-    maintenir une session utilisateur, assurer l'authentification et
-    renforcer la sécurité.
-  </p>  <p>
-    PaceDrop n'utilise pas de cookies publicitaires destinés à suivre
-    l'utilisateur à des fins de publicité comportementale, sauf
-    modification ultérieure du service.
-  </p>  <p>
-    Si PaceDrop met ultérieurement en place des cookies ou technologies
-    nécessitant le consentement de l'utilisateur, un mécanisme permettant
-    de recueillir ce consentement sera mis en place avant leur utilisation,
-    conformément à la réglementation applicable.
-  </p>  <h2>14. Sécurité</h2>  <p>
-    PaceDrop met en œuvre des mesures techniques et organisationnelles
-    destinées à protéger les données personnelles contre la perte,
-    l'accès non autorisé, l'altération, la divulgation ou la destruction.
-  </p>  <p>
-    Les mots de passe des utilisateurs, lorsqu'ils sont utilisés, sont
-    stockés sous une forme hachée et ne sont pas conservés en clair.
-  </p>  <p>
-    Les accès aux données et aux fonctionnalités d'administration sont
-    limités aux personnes ou systèmes qui en ont besoin pour assurer
-    le fonctionnement du service.
-  </p>  <p>
-    Malgré les mesures mises en œuvre, aucun système informatique ne peut
-    garantir une sécurité absolue.
-  </p>  <h2>15. Profilage et recommandations</h2>  <p>
-    PaceDrop peut analyser les données d'entraînement afin de produire
-    des statistiques, des indicateurs et des recommandations personnalisées
-    concernant la pratique sportive de l'utilisateur.
-  </p>  <p>
-    Ces analyses ont pour objectif d'aider l'utilisateur à comprendre
-    son entraînement et à adapter sa pratique sportive.
-  </p>  <p>
-    Elles ne sont pas destinées à prendre à l'égard de l'utilisateur des
-    décisions produisant des effets juridiques ou des effets significatifs
-    similaires.
-  </p>  <h2>16. Évolutions des services connectés</h2>  <p>
-    À la date de la présente politique, PaceDrop permet notamment
-    l'import manuel de fichiers FIT ou GPX ainsi que la connexion à Strava.
-  </p>  <p>
-    D'autres intégrations avec des services ou fabricants de montres
-    connectées pourront être proposées ultérieurement.
-  </p>  <p>
-    Lorsqu'une nouvelle intégration entraîne un nouveau traitement
-    significatif de données personnelles, la présente politique pourra
-    être mise à jour afin de décrire les données concernées, les finalités,
-    les destinataires et les modalités de traitement applicables.
-  </p>  <h2>17. Modification de la politique de confidentialité</h2>  <p>
-    PaceDrop peut modifier la présente politique de confidentialité afin
-    de tenir compte de l'évolution du service, de ses traitements de données
-    ou de la réglementation applicable.
-  </p>  <p>
-    La date de dernière mise à jour indiquée en haut de cette page permet
-    de connaître la version actuellement applicable.
-  </p>  <h2>18. Contact</h2>  <p>
-    Pour toute question concernant la présente politique ou le traitement
-    de vos données personnelles, vous pouvez contacter PaceDrop :
-  </p>  <p>
-    <strong>Laurent Montagono</strong><br>
-    71 boulevard de Cessole<br>
-    06100 Nice<br>
-    France
-  </p>  <p>
-    <a href="mailto:laurent@pacedrop.app">
-      laurent@pacedrop.app
-    </a>
-  </p></body>
+<h2 id="s6">6. Destinataires et prestataires</h2>
+<p>Vos données sont accessibles, dans la mesure nécessaire, aux destinataires suivants :</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Destinataire</th><th>Rôle</th><th>Données concernées</th></tr></thead>
+<tbody>
+<tr><td>PaceDrop</td><td>Administration du service, assistance</td><td>Selon la demande</td></tr>
+<tr><td>Railway Corporation</td><td>Hébergement de l'application et de la base de données (serveurs aux États-Unis)</td><td>Toutes les données du compte</td></tr>
+<tr><td>Stockage objet chiffré (compatible S3)</td><td>Sauvegardes quotidiennes de la base</td><td>Copie chiffrée des données du compte</td></tr>
+<tr><td>Netlify, Inc.</td><td>Hébergement du site pacedrop.app</td><td>Données techniques de visite</td></tr>
+<tr><td>Cerebras, Groq, Mistral AI, Google, Anthropic</td><td>Modèles d'IA de PaceMind</td><td>Extraits de données sportives, sans nom ni e-mail</td></tr>
+<tr><td>Anthropic (Claude)</td><td>Votre propre Claude, si vous le reliez</td><td>Données PaceDrop que votre Claude lit</td></tr>
+<tr><td>Open-Meteo</td><td>Météo des séances</td><td>Lieu et date de la séance, sans identité</td></tr>
+<tr><td>Intervals.icu, Strava, Suunto</td><td>Import et envoi de séances, si vous les connectez</td><td>Activités, calendrier, bien-être</td></tr>
+<tr><td>Resend, Zoho</td><td>Envoi des e-mails de service, messagerie de contact</td><td>Adresse e-mail et contenu du message</td></tr>
+<tr><td>Sentry</td><td>Suivi des erreurs techniques</td><td>Journaux d'erreurs, données techniques</td></tr>
+<tr><td>Apple, Google (Google Play)</td><td>Paiements depuis l'application mobile, si vous souscrivez une offre payante via la boutique</td><td>Données de paiement, gérées par eux</td></tr>
+<tr><td>Stripe</td><td>Paiements, si vous souscrivez une offre payante</td><td>Données de paiement, gérées par eux</td></tr>
+<tr><td>Autorités habilitées</td><td>Lorsque la loi l'impose</td><td>Selon la demande légale</td></tr>
+</tbody>
+</table>
+</div>
+<p>PaceDrop ne vend pas vos données personnelles.</p>
+
+<h2 id="s7">7. Transferts hors Union européenne</h2>
+<p>Nos serveurs sont situés aux États-Unis (région de Virginie). Plusieurs prestataires (Railway, Netlify, Anthropic, Cerebras, Groq, Google, Apple, Stripe, Strava, Resend, Sentry) traitent donc des données en dehors de l'Union européenne. Ces transferts s'appuient sur une décision d'adéquation de la Commission européenne (dont le cadre UE–États-Unis de protection des données, pour les entreprises certifiées) ou sur des clauses contractuelles types, selon le prestataire.</p>
+
+<h2 id="s8">8. Durées de conservation</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Données</th><th>Durée</th></tr></thead>
+<tbody>
+<tr><td>Compte et données sportives</td><td>Pendant la durée d'utilisation du compte</td></tr>
+<tr><td>Compte supprimé</td><td>Effacement immédiat de vos données, au plus tard sous 30 jours</td></tr>
+<tr><td>Compte fermé avec conservation</td><td>12 mois, puis effacement automatique. Un e-mail de rappel vous est envoyé 30 jours avant.</td></tr>
+<tr><td>Accès de votre Claude</td><td>Accès d'une heure, renouvelable pendant 30 jours. Les propositions non traitées expirent après 48 heures.</td></tr>
+<tr><td>Journaux techniques et de sécurité</td><td>12 mois</td></tr>
+<tr><td>Sauvegardes quotidiennes de la base</td><td>30 jours, sur un stockage externe chiffré, puis suppression automatique. Les données effacées de l'application peuvent y subsister jusqu'à 30 jours, puis disparaissent.</td></tr>
+<tr><td>Données comptables (paiements, factures)</td><td>10 ans, durée légale applicable aux pièces comptables</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="s9">9. Télécharger vos données, fermer ou supprimer le compte</h2>
+<p>Depuis les paramètres du compte, y compris depuis l'écran d'abonnement lorsque l'essai est terminé, vous pouvez :</p>
+<ul>
+<li><strong>Télécharger vos données</strong> (« Télécharger mes données ») ;</li>
+<li><strong>Supprimer votre compte</strong> (« Supprimer mon compte », ce qui retire aussi la photo de profil, les séances, les courses, les documents joints et les connexions), avec deux choix : tout effacer maintenant, ou fermer le compte en conservant vos données 12 mois pour reprendre plus tard là où vous vous étiez arrêté.</li>
+</ul>
+<p>Dans les deux cas, les connexions à vos services tiers sont révoquées, ainsi que les accès de Claude. Vous pouvez aussi demander la suppression en écrivant à <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a> depuis l'adresse liée à votre compte.</p>
+<p>Nous conservons uniquement ce que la loi nous oblige à garder (par exemple les données comptables) ou ce qui est nécessaire pour défendre nos droits en justice. Les données déjà transmises à des prestataires sont supprimées selon leurs propres délais. Celles qui se trouvent dans votre compte Intervals.icu ou Strava y restent, sous votre contrôle.</p>
+
+<h2 id="s10">10. Vos droits</h2>
+<p>Vous disposez, dans les conditions prévues par le RGPD, des droits suivants :</p>
+<ul>
+<li>accès à vos données ;</li>
+<li>rectification des données inexactes ;</li>
+<li>effacement ;</li>
+<li>limitation de certains traitements ;</li>
+<li>portabilité de vos données, notamment par « Télécharger mes données » ;</li>
+<li>opposition aux traitements fondés sur l'intérêt légitime ;</li>
+<li>retrait de votre consentement à tout moment.</li>
+</ul>
+<p>Pour les exercer, écrivez à <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a>. Nous pouvons vous demander de justifier votre identité si nécessaire. Nous répondons dans un délai d'un mois.</p>
+<p>Vous pouvez aussi déposer une réclamation auprès de la CNIL (<a href="https://www.cnil.fr">cnil.fr</a>).</p>
+
+<h2 id="s11">11. Intervals.icu, Strava, Suunto, Garmin et import de fichiers</h2>
+<h3>Intervals.icu</h3>
+<p>Intervals.icu est la connexion principale de PaceDrop. Elle permet d'importer vos activités et vos données de bien-être, et d'envoyer vos séances et vos stratégies de course vers votre calendrier, puis vers votre montre. PaceDrop retire de votre calendrier les séances qu'il y a envoyées lorsque le jour devient un jour de repos.</p>
+<h3>Strava</h3>
+<p>La connexion est volontaire et repose sur le mécanisme d'autorisation de Strava. PaceDrop n'utilise pas Strava pour modifier votre profil. Vous pouvez retirer l'accès à tout moment depuis les paramètres de votre compte Strava.</p>
+<h3>Suunto</h3>
+<p>Si vous connectez votre compte Suunto, PaceDrop importe vos activités et peut y envoyer des séances. La connexion est volontaire et repose sur le mécanisme d'autorisation de Suunto. Vous la retirez à tout moment dans l'application, ou depuis votre compte Suunto.</p>
+<h3>Lien Garmin Connect et fichiers</h3>
+<p>Si vous collez un lien Garmin Connect, PaceDrop récupère l'activité correspondante. Les fichiers que vous importez (FIT, GPX, TCX, ZIP) peuvent contenir des données de localisation et d'activité. Vous devez avoir le droit de transmettre les données qu'ils contiennent.</p>
+<p>Retirer l'accès d'un service arrête les futures synchronisations. Les données déjà importées restent dans PaceDrop jusqu'à leur suppression (voir section 9).</p>
+
+<h2 id="s12">12. Notifications et e-mails</h2>
+<p>PaceDrop peut vous envoyer :</p>
+<ul>
+<li>des e-mails de service : réinitialisation du mot de passe, rappel avant l'effacement d'un compte fermé ;</li>
+<li>une notification et, si vous l'activez, un e-mail de récapitulatif le dimanche soir.</li>
+</ul>
+<p>Les notifications n'apparaissent que si vous les autorisez sur votre appareil. Vous réglez notifications et e-mails à tout moment dans l'application.</p>
+
+<h2 id="s13">13. Cookies et technologies similaires</h2>
+<p>PaceDrop utilise uniquement les cookies ou technologies strictement nécessaires au fonctionnement du service (session, authentification, sécurité). Aucun cookie publicitaire ni de suivi comportemental n'est utilisé. Si cela change, nous recueillerons votre consentement avant toute utilisation.</p>
+
+<h2 id="s14">14. Sécurité</h2>
+<p>Nous mettons en œuvre des mesures techniques et organisationnelles pour protéger vos données contre la perte, l'accès non autorisé, l'altération ou la divulgation : mots de passe hachés, jetons de connexion aux services tiers chiffrés, jetons de Claude conservés sous forme d'empreinte uniquement, accès limités aux personnes et systèmes qui en ont besoin, communications chiffrées, nombre d'appels limité pour chaque connexion de Claude. Aucun système ne peut toutefois garantir une sécurité absolue. En cas de violation de données présentant un risque pour vous, nous vous en informerons et préviendrons la CNIL conformément à la loi.</p>
+
+<h2 id="s15">15. Âge minimum</h2>
+<p>PaceDrop s'adresse aux personnes âgées d'au moins 18 ans. Si vous avez moins de 18 ans, vous ne devez pas créer de compte. Si nous apprenons qu'un compte a été créé en méconnaissance de cette règle, nous le supprimerons.</p>
+
+<h2 id="s16">16. Profilage et recommandations</h2>
+<p>PaceDrop analyse vos données d'entraînement pour produire des statistiques, des indicateurs (forme, fatigue, projections de temps de course) et des recommandations personnalisées. Ces analyses vous aident à comprendre votre entraînement. Elles ne servent pas à prendre de décisions produisant des effets juridiques ou des effets significatifs similaires à votre égard.</p>
+
+<h2 id="s17">17. Évolutions et contact</h2>
+<p>PaceDrop pourra proposer de nouvelles intégrations (autres marques de montres, par exemple). Lorsqu'une intégration entraîne un nouveau traitement significatif de données, nous mettrons à jour cette politique avant sa mise en service et, si nécessaire, nous recueillerons de nouveau votre consentement. La date de mise à jour figure en haut de cette page. En cas de changement important, nous vous en informons dans l'application ou par e-mail.</p>
+<p>Pour toute question : Laurent Montagono, 71 boulevard de Cessole, 06100 Nice, France – <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a></p>
+<p>Voir aussi nos <a href="mentions.html">mentions légales</a>.</p>
+</div></main>
+<footer><div class="wrap">© PaceDrop · Mise à jour le 5 novembre 2026</div></footer>
+</body>
 </html>

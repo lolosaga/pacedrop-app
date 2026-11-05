@@ -1,43 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mentions légales — PaceDrop</title>
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #222; max-width: 900px; margin: 0 auto; padding: 30px 20px; background: #fff; }
-    h1 { font-size: 32px; margin-bottom: 10px; }
-    h2 { font-size: 22px; margin-top: 35px; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
-    p { font-size: 16px; }
-  </style>
-<link rel="icon" type="image/png" href="favicon.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Mentions légales de PaceDrop : éditeur, hébergeurs, propriété intellectuelle, médiation de la consommation.">
+<title>Mentions légales – PaceDrop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Rajdhani:wght@500;600;700&family=Barlow+Condensed:ital,wght@1,800&display=swap" rel="stylesheet">
+<style>
+html { color-scheme: light; }
+.band a.home { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+/* Layout: a single reading column under a brand band, numbered legal sections, tables for processors and retention */
+:root {
+  --bg: #f6f9fd;
+  --surface: #ffffff;
+  --ink: #16213d;
+  --muted: #55607c;
+  --line: #d6deec;
+  --accent: #1c78c8;
+  --accent-ink: #ffffff;
+  --note-bg: #fff3e9;
+  --note-line: #f26a21;
+  --f-display: "Rajdhani", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Newsreader", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1424; --surface: #161d33; --ink: #e8ecf8; --muted: #9ba6c6;
+    --line: #29335a; --accent: #5db1f5; --accent-ink: #0e1424;
+    --note-bg: #2a1d14; --note-line: #f2843f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1424; --surface: #161d33; --ink: #e8ecf8; --muted: #9ba6c6;
+  --line: #29335a; --accent: #5db1f5; --accent-ink: #0e1424;
+  --note-bg: #2a1d14; --note-line: #f2843f;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 1rem; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 1.0625rem; line-height: 1.65;
+}
+.wrap {
+  max-width: 46rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.band { background: #3D5F94; border-bottom: 0; }
+.band .wrap { padding-block: 10px; }
+.band a.home { color: #fff; }
+.band img { width: 34px; height: 34px; border-radius: 9px; }
+.band span { font-family: "Barlow Condensed", "Rajdhani", sans-serif; font-style: italic; font-weight: 800; font-size: 1.6rem; letter-spacing: .02em; text-transform: uppercase; color: #fff; }
+main { padding-block: 28px 56px; }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: 2.4rem; line-height: 1.1; margin: 0 0 6px; text-wrap: balance; }
+h2 { font-family: var(--f-display); font-weight: 700; font-size: 1.55rem; line-height: 1.2; margin: 2.4rem 0 .5rem; padding-top: 1.1rem; border-top: 1px solid var(--line); text-wrap: balance; }
+h3 { font-family: var(--f-display); font-weight: 600; font-size: 1.15rem; letter-spacing: .02em; margin: 1.3rem 0 .2rem; }
+p { margin: .6rem 0; }
+ul { margin: .5rem 0 .8rem; padding-left: 1.3rem; }
+li { margin: .3rem 0; }
+a { color: var(--accent); }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.meta { color: var(--muted); margin: 0 0 1.2rem; }
+.note { background: var(--note-bg); border-left: 4px solid var(--note-line); padding: 10px 16px; margin: 1.1rem 0; border-radius: 0 6px 6px 0; }
+.note p { margin: .4rem 0; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 18px; margin: 1.2rem 0 0; }
+nav.toc summary { cursor: pointer; font-family: var(--f-display); font-weight: 600; font-size: 1.1rem; letter-spacing: .02em; }
+nav.toc ol { margin: .6rem 0 0; padding-left: 1.4rem; }
+.table-wrap { overflow-x: auto; margin: .8rem 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: .97rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--f-display); font-weight: 600; font-size: 1rem; letter-spacing: .03em; color: var(--muted); }
+footer { padding-block: 0 40px; color: var(--muted); font-size: .95rem; }
+@media (max-width: 480px) { h1 { font-size: 2rem; } }
+</style>
+
 </head>
 <body>
-  <p><a href="index.html" style="text-decoration:none;font-weight:bold;display:inline-flex;align-items:center;gap:8px"><img src="favicon.png" width="28" height="28" alt="">PaceDrop</a> &middot; <a href="index.html">&larr; Accueil</a> &middot; <a href="privacy.html">Politique de confidentialité</a></p>
-  <h1>Mentions légales</h1>
+<div class="band"><div class="wrap"><a class="home" href="index.html" aria-label="Accueil PaceDrop"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAqE0lEQVR42u2dd5ydVbnvv2u9bffpJW0y6QUSCKEn9CJSFMihKIgeaQp6xavoFZByOOqxIKh4pKOoR0GR3quhhNBSCel1etl7ZnZ/y1r3j3fPEDzguecGSHLk/XySSfYk8+53PWs95ff7Pc8WWmvNx9dOu+THS/CxAT42wMfXxwb4h73MHf0B/+gxXAjxj3sCNLC723+3NoAUIKVCoz82wEe984UQtA+WeXh1P0JIlP7YAB/ZpVRohkdWD/Ddp3oQBIiPT8BHGfhCA/xhaYalG8ss7y4gJAT6YwN86FegNFIKXtowyBvbSoxujHLDov7wBOyGEXk3PAECAfzr420c2Cy56dRGfr2kn/ZsCUOK3S4W7FYGUFpjSMGK9kEeXznE144YzUnTqmmujfCjV3oRQqB2s4xI7na7X8B3/rKJWc0Gn9yjFjC58pBafvlGhs5cEUMI1G7kiuTu5PsNKXh9Y5pHXunihtMmEASCjekcX9yrntH1Dt99tR8pQGvxsQE+nMxH8ZXfruaw2dUcObOJvmyJ1V1D2IbFDw+p5/aVGVYPFDCM3ScWyN1n90vufbWdxW9nuPHs6biBj68VjpAUfI8zplSz3yibixZ2Inaj2niXN4DWYdVbLLtcdMfbfOmTY9lzTDUPv9XJ1kyemCl4ob2foXLArUeO5bmOMg9tGcCUYreoC+Tukvlcc99aCmWPfzttGgATalKkHBtfwZioja81e9XFuXh2igte7KQYBAghdvmTIHd112Makre2ZfjhfZu55fxZxBybtkwOxwJDSJACR0re6Bngzd4BfrzfKFzD4PJlfRhC7/KxYDdwQQGf++WbHDm7ms8c3ML6nhwL1/biWAZKC7QALcEWBmUXopbJbQc3cv3KXl7PFCuuSH9sgP/f3f9v969l6cYh7rxgNgBVEZOpzVUIJFqE6ZFWGlNK+j0XgFNaalgwtZqzX+/BD4IRBPVjA/w/o50a0xCs3JrhsluWcPMFezKuIcmytn4QCqE0gVIV7EeAgkApRsci9JZK9BSL3DKnka3FElev7cOUuy5cLXfFrEcjCALNaT9ezDEHNnL+0ZNJ58u8vjVNdcymVPYp+wFCQEjHaISUxCyDlQN51uby1Do2d+7TxPfWZHg9k8fcRXGiXc4AgVaYhuDbv13Olr48v7tkHiBI2BbTmquJmCaeEigV5vpi2F0JgSEFrbEYzU4MgDPGVnP6mBinLemlHPihu/rYAH/f71uGwbPLO7ju9yv57SVzaayK8vKmXvoLRRJOWGIJA5QOF9+QEgkYAmwEScdAoXi6q5+8r7hp72ayvs/X3+7BEHqXC8hyV8r3pRT0Z4v80/de5oJTJ7HggFZAkyl4bE4X6cuXkUKSdwOCQCC0JggUwjTxFWS9gHrHJm6Y5P2AqBTUWDZ/ntvAr9oKPNw9hCXlLmUEk13I9xtScPaPX6au2uIX5+1LyVP0FUvUJkwaow5jamvIlj2eWDtAQ01AxIR02WNUc4RNg2X2b4qxZ32czcUi06pi9LsunobD66q4dEKZM9/qZUNNhAbbDg2+CxCZu8QJ8JXCNCTX37+Cxxdv4f4r5mNbFq7v8dBbHew3tpZJjSlsofnyH9dR1haZXIH2bAllO3RkPbRhcE9nmSXpAvPqa5iejPNqJksxCFBa84MptUxL2Jy2og9ZYQ12hXMgdlQdvaPCrOF8/9V1PRxw0UPc/M2DuOATMyl6Po5lsLFngL6Ch5AGf1zaTzQwuOSYsTzxdgHDlghD4MmAOY0WvX7AzZsynD+phgZTYyjBHnUpckFAwjTZki8x5dUOrhmf5LKJDXhKY4qdK8wyd67b0QgB2XyZT1/9HGceN5kLPjETz1dYUlJWivF1SapiPgPlgMZohDrL5PaX01z2H73QYEFcgy2ZNz3G9w+uolYIUpakOWJSZdsM+T4J00SgaY1H+N30Gs5c3sVhtTHmVcfxlcYQ/6AuKATaJGf/+HlsQ3HbVw4E4MXuPtYP5bER5H1F1JGMqnKY3BCl7HmYCAwTIo7AsSWGIYigKfkBMQFJqdEKBr0AUwtKvk93ycNVijNGJTlvfDWnvNVP2nWRgp1aH8id5/c1pmHws/tX8ODCTTxw9RHEHYfeXIGmSATbEGRKZbTQuEqxKVPijc4itmUhtAal0IFC+7Ki1NJYpokyDbJKklOanOfTUXRZkyvxx609lHwfMLlxagPVMuCcVd1IoVGofywDKKWxDMlrazq45LqF3PStQ9l7YjOgeHlrmp5skVrHwdUBmZJPf0mRikmm1khK5TLZfJlg0KM86OMOuQQ5n8GiIlCaQEAgwZTgGIKkI9mnOs5Z4xr4a/cAm/MFHGly/55NPJJ1+XnbAJY0dhp3YO4Mt4MQ5IolPn3VM5xx3GQuPG4mWkPbQJ6xyQhzx9XRV3QZLAeMTcQQEtJln1WZEpMMg0/tXcXyjXms6hhEJEWpOWlGnAZb0jVUJp33GJ2yCJDUWiZdZY/mqMPERIRF3YOMaXWYmYxx6+Razl/Tz6FVEfZOxkLNkfgfngX5SmEZBqdf8wQvr+5m3W/OJGJZuH7AG9v6OHhCI/1ljyHPpyUepRxAzAoP6or2DJfdt41LjhmDNnRIvgvwpCBiwn+sH2Rec4x/ntkEQNHzcdE40qCnVKIlHmNZ/xDteY/jW+oAzZmrOlmU9Vi97xhsaSAq8MZHlQV9pAYIlMI0DG579C3O/8HzvHnnAuZMbsYLfFZ0Z2itSmDbJn3lMi2xKL0ll4aoTWfOpTZqEzUl9y/t4/rnukkkBHHHZNB1qamPM+SX2aMpyvfnj0MFsDZXYHoyhq81ZaUpa82g5zI1keDhtj6ihsFRo2oYcF2mv9bOCQ0Jbp/6309Nd5s0VOmw2FrXnub8Hz7FTy+Zx5zJzaA1PYUSqahJbTxKe75ISzzKQDmgN1+iIWrx2MYuPjNjLGBwwqwaMmWfuKmoi1uky4qkA4N+nNZaB0sYbCvnWTWYpc42qHcsXOUTlQZlKekvlzhxbB03ruvG6h7g0KZq/jyzgUOWdXF8tcOCxtRHmprKjwxi1pJAKRZc9hBH7juWry/YD6U0Od9HKc3kmhqGSi7ZoocUBv3FEqOSEXoHSxwzrh5PK7oLRUwhGZ0ImFwXoSluMS5l0FJlMTZpUhexKSuFIQTz61LUWDbb8iUanAj5IGBMJELO9cmWXS6e0szrA0Xe6M8yvybBFS1JzlnfR0/5o01N5UeDcoYQ89V3LGLNljS/u+zYygOGQW90MkHJ83ire4DW6iiZskvClNRFomzNujiGgZSCpGOxbFuGpC2xDUmApuQGmKaBUoqXtnSjVUDKtkFIFNAUc2grFkhaFp7SjI1F6HRdPOVzweRGnu7Ns6VQ5NoJDUxxDL64No0U+iPT+cqPBGI2DRavbuNfb36R3111HKPqUqhQ5E/UMAHN0rZ+ptQlQAg8rRmVjNNdLFCXcqiNO6Qsm/b+PO1DBQ6eMppc2QcdwtFaKQwE4xIO6/uHkCiStkVRBRjCoNq0yXkuWd8jEwQ0Ow4dxTIJQ7KgJcWLPQOUtebu6Y08MlDmD905TOOjkbXIDx1qQFN2y5zx3cc4/cRZnHbEDDxfYUgxwiiubO+jpTZJfSJGpuzRGLHpKbmk3YAxiQi2Kdk2mGV1b5YTZo1lsFRmc97FMiUG0Ff2qYpJmlMRauNRir4i6/nUOxaGhqRt0RyNUefYRGV4mmoti+5CmcmxKHum4jzV1s+0eJQftiQ4b30fvZ4XuqLd2QBKawzD4PLbXiLdn+OmbxxaUbkNf0+yoXeQeMRidFWcTLmMIyVFX2FLweREnJyvyBTK3Luig0MmNpAuejy/uZ8JdTECNOWyx6SGajqyRWpjNj35IgnLosGxCBTYpkF/rkjPQA4pJHHTJCYlKdtEC82A6zK7No6LwYs9Wb7VUk2rLfnqul6kEB+6K5IfrqrB4M21HVx3+6vc8d3jqEkkKwCcQEjBQLFMTgW01CRxA4WvNNW2hRDh11LgEzPA14qTZ46myrEpuC4TqiNMb4gRtySur2mO2kRMk76cR0FrOrJFbMNEobj6z68z+8qH2eemxXzpgaUMFksIKVFaUGvbuAoEkr3qYrySyVEM4NdT67i7O89zA7kPXWH3odQBGtBKYxiCfb5wF3VVDk/97Ez8YNj1hNXwqq5+mqsTxE2JZZgIARJBoEN0xleaqBEWR9v9NnJ1DhR4c0uaT+w5hpLnYRoaX4XFWcK2+e1zqzjnF68ip41DmAaBV+SzB4/ltyfuAQjKKiDvB1Q7FqaAR7f2k7BMDh1VzRfXdrEwXebt/cchhXzfAm2X7BNWKnQvtz+0lKVre7j9O8e+S7MvhSAIFLlCgCRUNghR0YFWDGgIQdQ0URXy11M+a7f10T2Yp2eoSDZfJG5KGqttTEOQiNhELIeYZeEIg0BpVm7OY0Tj1GazOKUcVnUVL2TKZMsuUoZLakqBqzS+0kypcshWAtMPW6ppK3v8qmOo0nOwm2BBWmukEAxkC3zthuf5l/P3p6W5Fq0CTEMSqHCxl3f1YchQyx8ojahomhWasoKEIfD9MMUczJc597pneHpjiaQNEo1IJDlgcoKpNSa3PL6R+uooZx/awh6japDSAKA2oQkGh5g4vpm1yqEUNZhQ5RC3jEqCMNzwpCkpwdh4nLWDvZR8j4ZIhO9NqOGyDWk+1xijyrJRH8KONT8UUZUpueb2RSSjNt886wAA1vZniVgG46uTbBoYoD4RxSvpyu4X71KvRQwZ0pSmwYa2Pk6/9mne7DPAH2IwXYDaJJQUW7qHwNAQi0E8yV0bl3H+5AQnzBpDVybHjY+8TW3KwotaFPtLqJzJQbX1mKaFpxSmDGUqEWkQaI0pBbOqEyzpG+KAplq+OqaGG7YNcfWmDD+b1oSv/ptA0UftgoZdz+bONDf84TWu/9ohROwIBddlayZHXTTCqt40XiAYX51ioOhhGYCW+Bp8whggKgF8W1eaE65+ljfbPch0c8UnxvGHq47g0ElVOIPdMJTF8DU4BnhlPNfgxfYhDrj0Pj71g2do8yK4rotI91AuBIyOGXxqYlV4SgFTCKKGhRAKU4bvvyWVwDQgXXaxDYMfTarhxs4s20rlsAlwVw7Cw/zuZ658gOXre1j5+y+itWDp5l6qqyK01iV5ZnUHB01spGMgR9nVtDalCAJNVcQO5SJKIaUgmy9xxDceYMnyTiZNaeTK02dxzol7VW4asGpjD6vbhnhleTsPLWsnO3oU+zc5rNnQT1vRpTjoY+Az1ixx2RlzebDL58S9Gzl37gSCILxHoDSGAU+v6aSr4PG5Oa1orWgrFFk/kOfg5npMATNfa+PQKotbpzfjK96FE+0yYJyqdLGs29rLHx9ZziO/OAMhDPKlEoM5j5nj68i7Pq3JBG6gkIZgj9HVdBXLAFQDOlBYpkEQ+Jx29ZMsWZvh/5y1J9/47IHU16bwA1UJ4pKZk0Yxc9Io/vTMahqFSxyfl97so6doYNbFaWzwiRUG+N8n78M/nzCXf9YBugKLSCkQQjBUKvPAyjbuWdmJEjCvtY6JNQnipklVxGJzPs+0VJJ/nZDis6v6uHJ8mbERZ0SRt0vFAF3p47r2zkXsMa2J4w+egtaazf1ZTBRaC6QQeFphScHEump6hvI4pkFNNBKyZKZBeijHl3/0FCvf3saLN3yKeXu1hjyCH2AYocf0A4UQBrfe9xp/vG8ZNFeBNwQiiqjSBCWfgahJojrFJXcsY2Na8+PP7YtSYYIwvICmFFz37EbeGlDsM8oiUeEdXDRj41FW5wo0uh6nNiQZZw9w/bYhfjq1kaAC+O0yMUDp0PV09A7wu0dXcPX5B6MRuL6PFyjqE5FQiaM1gQ5ACHyl2dafJ2KaoDVSwl2PrGT2F+7lnhc388QvTmPeXq24XoBSamTxAQxD4vke//6XNzBH1xGtryESiyIjJjrQ6MBHN6XYMOTjmg4/eWItK7b0hX3EKsx+yn5AKuowvS4OHnzr6Bk0JuIjcyik0ESFweZcHkMYXNqS4tauLIOuF+JPu1IQVpUk+Za/LGNUXZyTD5mGANp6B0k6EmlIzMqiO7YMH0BrooaJVcFm3ny7g2vuWEh7W5rxTSlG16ZGZOrb+9nhXfzim1tZtaWAVVsL0Si6sxclAvAF1pgqgswA5D2m19tQ1ize1Ies9BD7gcYxDV7Z0M0r6QK/XDCJM/YcjRcoBOApcJVmcjJK2fPxVcDZzSkkmv/oyYeC4A8Io/hADGAaEj/wuPX+JVy4YC6maVH2XXoLHslIDGTIMgUoZAWG1lqhtK4EcUHfUJFYxOSXlx7E1z89DU240O/tbTW/X7QZr7oWjYGfyUIEHC0xx9VhqgB3RRtHzqymKnAxLJ+r/rKSJRu7sUwDy5Q8vaKdY29bwrFT6rho3hS8QGEZAl8rJOBIg5hlEChBd7FI0jT5TFOcmzoG0QSV97YLGCAsrATPv76NzswQnz9+BgBdQyU8BY5hjGT4tpRUxSIEKhiZ+hA+iGbOtCZ++rUjuei0Azjr+L2pr06ESmjxbmJHSsFQtsCjL2zAaKhH5bKImINXCJB9PdSUBymu6WL+fmO45dyD8N0SwWCJDj/KhX96m0yuwJX3vslxNy2iKWXx02On4asQIukvefS5LnEzPJW+UlQ7FmvSeQKl+NKoFCsGXZZmixgfEFIqP5DoC9z2wFLmzW5h/Kh6XN8jly9R61j4SoUNFxpcX9OQiuEF2+cR4Q9oqE5yzP6TUUqHi/8eR3zY2Hc8tIquLDiFLNoxCQaHiDfWIhsTZN7ewrVnzeaRy46ltamG31xxIk1xB5HN8nZ/nvnXPs61T24hcBz+/cQpVCfjI9V7l+viq7BGkCps8IvbFvW2RaZcYu9UjGkxg7s7c8AHg5TKHV1705SUyi5PvbqBsz4RykvS+RKO4xCxDXJlHyHANiRtA3l682HjHJXdrbSoUJYVqXklUP4nNUWgsEzJm6u2cvU9S3BqqvHcEioIsBJR8lJSn8lxx8WHcMUpc0jFIrh+wB4Tm3nwqqOo9/Pk00VWFW2wJd87YizHzGrBDxRmJSZJpWiI2gQKAnQYsLWgPh6hu+ACggVNCe7ryQEfTCYkP4jgu3hlB9m8zwmHTEUI2JLJI6RAIjFNMTLHJyINHBlShYiwiAlQeISZiayIcv72uYZT1GKpxM/uXUGpCEGpgEQRMTQly2Efr4/Fvzydzx07myDQI+IvP1Dsv0cLT157Ai1xiGvFTSdN5rKT5hAEAUblngpNVMgwIxOQ9RUlFUrmU45N2g0dzqcbEmwKFOvybqVFaifWAcMB9NGX1zB1XIpxjdVhjiwFliFRvo8tISffsbYh5IgUUAAGYP0d4mOYuHlrfSef+8EzbFIpkq1j8TKdDLYPUK6rYlo0z0M/OYOmmgSuH2Btn7JKgR8E7D15FC9cfiSDeZc9JzRXBj+F/85DI3WIwIrKPVOmgWFAwXNJmDGihqavWGROKkKNNHgmnWdKPILS7JCYy9yxqYXhnf/65jbm79MCQLbkEjHBNAQlFZLbjmNWih8NGkQFCqZSkYr30eqryiKt2dLHUd96nG5tYdY5+AEcsO8EphzokesZ4oaLD6G5NoUKFKLSjLf9ohhSEgSKcY21jKu4M0OG93VF6PMNLXC1xg+grDRJ0wCtaS+WGRWNMj4eJ+0G1Edhn7jFU31FvjRuxytiuSNSEykFpbLLum2DHFYxwGDBI2Y7OKYIFwRBNOJUgKft5IlaY5iSv9vEW5kNd+XNf2UocIhYCfBDd7RcJXhxXAtDx+zLjT2KB7akGXTLWFJivEdztpQCpdTICQUooxBaY2qBjyavAtKuT0+pTM4LKAeKqakEJa2xTQOtQ0B6XpXNslwIoRhixxo9zB3T9gs2tPeTK7jsNTmUA5YCn7qojdZyxJlXRx2G+xN1BctRAmzLeGeh9Xv0jAnJynVt9PZmGGvHWZ/OY2sfpSReMcrmTTk2p12edUx+YgsmRgQnj45w0fQGJlXHK3XGOyd1uKArKo0pNIYQmJV3ZgrBntUpAq1o0jZCCEwhaCsUacuV2KsuRW4gTJ/3rYry/a1D9JY9Ghxr58SAYf+/dssAMcugZVR1mCoagohjknf9ETcQqUhPqMxuqLJtQIUvifeetacChWFJVqzvBi2oiZbQ67IYIgElRZDPY0QjROtjJCbXkzFsNpYi/LS/j992lvjG5BTfnNmEYZhhnj9sBMAW4SaQwxFf6xEXaVXmTwy/ljItzJjEEIKir1BKMTVmo7RgQ9GnwbEqE10+ahdU+bp+ax+1VTaJqMNgsYRVQUU9rXjnkYehW1nZb5Xqt1AK203/5t0rpbEsk76BLNfc+DRLV3XwqUMmMqpBUOjqppzJYiiNk07jr9pK5KWVzE1nmDY4QEvOx20f4v8s7eO4v25l02BuhHgZiQnbxZ3hekNWXispRdYPKCiN0Joqx2RULIJGEDchXSwz1rGJathYcCtroXceGrq1a4Cm+hggyBVc6mIR1ncNUp+K4Mt3O3QpZSUQCAqeS33SDt3DdkdAV9pVs7k8J/+vP7K2XSNMk3sfW8rXz9qH9Zt7eWZpBxv7etGeC47F5vUZNq/uhEQMM26TnDiaqkmtPFvMcsSQx6OHjmFGTaLi1t77NGf8gK5yQK+ryQaacqVrc0pEMj1mYkhBdcymvViiPh6lCk1nyd3hORQ7bIC+gTI1VWFn+uZMllQ0QtyU1MQc2nLld6UJQojKWdX0lzwmVCepJEYjgV1VSJnPXvYgLy3LEqtL4eXTLNk4wJIbnuaYA1t5+udn0J8v89aGXra0p8l5AtM2yBXKpAdybOjNs/qttVS1jKZDB6zoyTKzNjEC5P3tSc4HAUEA4yMmMxNixDH0eoo1OY+7u0ucUO8wPh6l3wrdaZVjkvH1zuMDhh8jX3JJRG0ALMshEbEwg2AEcxfbPaqoLL7Wmp5smbhpUBuNjBDkIaxtcMUNT/DwM23EGxO4pQKGk8KICLzBbs48bg9aWxpoBebOGDvy059ftpnrHlxHhhQFS5HP5HEzZebWCI4enUJXBj/97ftXGuKmSdISQMDGwSJdJR9bGkxPmcyvcXhtyOOx/hILGqPURyIAOKZBtjKJZacSMoGnkNFwJzQlItTGTbrTudDXy3fIdl3JQ6WU5D2fmqhFTcR+Z/GVwpAGy1a38ePfrSRWG6ccaCwnijYdgvwAf/jRAk47dg5BhRnz/ICIY/Grh5dx0Y1vgO1CIgGeoH5Uiovn1fKlY6dTl4qHsIJ4ZwBgMVAYQmJL8FXAnWv6uHP9EK8PuJQ14Ji02AEnj03y/Vmj0NrkhYESR9ZEQIQZnvoAeDFzR4OwZZq4ZT98TYQLUw70SKVpSEE+8LGFwDQkWgsSjkHCtkZcv9YQKDAMuPqmF3GDGBJNLNlELpcmXk5z7w9P5PhDZuB6AaYRcgsRx+KZNzfz9ZsWYUTiBNoiGriceeh4Ll+wD5NG14wEdSGGU2BBT6mEFJJ6x2DdYJ5zn9vCCxtzYAmqogb1ZY/MkMvWoTI/X9XLorTLnw4fz5p0QLcb0OSEUntzZxpg+EomTbr7vTC7QGBKSS7Q9BU8HFOikZgIbCnpLLooQ5BwzIoWKJyELg2BbRnc+eCbPPB8J9FEhCBRw1BXD9MnW/zuqjOZO3McgVIjtYMt4bk3NnLKtU9RDhxqqjzOOGw6Xz52CrNbG8ITEgQYQr578YslXKUZG7dZ3jfIJx/fSkdvkeNnVPH5CUmadNi/NpD32ThQ5jcr0rz2XA9fGSzwr8dNoc3VNDmKnBdQa8mdb4AxjVUsX9szQhVqDSHcVhHR6JB7DZRmYnUM26y0laKR0kBKKJVK3PP0Gr7yvReIpqpQVoDbvZVzjp/C9d/6BLWpOL4f4PoeSoW77t8fWMq371pJfW2cry6YxLnHTGNic+12nDGYFaxHV7iHrOeT9lymJlN05ouc9NhWuodK/Nuho2jKDPKzO19l8YZOLNvg2ENm8U8HjuHVoyfx7QfXctvCTqY2VnHq3NGU/YCBQNHgmDvfABPG1NCVyaFViCy6KmBcdYzaZJS2vhxR28QNFKaA6gokEVT8ff/QED/9zXL+/Hw7G7alsSJRSkJDbze3Xn0M550airrKXoBjGXzrlhf483Prsauq2LCph68umMF3ztiXUXWpdy288R65phAw4LmMjkaRIuDcZzfRmS3xswMaePL+xTy4aBtz9xrD5SfPpqU5RclKsHhIUM543HrGXiRqk/z0mc3MHRNlUksVeQUtERN2UCFh7tgkW5jWUs3AQI6+TA4RMciVAsbWVOHpgHLgU/B84gkHocLsZ7hRb2tHmlO/8RhvrBqgafRYEjEHX+U4fFIVX/vcqZx8xEz8IKT+hlPHmmSCbd0Kyx/kvmuO5uT500ZcjawMbHqvWCUFtOeLONIgZVnc8lYHj20Y4rJ9avndnQtZsW2ICxfsxWDe5cElnfj2IAeNjxFPJfnOuq20nDqH649p5eE1PbzVXmLumBQFL2BqzNphbZDc0SEVM1rrQVgsXddHXSxGOlui7PkEgJaCklLYIiTlVQU/cj2fz377Cda2eUya3MRA/xZmtwoW3XoKz91xTmXxFYaU73q4+moHfLj8lOmcPH8aZS8IDSrl+3K0AkEp8NmWK1Lr2LTnCvzvv27j2GnVbFi0gTc2Zjj6gLEs29yHbZscu/cYDp2U4rOHTeH6z87ljv1b+PXydhSSy49opS+bZ2W+TK0paYnuxBMwrK9pqq9iXFOKv76+iWMOnAQYuEGAr2BGc10outUaVak4TUNy3lWP8NaWHMmYoJjt5rvnzeLSL8zHti2CQKEJF397TB/grufXMW5yjG+ctj+BUliG/LsYzPDu3zhUpDUZxZSCb7ywBSUlMzJ9/OK51RgRi4mNKf5pfiNPL+3gvmVdDJZ8ntw8wMmz2/nx6XNhYz+rM0Mc25IiPVjg8e4ss1MOtjR3mA/YoTAe5uOCw/Ydx5OL1oUWFZpsqUyNY6GUQin9TlA0JN/62UJ+/cA2IhGfk+Y18+Idn+HyC47AsqwRyeD2iz8CXwOOZXP6YZNIRO135fXvv/iCzmKRsgpojkX5a1s/d2/Mckqjwf0Pv4XKe3z71Nm0NFfz5V8t4jePrmXdlkF6PMX67hw/eWwzh1y3kP0aosQsg7hlMH9CFQv7PY6ujQF6hxkxuWPT/MPr5MNmsGRtD+mBHKPrU/QOFQEZIo5SjMgNL7j6cX78i8UcfmAj9/zgOG668kQmjK3F98PZh/K/2EqXnjqdGaMTI30Ef3fxEZSDgPVDWaZVJSj4HucvbGNWc4yuRavZsjHNv1w8n1Qyztd/tZhcXnDgnGYuPGUakcYUVjxCos7kxbe7uPGvm2hNxEnYJjIWZVPJ5VNN8RDf2plZ0DCld+T+E4hFIzz43GpOP2kvCpWeHj/wufhHL+K6AWs2dfLK0l6uu2I+Xzt7PwzTwvcDhBQY/0VX9HBXzQn7T8IPwrp6e6Xce7kdpRVv9A4wpaqKmGnxvxauZ1Mp4Lj2dh5+Zh1fv3Ae9aNquegnz4EjOX3eeKa21PD4212UesMNdNGRLTzelmNhZz68pzT4w9Y0rY5kz2S0wjXsRAMIEaZ+8WiEk+aP58a7X+MLp+zL/uPrQ5wo7/LAojZ6tmapq3Z54Y5TmT+3taJOC953Ef/ex1f9LbT8bldV4YC14vW+DKNiDs1Rh3vWdvGLtwc5ws/x6H1LmXfwePacNZbzbnkNFJxzZCtlw+bnT6+nsTlFS51DXoEVMSm4ZSLSqVT4Pr/vyvKVlhogZN3Mnd2iNHz7r3zmAN5Y1c2y1e1IUSFgpCbqaJyUxSO/XMD8uaHWc5infb/saqRhQ7+brBHvQf/pkRH3VMRVJV7sSTMmGmVCKsGitj4+v3Arc2Se5Y8sob4hwbmfnsO3/vIWOufROi7OgoMncvcTazhn3hgm1lqcsV8L9dU2lm2yrbvMnNEJNIL7OwbpczVfbKka+SS/nS7MGuZaD5zVypyZjVx983OV4Ch47JWtbFnVzfWX7MMBe44bwXFUpSdr+1+BDvGjvOeT97ywHUiKESn59jIuvZ1BpBBICcUgYHn/EKsHCsypqWJcIsZTm/o44Zk2xvseXY+uJJsr8f0vH8b1L7TR3zkEvs8lJ87k6j8sZZ+pdUwa18iybpdfvtHNxNoEmzIlUJpjJjcggGvX9nFmc4LR0QieUh+IRN38oMS5Ukq+/9Wj+OQFv2bpug5mTx7FnY9v4eBDJ/PlBXMou+Hiy8qg1fe7SsqnI1dkKO8hNVTFHOpiNnHbwjIEI6bQUPID0mWP9qJLzg0YG7eZXZcE4OcrO7l80TZGDebpenoZhUKJ6755NHcv7WTFhn5I5zh23nhW97ssWdnNvVcfzc8WbqM769LcAIdOquOqR1ax5+Q6Dp/YyEOdg7xV8PnL/g3oDyD4fqAGMCrNd8fNm8rB+7bylWsf4sW7LmRUHUzbuxmQOCFlQG8my8ot/awa9OnwwBVQXRNnfMpkj9okU5IGU2tSUAOlkkd7rsz6dB5XBwhpIiwjRJp8D19roobF+IRDc30E0Czvz3PNsk6e3DBAw4ZO1j23lNFNVVxz4RHc92obz73dB8USR+07nkOmNfLdu97kO+cewN1Lu1m4MmTVzj94Ag9tHcAVJpcePA7TMLjwjQ7OG5diajL6gU5TMT/IkSgayc1XnMisT9/EIy+t5+un7c2G9n46e4f409Mr+NNTK1m8JoOXKYRbOBaHqAGpBCSjWKPrGDOxkb0mNzJvTILDxiSYURVhkhWveMvtHZCuvCbIeh4PbhvgP9ameWxtD/7mPuSKjWzqzHD04VM55oCx3PHEWpav6YOIwZlHTGavaU185/bXOPuYCWTLHvcs7gTTZL896rAjJi+v6Wf29GbOnt3Ctev7GETzg+kN70tr7lI9Yt+96Vl+dMvzdD17KbGozZOL1pMeLGFZJiXPZ1PHAIuXb+bVVV0Mpt1w4F7MRgc+vhWFmhoY1QBNVTQ2xpneFGdSdYSWOof6RISIAXlXsS3vsaovz8qOPNu29MPWHuzuPtz0IBNHJzn+4FZ80+HXT2+k1DfIhGkNnHX0FHryglvuW8J5J89CJmPc8vxmhBA07tPCzSdO4tsPrWVt1wCvXHgAiZokezy+ht8f1MJnx9b9p92/S03M0lpX8B7Fvmf+O7F4jJfuPO990ZJ0JsefnlnF7Q8s5bXlW8EwsSJRCDyEBm2aeNEYWBGwNEQsMKxw4wc+uAqyOSiVIV+qaGAsZrQkmD55NG9uGWLLyjZSLVV8/phpzJhQz40Pvs2qTT1cfs7+9PiKRWt7eDutsSfWc9uZe/DbhZt4fHkP/3byVL45bxotT65nfpXB3Qe0VhZf7Nojy5RSSEPS1j3A1FN+xec/OZ2bvnsqq9r6uXfxVvZsdNjSmWfNlgG+fPIsZk9pBuBPTyzlR799mdeXdkIiihUxkcIgYZrELE0yauIHPp4X4Aaykp4qolGDeNymqT5FU12cpuoovQMl7np+K1LCaUdOZu8JVaxsK/H7h95g8sQGzjtpBk+sHWRiY5TuvOLZTWluuPhgnnx9G39e3M4Xjmjhzk/N4agXN7C5pFl+eCsRw3jPyneXnBk3DDk//8ZajjjzZq699CSuuOBwXl3fzfK+IQ6fVM99T63hut+8xD7Tx/AvFx/KvlNH4/keN//5Vb5320t0dechaofVV8QiFTOoScSpSUiqEnESURtLasyIQ6mYJ+cp2rqKDGX6UVaESaNqmTa+hl7X4LFXNkO+wLmnzqKpIc5dL2zhqH3H0pH1eXZ1NzddcBB3r+ri6VUDnLp/M/cs2ItzXm/jvvZBlh01kSmpRGWioth9hvYFQdjp/senl3Hp95/g55efwClH7UEx8NlSKDE9mWDlxm7OvvIhxjXXcNWX5rP3xHpMadDWleGyG5/hpZXdCNvEtC2MRIRC0cMvBMTiNlp7FHNlfM9DIUH5mKbDgVOTxKpqaevK0JHOMVAK2HPqaC78xBRWtg/xl5fW88kDW1ndU2RtT54fnLU3T24d5L6VaT4xrZo7P7UnN2we5IZ1vdyz3ygOqq9+l7JulzPAf/mZAJXBHPmiRyJuj+wiPwiH+A23oGopw7afSiAH8Lywo1JrjTRCYE+rd+QlgXpHfTf80Sdlz8f3w65K25JINKYZ8sjdA0WaqqMoDdmiR1WFUMkUPZIRcwRWyLgBNbYxAm98mLNEP1QDvFOkib9roPcc7qr5L9HR/66OVYj3+6S+d7AkId6tGfqwB7l+6Ab424d83ybv9/l//wl0+s/tZf/P9OnwiLTtxdh/+2fe4++7vQE+vv5HfaT5/6zr/wI10k0FYts7yQAAAABJRU5ErkJggg==" alt="" width="36" height="36"><span>PaceDrop</span></a></div></div>
+<main><div class="wrap">
+<h1>Mentions légales</h1>
+<p class="meta">Dernière mise à jour : 5 novembre 2026</p>
 
-  <h2>Éditeur du site</h2>
-  <p>
-    <strong>Laurent Montagono</strong>, personne physique<br>
-    Directeur de la publication : Laurent Montagono<br>
-    Contact : <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a>
-  </p>
+<p>Ces mentions concernent le site pacedrop.app et l'application PaceDrop, disponibles sur le web et sur mobile.</p>
 
-  <h2>Hébergeur</h2>
-  <p>
-    Netlify, Inc.<br>
-    512 2nd Street, Suite 200<br>
-    San Francisco, CA 94107, États-Unis<br>
-    <a href="https://www.netlify.com">www.netlify.com</a>
-  </p>
+<h2 id="m1">1. Éditeur</h2>
+<p>Laurent Montagono, entrepreneur individuel<br>
+71 boulevard de Cessole, 06100 Nice, France<br>
+Immatriculé au Registre national des entreprises (RNE) – SIREN 878 484 336<br>
+SIRET : 878 484 336 00028<br>
+E-mail : <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a><br>
+Téléphone : 06 59 12 16 99<br>
+TVA non applicable, article 293 B du CGI</p>
+<p>Directeur de la publication : Laurent Montagono.</p>
 
-  <h2>Hébergement de l'application</h2>
-  <p>L'application PaceDrop est hébergée par Railway Corp. (<a href="https://railway.com">railway.com</a>).</p>
+<h2 id="m2">2. Hébergement</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Élément</th><th>Hébergeur</th></tr></thead>
+<tbody>
+<tr><td>Application et base de données</td><td>Railway Corporation, 548 Market St Suite 68956, San Francisco, California 94104, États-Unis. Serveurs situés aux États-Unis (région de Virginie).</td></tr>
+<tr><td>Site pacedrop.app</td><td>Netlify, Inc., 101 2nd Street, San Francisco, CA 94105, États-Unis.</td></tr>
+</tbody>
+</table>
+</div>
 
-  <h2>Données personnelles</h2>
-  <p>
-    Le traitement des données personnelles est décrit dans la
-    <a href="privacy.html">politique de confidentialité</a>.
-  </p>
+<h2 id="m3">3. Service proposé</h2>
+<p>PaceDrop est un service d'accompagnement à la course à pied et au swimrun : analyse de séances, plan d'entraînement, suivi de la forme et du bien-être, préparation de course. Il comprend un essai gratuit de 14 jours sans carte bancaire, puis un abonnement. Les conditions de l'abonnement et son prix sont affichés dans l'application avant toute souscription. Le paiement est traité par Stripe.</p>
+
+<h2 id="m4">4. Propriété intellectuelle</h2>
+<p>Le site, l'application, leurs textes, visuels, logos et noms (PaceDrop, PaceMind, PaceForm, PaceMap et les autres noms de fonctions) sont la propriété de l'éditeur. Toute reproduction ou réutilisation sans autorisation écrite est interdite. Vos données d'entraînement restent les vôtres.</p>
+<p>Strava, Suunto, Garmin, Polar, Coros, Intervals.icu, Claude, Anthropic et Google (Gemini) sont des marques ou des noms de leurs propriétaires respectifs. Ils sont cités uniquement pour indiquer la compatibilité de PaceDrop. PaceDrop n'est ni affilié à ces sociétés, ni approuvé ou parrainé par elles.</p>
+
+<h2 id="m5">5. Intelligence artificielle et santé</h2>
+<p>PaceMind et Claude produisent des indications générées par intelligence artificielle. Elles peuvent être inexactes et ne remplacent ni un entraîneur, ni un avis médical. En cas de douleur ou de doute sur votre santé, consultez un professionnel de santé avant de poursuivre l'entraînement.</p>
+
+<h2 id="m6">6. Données personnelles</h2>
+<p>Le traitement de vos données est décrit dans notre <a href="privacy.html">politique de confidentialité</a>. Vous pouvez y exercer vos droits en écrivant à <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a>.</p>
+
+<h2 id="m7">7. Signaler un contenu ou une anomalie</h2>
+<p>Pour signaler une anomalie dans l'application, utilisez la fonction de signalement. Pour tout autre sujet, y compris un contenu qui vous semble illicite, écrivez à <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a>.</p>
+
+<h2 id="m8">8. Médiation de la consommation</h2>
+<p>Si vous êtes consommateur et qu'un litige subsiste après une réclamation écrite adressée à l'éditeur depuis moins d'un an, vous pouvez recourir gratuitement au médiateur de la consommation dont relève PaceDrop :</p>
+<p>CM2C, Centre de la Médiation de la Consommation de Conciliateurs de Justice<br>
+49 rue de Ponthieu, 75008 Paris<br>
+<a href="https://www.cm2c.net">www.cm2c.net</a></p>
+<p>Vous pouvez y <a href="https://www.cm2c.net/declarer-un-litige.php">déclarer votre litige en ligne</a>.</p>
+
+<h2 id="m9">9. Droit applicable</h2>
+<p>Ces mentions sont soumises au droit français. Les droits dont vous disposez en tant que consommateur, notamment celui de saisir le tribunal de votre domicile, restent inchangés.</p>
+</div></main>
+<footer><div class="wrap">© PaceDrop · Mise à jour le 5 novembre 2026</div></footer>
 </body>
 </html>
