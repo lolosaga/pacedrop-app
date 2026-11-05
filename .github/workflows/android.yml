@@ -30,6 +30,11 @@ jobs:
         run: ./gradlew assembleDebug --no-daemon
       - name: Nommer l'APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/pacedrop.apk
+      - name: Compiler le bundle Google Play (AAB)
+        working-directory: android
+        run: ./gradlew bundleRelease --no-daemon
+      - name: Nommer le bundle
+        run: cp android/app/build/outputs/bundle/release/app-release.aab android/app/build/outputs/bundle/release/pacedrop.aab
       - uses: actions/upload-artifact@v4
         with:
           name: pacedrop-apk
@@ -43,5 +48,7 @@ jobs:
           name: APK de test PaceDrop
           body: "Dernière compilation de l'APK de test (signé avec la clé de debug). Télécharge « pacedrop.apk » ci-dessous."
           prerelease: true
-          files: android/app/build/outputs/apk/debug/pacedrop.apk
+          files: |
+            android/app/build/outputs/apk/debug/pacedrop.apk
+            android/app/build/outputs/bundle/release/pacedrop.aab
           fail_on_unmatched_files: true
