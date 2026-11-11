@@ -9,7 +9,9 @@ import android.util.Base64;
 import android.widget.Toast;
 import android.os.CancellationSignal;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
+import java.util.Locale;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -37,7 +39,32 @@ import org.json.JSONObject;
 
 public class MainActivity extends BridgeActivity {
     /** Pont appelé par la page de connexion : ouvre le sélecteur de mots de passe de Google. */
+    private TextToSpeech voix;
+    private boolean voixPrete = false;
+    private String enAttente = null;
+
+    private void parlerNatif(final String texte) {
+        if (voix == null) {
+            voix = new TextToSpeech(getApplicationContext(), statut -> {
+                if (statut == TextToSpeech.SUCCESS) {
+                    voix.setLanguage(Locale.FRANCE);
+                    voixPrete = true;
+                    if (enAttente != null) { voix.speak(enAttente, TextToSpeech.QUEUE_FLUSH, null, "pd"); enAttente = null; }
+                }
+            });
+        }
+        if (!voixPrete) { enAttente = texte; return; }
+        voix.speak(texte, TextToSpeech.QUEUE_FLUSH, null, "pd");
+    }
+
     private class PontIdentifiants {
+        /** Lit un texte à voix haute (synthèse vocale d'Android, en français) : la WebView n'a pas speechSynthesis. */
+        @JavascriptInterface
+        public void parler(final String texte) { runOnUiThread(() -> parlerNatif(texte)); }
+
+        @JavascriptInterface
+        public void taire() { runOnUiThread(() -> { enAttente = null; if (voix != null && voixPrete) voix.stop(); }); }
+
         @JavascriptInterface
         public void enregistrer(final String identifiant, final String motDePasse) {
             runOnUiThread(() -> enregistrerIdentifiants(identifiant, motDePasse));
