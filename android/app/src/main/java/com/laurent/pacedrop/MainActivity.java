@@ -10,6 +10,7 @@ import android.widget.Toast;
 import android.os.CancellationSignal;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import androidx.activity.OnBackPressedCallback;
@@ -45,6 +46,15 @@ public class MainActivity extends BridgeActivity {
         @JavascriptInterface
         public void demander() {
             runOnUiThread(() -> demanderIdentifiants());
+        }
+
+        /** Garde l'écran allumé (true) ou le laisse se mettre en veille (false) : renfo guidé. */
+        @JavascriptInterface
+        public void garderEcran(final boolean allume) {
+            runOnUiThread(() -> {
+                if (allume) getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                else getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            });
         }
 
         /** Ouvre le partage Android avec l'image PNG (base64) générée par la page. */
