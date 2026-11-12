@@ -1,7 +1,10 @@
 package com.laurent.pacedrop;
 
 import android.content.ContentValues;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import androidx.core.app.ActivityCompat;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -73,6 +76,47 @@ public class MainActivity extends BridgeActivity {
         @JavascriptInterface
         public void demander() {
             runOnUiThread(() -> demanderIdentifiants());
+        }
+
+        // ---- PaceGo : sortie enregistrée avec le GPS du téléphone, écran verrouillé compris ----
+
+        /** Vrai si la position précise est déjà autorisée. */
+        @JavascriptInterface
+        public boolean goAutorise() {
+            return ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        }
+
+        /** Demande la position (et les notifications sur Android 13+) ; la page reçoit le résultat par window.__goPermission(bool). */
+        @JavascriptInterface
+        public void goDemanderAutorisation() {
+            runOnUiThread(() -> {
+                if (Build.VERSION.SDK_INT >= 33) {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.POST_NOTIFICATIONS }, 4101);
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION }, 4101);
+                }
+            });
+        }
+
+        /** Démarre l'enregistrement : service au premier plan, étapes [{nom, minutes, cible}] en JSON. */
+        @JavascriptInterface
+        public boolean goDemarrer(final String etapesJson, final boolean voix) {
+            if (!goAutorise()) return false;
+            PaceGoService.reinitialiser(etapesJson, voix);
+            runOnUiThread(() -> ContextCompat.startForegroundService(MainActivity.this, new Intent(MainActivity.this, PaceGoService.class).setAction(PaceGoService.ACTION_DEMARRER)));
+            return true;
+        }
+
+        @JavascriptInterface public void goPause(final boolean enPause) { PaceGoService.basculerPause(enPause); }
+        @JavascriptInterface public void goVoix(final boolean avecVoix) { PaceGoService.regler(avecVoix); }
+        @JavascriptInterface public void goEtapeSuivante() { PaceGoService.etapeSuivante(); }
+        @JavascriptInterface public String goEtat() { return PaceGoService.etatJson(); }
+        @JavascriptInterface public String goPoints(final int depuis) { return PaceGoService.pointsJson(depuis); }
+
+        /** Arrête le service (le GPS et la notification s'éteignent). */
+        @JavascriptInterface
+        public void goArreter() {
+            runOnUiThread(() -> startService(new Intent(MainActivity.this, PaceGoService.class).setAction(PaceGoService.ACTION_ARRETER)));
         }
 
         /** Garde l'écran allumé (true) ou le laisse se mettre en veille (false) : renfo guidé. */
@@ -207,6 +251,15 @@ public class MainActivity extends BridgeActivity {
         if (web == null) return;
         String js = "window.__pdFill && window.__pdFill(" + JSONObject.quote(identifiant) + "," + JSONObject.quote(motDePasse) + ");";
         web.evaluateJavascript(js, null);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int code, String[] permissions, int[] resultats) {
+        super.onRequestPermissionsResult(code, permissions, resultats);
+        if (code != 4101) return;
+        boolean ok = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        WebView web = getBridge() != null ? getBridge().getWebView() : null;
+        if (web != null) web.evaluateJavascript("window.__goPermission && window.__goPermission(" + ok + ");", null);
     }
 
     @Override
