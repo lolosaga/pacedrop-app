@@ -3,13 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PaceDrop — Coach IA pour route, trail, swimrun et triathlon</title>
-<meta name="description" content="PaceDrop analyse chaque séance, construit votre plan et prépare votre course : route, trail, swimrun, triathlon, backyard. Gratuit pour commencer, 14 jours de PaceDrop+ offerts.">
+<title>PaceDrop : coach IA running, trail et swimrun | Gratuit pour commencer</title>
+<meta name="description" content="Importez une sortie : PaceDrop l'analyse, ajuste votre plan et l'envoie sur votre montre. Route, trail, swimrun. Gratuit pour commencer.">
+<link rel="canonical" href="https://pacedrop.app/">
 <meta name="theme-color" content="#4b76a8">
-<meta property="og:title" content="PaceDrop — Coach IA pour route, trail, swimrun et triathlon">
-<meta property="og:description" content="Importez une sortie, PaceMind l'analyse, PaceMap prépare votre course. 14 jours gratuits, sans carte.">
+<meta property="og:site_name" content="PaceDrop">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="PaceDrop : coach IA running, trail et swimrun">
+<meta property="og:description" content="Votre coach lit chaque séance, route, trail ou swimrun, et ajuste votre semaine. Gratuit pour commencer.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://pacedrop.app/">
+<meta property="og:image" content="https://pacedrop.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"PaceDrop","url":"https://pacedrop.app/","logo":"https://pacedrop.app/logo-nouveau.png","email":"laurent@pacedrop.app"},{"@type":"SoftwareApplication","name":"PaceDrop","applicationCategory":"HealthApplication","operatingSystem":"Android, iOS, Web","description":"Coach IA pour la course à pied, le trail, le swimrun et le triathlon : analyse de chaque séance, plan adaptatif et préparation de course.","url":"https://pacedrop.app/","inLanguage":"fr","offers":[{"@type":"Offer","name":"Gratuit","price":"0","priceCurrency":"EUR"},{"@type":"Offer","name":"PaceDrop+ mensuel","price":"6.90","priceCurrency":"EUR"},{"@type":"Offer","name":"PaceDrop+ annuel","price":"69","priceCurrency":"EUR"}]},{"@type":"FAQPage","mainEntity":[
+{"@type": "Question", "name": "Faut-il une montre ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Vous pouvez déposer un fichier FIT ou GPX, ou enregistrer votre sortie avec le GPS de votre téléphone grâce à PaceGo. Une montre rend simplement l'import automatique."}},
+{"@type": "Question", "name": "Faut-il un compte Intervals.icu ?", "acceptedAnswer": {"@type": "Answer", "text": "Non, c'est facultatif. Intervals.icu sert à relier votre montre pour que vos séances arrivent toutes seules. Sans lui, l'import d'un fichier FIT ou GPX fonctionne très bien."}},
+{"@type": "Question", "name": "Quelles montres sont compatibles ?", "acceptedAnswer": {"@type": "Answer", "text": "Les montres qui envoient leurs séances à Intervals.icu : Garmin, Suunto, Polar, COROS et d'autres. Tout fichier FIT ou GPX est aussi accepté."}},
+{"@type": "Question", "name": "Mes données sont-elles revendues ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. PaceDrop ne vend pas vos données personnelles. Le détail figure dans la politique de confidentialité."}},
+{"@type": "Question", "name": "Comment marche le swimrun ?", "acceptedAnswer": {"@type": "Answer", "text": "PaceDrop lit les enchaînements nage, course et transitions, analyse chaque partie, et ajuste votre semaine en fonction de la course visée."}},
+{"@type": "Question", "name": "L'IA remplace-t-elle un coach ?", "acceptedAnswer": {"@type": "Answer", "text": "Elle lit vos séances et propose un plan qui s'ajuste. Elle ne remplace pas l'avis d'un médecin ni le regard d'un entraîneur si vous en avez un. En cas de douleur, consultez."}},
+{"@type": "Question", "name": "Que contient l'offre gratuite ?", "acceptedAnswer": {"@type": "Answer", "text": "L'import, la lecture de vos séances par PaceMind (quelques analyses par semaine), le calendrier de la semaine en cours et de la suivante, et une séance PaceCore par semaine. PaceDrop+ débloque le reste."}}
+]}]}</script>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -157,6 +173,14 @@ section.s{padding:112px 0 0}
 .who{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;padding:0;list-style:none}
 .who li{padding:11px 22px;border-radius:14px;background:#fff;border:2px solid #dde5f0;font-weight:700;font-size:18px;color:#1b2f52}
 .start{background:#e9f0f9;margin-top:120px;padding:112px 0;border-top:2px solid #d3e0f2;border-bottom:2px solid #d3e0f2}
+.guide{margin-top:26px}
+.guide>summary{cursor:pointer;font-weight:700;font-size:19px;color:#1b2f52;padding:18px 24px;background:#fff;border:2px solid #dde5f0;border-radius:20px;list-style:none}
+.guide[open]>summary{margin-bottom:6px}
+.guide .steps{margin-top:18px}
+.faq{padding-top:96px;padding-bottom:40px;max-width:860px}
+.faq details{background:#fff;border:2px solid #dde5f0;border-radius:20px;margin-top:12px;padding:0 24px}
+.faq summary{cursor:pointer;font-weight:700;font-size:19px;color:#1b2f52;padding:20px 0}
+.faq p{margin:0 0 20px;font-size:18px;line-height:1.55;color:#40516c}
 .steps{margin-top:52px;display:grid;gap:18px}
 .stp{display:grid;grid-template-columns:76px 1fr;gap:24px;background:#fff;border:2px solid #dde5f0;border-radius:28px;padding:30px}
 .stp>b{display:grid;place-items:center;width:60px;height:60px;border-radius:18px;background:#4b76a8;color:#fff;font-size:30px}
@@ -268,8 +292,9 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
       <a class="hm" href="#fonctions">Fonctions</a>
       <a class="hm" href="#tarifs">Tarifs</a>
       <a class="hm" href="#demarrer">Démarrer</a>
+      <a class="hm" href="#faq">Questions</a>
       <a class="hm" href="https://app.pacedrop.app/connect/login">Se connecter</a>
-      <a class="btn btn-or" href="#demarrer">Télécharger</a>
+      <a class="btn btn-or" href="https://app.pacedrop.app/connect/signup">Essayer gratuitement</a>
     </div>
   </div>
 </nav>
@@ -278,13 +303,13 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
   <div class="wrap hero-grid">
     <div>
       <p class="eyebrow"><i></i>Coach IA · route, trail, swimrun, triathlon</p>
-      <h1>Courez <em>plus malin.</em> Votre coach IA lit chaque séance.</h1>
-      <p class="lead">Importez une sortie, PaceDrop l'analyse, prépare votre course et pose la semaine dans votre calendrier.</p>
+      <h1>Votre coach <em>lit chaque séance</em>, route, trail ou swimrun, et ajuste votre semaine.</h1>
+      <p class="lead">Importez une sortie : débrief, plan de la semaine, envoi sur votre montre.</p>
       <div class="cta">
-        <a class="btn btn-or" href="#demarrer"><svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 11 12 15.5 16.5 11"/><path d="M5 19h14"/></svg>Télécharger l'appli</a>
-        <a class="btn btn-ln" href="https://app.pacedrop.app/connect/signup">Créer mon compte</a>
+        <a class="btn btn-or" href="https://app.pacedrop.app/connect/signup">Essayer gratuitement</a>
+        <a class="btn btn-ln" href="#fonctions">Voir comment ça marche</a>
       </div>
-      <div class="plat"><span>Gratuit pour commencer, PaceDrop+ pour aller plus loin</span><span>Android et iPhone</span><span>Intervals.icu, FIT et GPX</span></div>
+      <div class="plat"><span>Sans carte · rien à installer</span><span>Android, iPhone et navigateur</span><span>Intervals.icu, FIT et GPX</span></div>
     </div>
     <div class="stage">
       <div class="orb" aria-hidden="true"></div>
@@ -470,9 +495,17 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
 <section class="start" id="demarrer">
   <div class="wrap">
     <div class="idx"><span>03</span><i></i></div>
-    <h2 class="big">Démarrer en quatre étapes</h2>
-    <p class="sub">Comptez une dizaine de minutes. Intervals.icu relie votre montre à PaceDrop.</p>
+    <h2 class="big">Démarrer en trois étapes</h2>
+    <p class="sub">Pas besoin d'installer quoi que ce soit pour essayer : tout fonctionne dans le navigateur.</p>
 
+    <div class="steps">
+      <div class="stp"><b>1</b><div><h3>Importez une sortie</h3><p>Déposez un fichier FIT ou GPX, ou lancez PaceGo avec le GPS de votre téléphone.</p></div></div>
+      <div class="stp"><b>2</b><div><h3>Lisez votre débrief</h3><p>PaceMind analyse la séance et la compare à ce qui était prévu.</p></div></div>
+      <div class="stp"><b>3</b><div><h3>Suivez votre semaine</h3><p>Le plan s'ajuste après chaque séance et peut partir sur votre montre.</p></div></div>
+    </div>
+
+    <details class="guide">
+    <summary>Guide complet : installer l'appli et relier votre montre</summary>
     <div class="steps">
       <div class="stp">
         <b>1</b>
@@ -527,23 +560,36 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
       </div>
     </div>
 
+    </details>
+
     <div class="alt"><strong>Pas envie de créer un compte Intervals.icu ?</strong> Déposez simplement un fichier FIT ou GPX dans PaceDrop. Et sans montre, lancez PaceGo avec le GPS de votre téléphone.</div>
   </div>
+</section>
+
+<section class="wrap faq" id="faq">
+  <h2 class="big">Questions fréquentes</h2>
+  <details><summary>Faut-il une montre ?</summary><p>Non. Vous pouvez déposer un fichier FIT ou GPX, ou enregistrer votre sortie avec le GPS de votre téléphone grâce à PaceGo. Une montre rend simplement l'import automatique.</p></details>
+  <details><summary>Faut-il un compte Intervals.icu ?</summary><p>Non, c'est facultatif. Intervals.icu sert à relier votre montre pour que vos séances arrivent toutes seules. Sans lui, l'import d'un fichier FIT ou GPX fonctionne très bien.</p></details>
+  <details><summary>Quelles montres sont compatibles ?</summary><p>Les montres qui envoient leurs séances à Intervals.icu : Garmin, Suunto, Polar, COROS et d'autres. Tout fichier FIT ou GPX est aussi accepté.</p></details>
+  <details><summary>Mes données sont-elles revendues ?</summary><p>Non. PaceDrop ne vend pas vos données personnelles. Le détail figure dans la politique de confidentialité.</p></details>
+  <details><summary>Comment marche le swimrun ?</summary><p>PaceDrop lit les enchaînements nage, course et transitions, analyse chaque partie, et ajuste votre semaine en fonction de la course visée.</p></details>
+  <details><summary>L'IA remplace-t-elle un coach ?</summary><p>Elle lit vos séances et propose un plan qui s'ajuste. Elle ne remplace pas l'avis d'un médecin ni le regard d'un entraîneur si vous en avez un. En cas de douleur, consultez.</p></details>
+  <details><summary>Que contient l'offre gratuite ?</summary><p>L'import, la lecture de vos séances par PaceMind (quelques analyses par semaine), le calendrier de la semaine en cours et de la suivante, et une séance PaceCore par semaine. PaceDrop+ débloque le reste.</p></details>
 </section>
 
 <section class="final">
   <a class="lock" href="#haut"><span class="lg"><img src="logo-nouveau.png" alt=""></span><span><b>PaceDrop</b><small>AI Coach Running</small></span></a>
   <h2>Votre prochaine séance mérite un vrai coach</h2>
-  <p>Téléchargez PaceDrop et importez votre première sortie en quelques minutes.</p>
+  <p>Importez votre première sortie et lisez votre débrief.</p>
   <div class="cta">
-    <a class="btn btn-or" href="https://app.pacedrop.app/pacedrop.apk"><svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7.5 11 12 15.5 16.5 11"/><path d="M5 19h14"/></svg>Télécharger pour Android</a>
-    <a class="btn btn-wh" href="https://app.pacedrop.app/installer">Installer sur iPhone</a>
+    <a class="btn btn-wh" href="https://app.pacedrop.app/connect/signup">Essayer gratuitement</a>
   </div>
-  <p class="soon">Bientôt sur Google Play et l'App Store.</p>
+  <p class="soon">Aussi en application : <a href="https://app.pacedrop.app/installer">installer sur Android ou iPhone</a> (version bêta, bientôt sur les stores).</p>
   <p class="tarif">Gratuit pour commencer · 14 jours de PaceDrop+ offerts · puis 6,90 € par mois ou 69 € par an</p>
 </section>
 
 <footer class="f">
+  <p><a href="#fonctions">Fonctions</a> &middot; <a href="#tarifs">Tarifs</a> &middot; <a href="#faq">Questions</a> &middot; <a href="https://app.pacedrop.app/connect/login">Se connecter</a></p>
   <p><strong style="color:#fff">PaceDrop</strong> &mdash; <a href="privacy.html">Politique de confidentialité</a> &middot; <a href="mentions.html">Mentions légales</a></p>
   <p>Contact : <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a></p>
 </footer>
