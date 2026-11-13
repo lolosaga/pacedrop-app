@@ -281,17 +281,20 @@ table.pass tr.pt td{font-weight:700;color:#1b2f52;background:#f2f6fb}
 .bracelet-wrap{position:sticky;top:96px;text-align:center}
 .bracelet-wrap p{margin:12px 0 0;font-size:14px;color:#56657a}
 #bande{display:flex;flex-direction:column;width:128px;height:808px;margin:0 auto;background:#fff;border:2px dashed #aebfd8;border-radius:6px;overflow:hidden;font-variant-numeric:tabular-nums;box-shadow:0 18px 40px rgba(27,47,82,.12)}
-#bande .bt{background:#1b2f52;color:#fff;padding:9px 8px 7px;display:block;text-align:center}
-#bande .bt b{display:block;font-size:14px;letter-spacing:.06em}
-#bande .bt span{font-size:9px;color:#c4d6ee}
-#bande .bp{background:#e8761a;color:#fff;padding:7px 8px;font-weight:700;font-size:17px;text-align:center}
+#bande .bm{flex:0 0 55%;position:relative;overflow:hidden;background:linear-gradient(170deg,#2f5183,#1b2f52);display:flex;align-items:center;justify-content:center}
+#bande .bm::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:#e8761a}
+#bande .bm span{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:50px;line-height:1;letter-spacing:.1em;color:#fff;text-transform:uppercase}
+#bande .bm span em{font-style:normal;color:#e8761a}
+#bande .bm small{position:absolute;right:7px;bottom:10px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:8px;letter-spacing:.18em;color:#9fb7d9;text-transform:uppercase}
+#bande .bc{flex:1;display:flex;flex-direction:column;min-height:0}
+#bande .bp{background:#e8761a;color:#fff;padding:6px 8px;font-weight:700;font-size:16px;text-align:center}
 #bande .bp small{font-size:11px;font-weight:600;opacity:.9;margin-right:6px;letter-spacing:.08em}
 #bande .br{flex:1;display:grid;grid-template-columns:34px 1fr;align-items:center;border-top:1px solid #d3deee;font-size:12.5px;font-weight:600;color:#1b2f52}
 #bande .br span{padding:0 6px;height:100%;display:flex;align-items:center;border-right:2px solid #1b2f52;font-weight:700}
 #bande .br b{padding:0 5px;font-weight:600}
 #bande .br.pt{background:#1b2f52;color:#fff}
 #bande .br.pt span{border-right-color:#fff}
-#bande .bf{background:#4b76a8;color:#fff;text-align:center;padding:8px 4px;font-size:10.5px;letter-spacing:.08em}
+#bande .bf{background:#4b76a8;color:#fff;text-align:center;padding:7px 4px;font-size:10.5px;letter-spacing:.08em}
 .note{margin-top:14px;padding:14px 16px;border-radius:14px;background:#e3f2f7;color:#1c5a6b;font-size:15px;line-height:1.5}
 .sec{margin-top:80px}
 .sec h2{margin:0 0 14px;font-size:34px;line-height:1.1;color:#1b2f52}
@@ -309,7 +312,7 @@ table.pass tr.pt td{font-weight:700;color:#1b2f52;background:#f2f6fb}
   nav.top,footer.f,.pg>*:not(.outil),.outil>.carte,.bracelet-wrap p,.espace{display:none!important}
   body,.pg,.outil,.bracelet-wrap{display:block;margin:0;padding:0;background:#fff;position:static;min-height:0}
   #bande{margin:0;width:3cm;height:19cm;border:1px dashed #000;border-radius:0;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #bande .br{font-size:8.5pt;grid-template-columns:.85cm 1fr}#bande .bt b{font-size:8.5pt}#bande .bt span{font-size:5.5pt}#bande .bp{font-size:10pt}#bande .bf{font-size:6.5pt}
+  #bande .br{font-size:8.5pt;grid-template-columns:.85cm 1fr}#bande .bm span{font-size:36pt}#bande .bm small{font-size:5pt}#bande .bp{font-size:10pt}#bande .bf{font-size:6.5pt}
   @page{margin:1cm}
 }
 </style>
@@ -420,7 +423,7 @@ function render(){
   tb+='<tr class="pt"><td>Arrivée</td><td>'+fmtFull(T)+'</td></tr>';
   document.getElementById("tb").innerHTML=tb;
   var pace=fmt(p).padStart(4,"0");
-  document.getElementById("bande").innerHTML='<div class="bt"><b>PACEDROP</b><span>pacedrop.app</span></div><div class="bp"><small>PACE</small>'+fmtFull(p).slice(3)+'</div>'+br+'<div class="bf">ARRIVÉE &nbsp; '+fmtFull(T)+'</div>';
+  document.getElementById("bande").innerHTML='<div class="bm"><span>Pace<em>Drop</em></span><small>AI coach running · pacedrop.app</small></div><div class="bc"><div class="bp">'+fmtFull(p).slice(3)+' /km</div>'+br+'<div class="bf">ARRIVÉE &nbsp; '+fmtFull(T)+'</div></div>';
   document.getElementById("note-strat").textContent=strat==="neg"?"Départ prudent : première moitié 1 % plus lente ("+fmt(p*1.01)+" /km), seconde 1 % plus rapide ("+fmt(p*0.99)+" /km).":"Allure régulière : même allure du début à la fin.";
 }
 document.getElementById("dist").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;D=+b.dataset.d;var df={"42.195":[3,8,0],"21.0975":[1,45,0],"10":[0,50,0],"5":[0,25,0]}[b.dataset.d];document.getElementById("h").value=df[0];document.getElementById("m").value=String(df[1]).padStart(2,"0");document.getElementById("s").value=String(df[2]).padStart(2,"0");this.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});render();});
@@ -428,16 +431,25 @@ document.getElementById("strat").addEventListener("click",function(e){var b=e.ta
 ["h","m","s"].forEach(function(i){document.getElementById(i).addEventListener("input",render);});
 document.getElementById("imp").addEventListener("click",function(){window.print();});
 document.getElementById("png").addEventListener("click",function(){
-  var T=total(),p=T/D,ms=marks(),W=315,top=118,foot=62,H=Math.round(W*19/3),rowH=(H-top-foot)/ms.length,c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
+  var T=total(),p=T/D,ms=marks(),W=315,H=Math.round(W*19/3),mh=Math.round(H*0.55),bpH=58,fin=56,rowH=(H-mh-bpH-fin)/ms.length,c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
+  var F="'Space Grotesk',Arial,sans-serif";
   x.fillStyle="#fff";x.fillRect(0,0,W,H);
-  x.fillStyle="#1b2f52";x.fillRect(0,0,W,56);x.fillStyle="#fff";x.font="700 22px 'Space Grotesk',Arial,sans-serif";x.textAlign="center";x.fillText("PACEDROP",W/2,26);x.font="600 13px 'Space Grotesk',Arial,sans-serif";x.fillStyle="#c4d6ee";x.fillText("pacedrop.app",W/2,46);x.textAlign="left";
-    x.fillStyle="#e8761a";x.fillRect(0,56,W,66);x.fillStyle="#fff";x.font="600 18px 'Space Grotesk',Arial,sans-serif";x.fillText("PACE",14,98);x.font="700 36px 'Space Grotesk',Arial,sans-serif";x.fillText(fmtFull(p).slice(3),76,102);
-  ms.forEach(function(o,i){var y=top+i*rowH+rowH/2-34,t=at(o.km,T),lab=o.half?"½":String(Math.round(o.km*10)/10);
-    if(o.half){x.fillStyle="#1b2f52";x.fillRect(0,top+i*rowH,W,rowH);}
-    x.fillStyle=o.half?"#fff":"#1b2f52";x.font="700 24px 'Space Grotesk',Arial,sans-serif";x.fillText(lab,14,y+32);
-    x.fillRect(66,top+i*rowH+6,2,rowH-12);x.font="600 25px 'Space Grotesk',Arial,sans-serif";x.fillText(fmtFull(t),80,y+32);
-    if(!o.half){x.fillStyle="#d3deee";x.fillRect(0,top+(i+1)*rowH,W,1);}});
-  var fy=H-foot;x.fillStyle="#4b76a8";x.fillRect(0,fy,W,foot);x.fillStyle="#fff";x.font="700 17px 'Space Grotesk',Arial,sans-serif";x.textAlign="center";x.fillText("ARRIVÉE "+fmtFull(T),W/2,fy+37);
+  var g=x.createLinearGradient(0,0,W,mh);g.addColorStop(0,"#2f5183");g.addColorStop(1,"#1b2f52");x.fillStyle=g;x.fillRect(0,0,W,mh);
+  x.fillStyle="#e8761a";x.fillRect(0,0,12,mh);
+  x.save();x.translate(W/2+8,mh/2);x.rotate(-Math.PI/2);x.textBaseline="middle";
+  var fs=150;x.font="700 "+fs+"px "+F;if(x.letterSpacing!==undefined)x.letterSpacing="14px";
+  var w1=x.measureText("PACE").width,w2=x.measureText("DROP").width,tw=w1+w2;
+  x.textAlign="left";x.fillStyle="#fff";x.fillText("PACE",-tw/2,0);x.fillStyle="#e8761a";x.fillText("DROP",-tw/2+w1,0);x.restore();
+  x.save();x.translate(W-22,mh-24);x.rotate(-Math.PI/2);x.font="600 15px "+F;if(x.letterSpacing!==undefined)x.letterSpacing="3px";x.fillStyle="#9fb7d9";x.textAlign="left";x.fillText("AI COACH RUNNING · PACEDROP.APP",0,0);x.restore();
+  if(x.letterSpacing!==undefined)x.letterSpacing="0px";
+  x.fillStyle="#e8761a";x.fillRect(0,mh,W,bpH);x.fillStyle="#fff";x.font="700 32px "+F;x.textAlign="center";x.textBaseline="alphabetic";x.fillText(fmtFull(p).slice(3)+" /km",W/2,mh+40);
+  var top=mh+bpH;
+  ms.forEach(function(o,i){var y0=top+i*rowH,t=at(o.km,T),lab=o.half?"½":String(Math.round(o.km*10)/10),cy=y0+rowH/2+9;
+    if(o.half){x.fillStyle="#1b2f52";x.fillRect(0,y0,W,rowH);}
+    x.textAlign="left";x.fillStyle=o.half?"#fff":"#1b2f52";x.font="700 24px "+F;x.fillText(lab,14,cy);
+    x.fillRect(66,y0+6,2,rowH-12);x.font="600 25px "+F;x.fillText(fmtFull(t),80,cy);
+    if(!o.half){x.fillStyle="#d3deee";x.fillRect(0,y0+rowH,W,1);}});
+  var fy=H-fin;x.fillStyle="#4b76a8";x.fillRect(0,fy,W,fin);x.fillStyle="#fff";x.font="700 17px "+F;x.textAlign="center";x.fillText("ARRIVÉE "+fmtFull(T),W/2,fy+34);
   var a=document.createElement("a");a.download="bracelet-pacedrop.png";a.href=c.toDataURL("image/png");document.body.appendChild(a);a.click();a.remove();
 });
 render();
