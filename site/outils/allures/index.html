@@ -283,7 +283,7 @@ table.pass tr.pt td{font-weight:700;color:#1b2f52;background:#f2f6fb}
 #bande{display:flex;flex-direction:column;width:128px;height:808px;margin:0 auto;background:#fff;border:2px dashed #aebfd8;border-radius:6px;overflow:hidden;font-variant-numeric:tabular-nums;box-shadow:0 18px 40px rgba(27,47,82,.12)}
 #bande .bm{flex:0 0 55%;position:relative;overflow:hidden;background:linear-gradient(170deg,#2f5183,#1b2f52);display:flex;align-items:center;justify-content:center}
 #bande .bm::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:#e8761a}
-#bande .bm span{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:50px;line-height:1;letter-spacing:.1em;color:#fff;text-transform:uppercase}
+#bande .bm span{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;font-size:34px;line-height:1;letter-spacing:.1em;color:#fff;text-transform:uppercase}
 #bande .bm span em{font-style:normal;color:#e8761a}
 #bande .bm small{position:absolute;right:7px;bottom:10px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:8px;letter-spacing:.18em;color:#9fb7d9;text-transform:uppercase}
 #bande .bc{flex:1;display:flex;flex-direction:column;min-height:0}
@@ -312,7 +312,7 @@ table.pass tr.pt td{font-weight:700;color:#1b2f52;background:#f2f6fb}
   nav.top,footer.f,.pg>*:not(.outil),.outil>.carte,.bracelet-wrap p,.espace{display:none!important}
   body,.pg,.outil,.bracelet-wrap{display:block;margin:0;padding:0;background:#fff;position:static;min-height:0}
   #bande{margin:0;width:3cm;height:19cm;border:1px dashed #000;border-radius:0;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #bande .br{font-size:8.5pt;grid-template-columns:.85cm 1fr}#bande .bm span{font-size:36pt}#bande .bm small{font-size:5pt}#bande .bp{font-size:10pt}#bande .bf{font-size:6.5pt}
+  #bande .br{font-size:8.5pt;grid-template-columns:.85cm 1fr}#bande .bm span{font-size:24pt}#bande .bm small{font-size:5pt}#bande .bp{font-size:10pt}#bande .bf{font-size:6.5pt}
   @page{margin:1cm}
 }
 </style>
@@ -437,7 +437,7 @@ document.getElementById("png").addEventListener("click",function(){
   var g=x.createLinearGradient(0,0,W,mh);g.addColorStop(0,"#2f5183");g.addColorStop(1,"#1b2f52");x.fillStyle=g;x.fillRect(0,0,W,mh);
   x.fillStyle="#e8761a";x.fillRect(0,0,12,mh);
   x.save();x.translate(W/2+8,mh/2);x.rotate(-Math.PI/2);x.textBaseline="middle";
-  var fs=150;x.font="700 "+fs+"px "+F;if(x.letterSpacing!==undefined)x.letterSpacing="14px";
+  var fs=104;x.font="700 "+fs+"px "+F;if(x.letterSpacing!==undefined)x.letterSpacing="10px";
   var w1=x.measureText("PACE").width,w2=x.measureText("DROP").width,tw=w1+w2;
   x.textAlign="left";x.fillStyle="#fff";x.fillText("PACE",-tw/2,0);x.fillStyle="#e8761a";x.fillText("DROP",-tw/2+w1,0);x.restore();
   x.save();x.translate(W-22,mh-24);x.rotate(-Math.PI/2);x.font="600 15px "+F;if(x.letterSpacing!==undefined)x.letterSpacing="3px";x.fillStyle="#9fb7d9";x.textAlign="left";x.fillText("AI COACH RUNNING · PACEDROP.APP",0,0);x.restore();
