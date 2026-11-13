@@ -278,20 +278,20 @@ table.pass th{font-size:13px;color:#56657a;text-transform:uppercase;letter-spaci
 table.pass tr.pt td{font-weight:700;color:#1b2f52;background:#f2f6fb}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .actions .btn{min-height:50px;font-size:16px;border:0;cursor:pointer;font-family:inherit}
-.bracelet-wrap{position:sticky;top:104px;text-align:center}
+.bracelet-wrap{position:sticky;top:96px;text-align:center}
 .bracelet-wrap p{margin:12px 0 0;font-size:14px;color:#56657a}
-#bande{width:210px;margin:0 auto;background:#fff;border:2px dashed #aebfd8;border-radius:6px;overflow:hidden;font-variant-numeric:tabular-nums;box-shadow:0 18px 40px rgba(27,47,82,.12)}
-#bande .bt{background:#1b2f52;color:#fff;padding:9px 10px 7px;display:flex;justify-content:space-between;align-items:baseline}
-#bande .bt b{font-size:15px;letter-spacing:.06em}
-#bande .bt span{font-size:11px;color:#c4d6ee}
-#bande .bp{background:#e8761a;color:#fff;padding:8px 10px;font-weight:700;font-size:19px}
+#bande{display:flex;flex-direction:column;width:128px;height:808px;margin:0 auto;background:#fff;border:2px dashed #aebfd8;border-radius:6px;overflow:hidden;font-variant-numeric:tabular-nums;box-shadow:0 18px 40px rgba(27,47,82,.12)}
+#bande .bt{background:#1b2f52;color:#fff;padding:9px 8px 7px;display:block;text-align:center}
+#bande .bt b{display:block;font-size:14px;letter-spacing:.06em}
+#bande .bt span{font-size:9px;color:#c4d6ee}
+#bande .bp{background:#e8761a;color:#fff;padding:7px 8px;font-weight:700;font-size:17px;text-align:center}
 #bande .bp small{font-size:11px;font-weight:600;opacity:.9;margin-right:6px;letter-spacing:.08em}
-#bande .br{display:grid;grid-template-columns:52px 1fr;border-top:1px solid #d3deee;font-size:17px;font-weight:600;color:#1b2f52}
-#bande .br span{padding:6px 10px;border-right:2px solid #1b2f52;font-weight:700}
-#bande .br b{padding:6px 10px;font-weight:600}
+#bande .br{flex:1;display:grid;grid-template-columns:34px 1fr;align-items:center;border-top:1px solid #d3deee;font-size:12.5px;font-weight:600;color:#1b2f52}
+#bande .br span{padding:0 6px;height:100%;display:flex;align-items:center;border-right:2px solid #1b2f52;font-weight:700}
+#bande .br b{padding:0 5px;font-weight:600}
 #bande .br.pt{background:#1b2f52;color:#fff}
 #bande .br.pt span{border-right-color:#fff}
-#bande .bf{background:#4b76a8;color:#fff;text-align:center;padding:8px 6px;font-size:12px;letter-spacing:.08em}
+#bande .bf{background:#4b76a8;color:#fff;text-align:center;padding:8px 4px;font-size:10.5px;letter-spacing:.08em}
 .note{margin-top:14px;padding:14px 16px;border-radius:14px;background:#e3f2f7;color:#1c5a6b;font-size:15px;line-height:1.5}
 .sec{margin-top:80px}
 .sec h2{margin:0 0 14px;font-size:34px;line-height:1.1;color:#1b2f52}
@@ -304,12 +304,12 @@ table.pass tr.pt td{font-weight:700;color:#1b2f52;background:#f2f6fb}
 .pdc{margin-top:64px;padding:34px 28px;border-radius:28px;background:linear-gradient(160deg,#4b76a8,#2f5183);color:#fff;text-align:center}
 .pdc h2{margin:0 0 10px;font-size:32px;line-height:1.1}
 .pdc p{margin:0 auto 20px;max-width:560px;font-size:18px;line-height:1.5;color:#e3edf9}
-@media (max-width:900px){.outil{grid-template-columns:1fr}.bracelet-wrap{position:static;order:-1}.pg{padding:32px 0 0}.pg h1{font-size:36px}.pg .lead{font-size:18px}.kpis b{font-size:19px}.sec{margin-top:56px}.sec h2{font-size:28px}}
+@media (max-width:900px){.outil{grid-template-columns:1fr}.bracelet-wrap{position:static}.pg{padding:32px 0 0}.pg h1{font-size:36px}.pg .lead{font-size:18px}.kpis b{font-size:19px}.sec{margin-top:56px}.sec h2{font-size:28px}}
 @media print{
-  body *{visibility:hidden}
-  #bande,#bande *{visibility:visible}
-  #bande{position:absolute;left:0;top:0;width:4cm;border:1px dashed #000;border-radius:0;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #bande .br{font-size:10pt}#bande .bt b{font-size:9pt}#bande .bt span{font-size:6pt}#bande .bp{font-size:11pt}#bande .bf{font-size:7pt}
+  nav.top,footer.f,.pg>*:not(.outil),.outil>.carte,.bracelet-wrap p,.espace{display:none!important}
+  body,.pg,.outil,.bracelet-wrap{display:block;margin:0;padding:0;background:#fff;position:static;min-height:0}
+  #bande{margin:0;width:3cm;height:19cm;border:1px dashed #000;border-radius:0;box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #bande .br{font-size:8.5pt;grid-template-columns:.85cm 1fr}#bande .bt b{font-size:8.5pt}#bande .bt span{font-size:5.5pt}#bande .bp{font-size:10pt}#bande .bf{font-size:6.5pt}
   @page{margin:1cm}
 }
 </style>
@@ -365,7 +365,7 @@ table.pass tr.pt td{font-weight:700;color:#1b2f52;background:#f2f6fb}
     </div>
     <div class="bracelet-wrap">
       <div id="bande" aria-label="Aperçu du bracelet"></div>
-      <p>Aperçu. À l'impression, la bande fait 4 cm de large.</p>
+      <p>Aperçu. À l'impression, la bande fait 3 cm de large sur 19 cm de long, de quoi faire le tour du poignet.</p>
     </div>
   </div>
 
@@ -388,7 +388,7 @@ table.pass tr.pt td{font-weight:700;color:#1b2f52;background:#f2f6fb}
     <a class="btn btn-wh" href="https://app.pacedrop.app/connect/signup">Essayer gratuitement</a>
   </div>
 </main>
-<div style="height:72px"></div>
+<div class="espace" style="height:72px"></div>
 <footer class="f">
   <p><a href="/outils/allures">Bracelet d'allure</a> &middot; <a href="/#fonctions">Fonctions</a> &middot; <a href="/#tarifs">Tarifs</a> &middot; <a href="/#faq">Questions</a> &middot; <a href="https://app.pacedrop.app/connect/login">Se connecter</a></p>
   <p><strong style="color:#fff">PaceDrop</strong> &mdash; <a href="/privacy.html">Politique de confidentialité</a> &middot; <a href="/mentions.html">Mentions légales</a></p>
@@ -428,17 +428,16 @@ document.getElementById("strat").addEventListener("click",function(e){var b=e.ta
 ["h","m","s"].forEach(function(i){document.getElementById(i).addEventListener("input",render);});
 document.getElementById("imp").addEventListener("click",function(){window.print();});
 document.getElementById("png").addEventListener("click",function(){
-  var T=total(),p=T/D,ms=marks(),W=420,rowH=64,top=140,H=top+ms.length*rowH+70,c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
+  var T=total(),p=T/D,ms=marks(),W=315,top=118,foot=62,H=Math.round(W*19/3),rowH=(H-top-foot)/ms.length,c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
   x.fillStyle="#fff";x.fillRect(0,0,W,H);
-  x.fillStyle="#1b2f52";x.fillRect(0,0,W,56);x.fillStyle="#fff";x.font="700 26px 'Space Grotesk',Arial,sans-serif";x.fillText("PACEDROP",18,37);
-  x.font="600 16px 'Space Grotesk',Arial,sans-serif";x.fillStyle="#c4d6ee";x.textAlign="right";x.fillText("pacedrop.app",W-18,36);x.textAlign="left";
-  x.fillStyle="#e8761a";x.fillRect(0,56,W,66);x.fillStyle="#fff";x.font="600 18px 'Space Grotesk',Arial,sans-serif";x.fillText("PACE",18,98);x.font="700 40px 'Space Grotesk',Arial,sans-serif";x.fillText(fmtFull(p).slice(3),86,102);
-  ms.forEach(function(o,i){var y=top+i*rowH,t=at(o.km,T),lab=o.half?"½":String(Math.round(o.km*10)/10);
-    if(o.half){x.fillStyle="#1b2f52";x.fillRect(0,y-10,W,rowH);}
-    x.fillStyle=o.half?"#fff":"#1b2f52";x.font="700 30px 'Space Grotesk',Arial,sans-serif";x.fillText(lab,20,y+34);
-    x.fillRect(100,y-8,2,rowH-4);x.font="600 32px 'Space Grotesk',Arial,sans-serif";x.fillText(fmtFull(t),124,y+34);
-    if(!o.half){x.fillStyle="#d3deee";x.fillRect(0,y+rowH-12,W,1);}});
-  var fy=H-62;x.fillStyle="#4b76a8";x.fillRect(0,fy,W,62);x.fillStyle="#fff";x.font="700 24px 'Space Grotesk',Arial,sans-serif";x.textAlign="center";x.fillText("ARRIVÉE  "+fmtFull(T),W/2,fy+39);
+  x.fillStyle="#1b2f52";x.fillRect(0,0,W,56);x.fillStyle="#fff";x.font="700 22px 'Space Grotesk',Arial,sans-serif";x.textAlign="center";x.fillText("PACEDROP",W/2,26);x.font="600 13px 'Space Grotesk',Arial,sans-serif";x.fillStyle="#c4d6ee";x.fillText("pacedrop.app",W/2,46);x.textAlign="left";
+    x.fillStyle="#e8761a";x.fillRect(0,56,W,66);x.fillStyle="#fff";x.font="600 18px 'Space Grotesk',Arial,sans-serif";x.fillText("PACE",14,98);x.font="700 36px 'Space Grotesk',Arial,sans-serif";x.fillText(fmtFull(p).slice(3),76,102);
+  ms.forEach(function(o,i){var y=top+i*rowH+rowH/2-34,t=at(o.km,T),lab=o.half?"½":String(Math.round(o.km*10)/10);
+    if(o.half){x.fillStyle="#1b2f52";x.fillRect(0,top+i*rowH,W,rowH);}
+    x.fillStyle=o.half?"#fff":"#1b2f52";x.font="700 24px 'Space Grotesk',Arial,sans-serif";x.fillText(lab,14,y+32);
+    x.fillRect(66,top+i*rowH+6,2,rowH-12);x.font="600 25px 'Space Grotesk',Arial,sans-serif";x.fillText(fmtFull(t),80,y+32);
+    if(!o.half){x.fillStyle="#d3deee";x.fillRect(0,top+(i+1)*rowH,W,1);}});
+  var fy=H-foot;x.fillStyle="#4b76a8";x.fillRect(0,fy,W,foot);x.fillStyle="#fff";x.font="700 17px 'Space Grotesk',Arial,sans-serif";x.textAlign="center";x.fillText("ARRIVÉE "+fmtFull(T),W/2,fy+37);
   var a=document.createElement("a");a.download="bracelet-pacedrop.png";a.href=c.toDataURL("image/png");document.body.appendChild(a);a.click();a.remove();
 });
 render();
