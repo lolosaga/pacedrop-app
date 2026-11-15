@@ -30,7 +30,7 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#f7f9fc;color:#0f172a;font-family:"Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 *,*::before,*::after{box-sizing:border-box}
@@ -263,6 +263,59 @@ footer.f p{margin:6px 0}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
 .links a:not(.btn):not(.hm){display:inline}
 @media (max-width:860px){.links a.hm{display:none}}
+
+/* Accueil : même interface que l'appli (logo rond, îlots, pastille d'appel) */
+.acc{position:relative;overflow:hidden;background:radial-gradient(circle at 20% 0%,#fff 0%,#eef2f9 50%,#dce6f6 100%);padding:34px 0 80px}
+.acc::before,.acc::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.acc::before{right:-120px;top:240px;width:420px;height:420px;background:rgba(232,118,26,.08)}
+.acc::after{left:-140px;top:880px;width:400px;height:400px;background:rgba(61,95,148,.07)}
+.acc-in{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 28px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.acc-logo{width:150px;height:150px;border-radius:50%;background:#fff;border:7px solid #3d5f94;box-shadow:0 18px 40px rgba(27,47,82,.22);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.acc-logo img{width:140%;height:140%;max-width:none;object-fit:contain;transform:translateY(3%)}
+.acc-eye{margin:26px 0 0;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#475569}
+.acc h1{margin:10px 0 0;max-width:900px;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-style:italic;font-weight:800;text-transform:uppercase;font-size:68px;line-height:1.02;color:#1b2f52;letter-spacing:.01em}
+.acc-lead{margin:18px 0 0;max-width:620px;font-size:20px;line-height:1.5;color:#33445f}
+.acc-q{margin:34px 0 0;font-size:17px;color:#475569}
+.acc-mood{margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.acc-mood a{min-height:48px;padding:0 24px;border-radius:999px;background:#fff;box-shadow:0 6px 16px rgba(27,47,82,.1);display:flex;align-items:center;font-weight:700;font-size:16px;text-decoration:none}
+.acc-mood .m1{color:#9a4a0c}.acc-mood .m3{color:#2e6b3f}
+.acc-mood .m2{background:#eaf0f8;border:2px solid #3d5f94;color:#2f4a7a}
+.isl{margin-top:46px;width:100%;display:flex;flex-direction:column;align-items:center;gap:30px}
+.isl .row{display:flex;align-items:flex-start;justify-content:center;gap:40px}
+.il{--d:112px;--w:176px;width:var(--w);background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px}
+.il.big{--d:200px;--w:240px}.il.mid{--d:140px;--w:190px}.il.o1{padding-top:34px;--d:120px;--w:190px}.il.o2{padding-top:18px}
+.il .c{width:var(--d);height:var(--d);border-radius:50%;display:flex;align-items:center;justify-content:center;outline:0 solid transparent;outline-offset:6px;transition:outline-color .15s,transform .15s}
+.il .c svg{width:46%;height:46%}
+.il:hover .c{transform:translateY(-3px)}
+.il[aria-pressed=true] .c{outline:3px solid #e8761a}
+.il:focus-visible .c{outline:3px solid #e8761a}
+.il b{font-size:18px;color:#1b2f52}.il.big b{font-size:22px;color:#9a4a0c}
+.il small{font-size:14px;line-height:1.4;color:#475569}
+.det{margin-top:40px;width:640px;max-width:100%;box-sizing:border-box;background:#fff;border-radius:24px;border-top:5px solid #e8761a;box-shadow:0 14px 34px rgba(27,47,82,.14);padding:22px 28px 24px;text-align:left}
+.det-t{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.det-t b{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-style:italic;font-weight:800;text-transform:uppercase;font-size:30px;line-height:1.05;color:#1b2f52}
+.det-t span{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#475569;text-align:right}
+.det p{margin:10px 0 0;font-size:17px;line-height:1.55;color:#33445f}
+.det ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.det li{display:flex;gap:10px;font-size:15.5px;line-height:1.45;color:#33445f}
+.det li::before{content:"";margin-top:8px;width:7px;height:7px;border-radius:50%;background:#e8761a;flex:none}
+.acc-cta{margin-top:44px;min-height:64px;padding:0 34px;border-radius:999px;background:#fff;box-shadow:0 12px 30px rgba(27,47,82,.16);display:flex;align-items:center;gap:14px;font-size:20px;color:#33445f;text-decoration:none}
+.acc-cta i{width:12px;height:12px;border-radius:50%;background:#e8761a;flex:none}
+.acc-cta b{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-style:italic;font-weight:800;font-size:26px;color:#3d5f94;text-transform:uppercase}
+.acc-note{margin:14px 0 0;font-size:15px;color:#475569}
+@media(max-width:760px){
+.acc{padding:18px 0 56px}.acc-in{padding:0 16px}
+.acc-logo{width:112px;height:112px;border-width:6px}
+.acc h1{font-size:40px}.acc-lead{font-size:16px}.acc-eye{font-size:11.5px;margin-top:18px}
+.acc-q{margin-top:24px;font-size:15px}.acc-mood a{min-height:44px;padding:0 16px;font-size:15px}
+.isl{margin-top:30px;gap:22px}.isl .row{gap:6px}
+.il{--d:64px;--w:80px;gap:7px}.il.big{--d:118px;--w:132px}.il.mid{--d:80px;--w:96px}.il.o1{--d:72px;--w:96px;padding-top:26px}.il.o2{padding-top:14px}
+.il b{font-size:13px;line-height:1.2}.il.big b{font-size:15px}.il small{display:none}
+.det{margin-top:26px;border-radius:20px;border-top-width:4px;padding:16px 18px 18px}
+.det-t b{font-size:24px}.det-t span{font-size:11px}.det p{font-size:15px}.det li{font-size:14px}
+.acc-cta{margin-top:30px;min-height:56px;padding:0 22px;font-size:15px;gap:10px;flex-wrap:wrap;justify-content:center;text-align:center}
+.acc-cta b{font-size:20px}.acc-note{font-size:13.5px}
+}
 </style>
 </head>
 <body>
@@ -299,40 +352,33 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
   </div>
 </nav>
 
-<header class="hero" id="haut">
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow"><i></i>Coach IA · route, trail, swimrun, triathlon</p>
-      <h1>Votre coach <em>lit chaque séance</em>, route, trail ou swimrun, et ajuste votre semaine.</h1>
-      <p class="lead">Importez une sortie : débrief, plan de la semaine, envoi sur votre montre.</p>
-      <div class="cta">
-        <a class="btn btn-or" href="https://app.pacedrop.app/connect/signup">Essayer gratuitement</a>
-        <a class="btn btn-ln" href="#fonctions">Voir comment ça marche</a>
+<header class="acc" id="haut">
+  <div class="acc-in">
+    <span class="acc-logo"><img src="logo-nouveau.png" alt="Logo PaceDrop"></span>
+    <p class="acc-eye">Coach IA · route, trail, swimrun, triathlon</p>
+    <h1>Votre coach lit chaque séance et ajuste votre semaine.</h1>
+    <p class="acc-lead">Importez une sortie : débrief, plan de la semaine, envoi sur votre montre.</p>
+    <p class="acc-q">Comment va la machine aujourd'hui ?</p>
+    <div class="acc-mood" role="group" aria-label="Humeur du jour"><a href="https://app.pacedrop.app/connect/signup" class="m1">Bof</a><a href="https://app.pacedrop.app/connect/signup" class="m2">Ça va</a><a href="https://app.pacedrop.app/connect/signup" class="m3">Au top</a></div>
+    <div class="isl" id="ilots">
+      <div class="row">
+        <button type="button" class="il o1" data-k="profil" aria-pressed="false"><span class="c" style="background:linear-gradient(160deg,#fff,#EEF2F9);box-shadow:0 14px 30px rgba(27,47,82,.14)"><svg fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" viewBox="0 0 24 24" stroke="#2F4A7A" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="#E8761A" stroke="#E8761A"/></svg></span><b>Mon profil</b><small>Profil, sources, compte</small></button>
+        <button type="button" class="il big" data-k="aujourdhui" aria-pressed="false"><span class="c" style="background:linear-gradient(160deg,#E8963F,#C4651B);box-shadow:0 20px 44px rgba(196,101,27,.35)"><svg fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" viewBox="0 0 24 24" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="11" r="4" fill="#FBD98B" stroke="#FBD98B"/><path d="M12 2.5v2.2M4.2 6l1.6 1.6M19.8 6l-1.6 1.6M2.5 11h2.2M19.3 11h2.2M6 17h12M8.5 20h7"/></svg></span><b>Aujourd'hui</b><small>Séance du jour, repos ou sortie improvisée</small></button>
+        <button type="button" class="il mid o2" data-k="plan" aria-pressed="false"><span class="c" style="background:linear-gradient(160deg,#5B77AE,#3A5588);box-shadow:0 16px 36px rgba(58,85,136,.32)"><svg fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" viewBox="0 0 24 24" stroke="#fff" stroke-width="1.9"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/><path d="m9 15 2.2 2.2L15.5 13" stroke="#E8761A"/></svg></span><b>Plan &amp; Calendrier</b><small>PaceMap et PaceCalendar</small></button>
       </div>
-      <div class="plat"><span>Sans carte · rien à installer</span><span>Android, iPhone et navigateur</span><span>Intervals.icu, FIT et GPX</span></div>
-    </div>
-    <div class="stage">
-      <div class="orb" aria-hidden="true"></div>
-      <div class="dchip" style="--f:#ece8f8;left:0;top:70px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#5B45B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-tri"/></svg></i>Triathlon</div>
-      <div class="dchip" style="--f:#dff2f6;right:0;top:30px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#0E7490" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-swimrun"/></svg></i>Swimrun</div>
-      <div class="dchip" style="--f:#e3f3ea;right:6px;bottom:90px"><i><svg viewBox="0 0 24 24" fill="none" stroke="#1F7A4A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#d-trail"/></svg></i>Trail</div>
-      <div class="phone" aria-label="Aperçu de l'écran d'accueil de l'appli">
-        <div class="scr">
-          <div class="sbar"></div>
-          <div class="in">
-            <div class="hdr"><span class="lock"><span class="lg"><img src="logo-nouveau.png" alt=""></span><span><b>PaceDrop</b><small>AI Coach Running</small></span></span></div>
-            <div class="card"><em>« Il n'y a plus de séance à rattraper, seulement une course à vivre »</em><b>Salut,</b><span>Comment va la machine aujourd'hui ?</span></div>
-            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-auj"/></svg></span><span><strong>Aujourd'hui</strong><small>Séance du jour, repos ou sortie improvisée</small></span></div>
-            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-plan"/></svg></span><span><strong>Plan &amp; Calendrier</strong><small>PaceMap et PaceCalendar</small></span></div>
-            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-profil"/></svg></span><span><strong>Mon profil</strong><small>Profil, sources, compte</small></span></div>
-            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-renfo"/></svg></span><span><strong>PaceCore</strong><small>Renfo guidé de 20 à 30 min</small></span></div>
-            <div class="mr"><span class="mi"><svg viewBox="0 0 80 58"><use href="#ic-course"/></svg></span><span><strong>Ma prochaine course</strong><small>Objectifs, documents, stratégie</small></span></div>
-          </div>
-        </div>
+      <div class="row">
+        <button type="button" class="il " data-k="core" aria-pressed="false"><span class="c" style="background:linear-gradient(160deg,#fff,#EEF2F9);box-shadow:0 14px 30px rgba(27,47,82,.14)"><svg fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" viewBox="0 0 24 24" stroke="#2F6B6B" stroke-width="2"><path d="M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12"/></svg></span><b>PaceCore</b><small>Renfo guidé de 20 à 30 min</small></button>
+        <button type="button" class="il " data-k="drop" aria-pressed="false"><span class="c" style="background:linear-gradient(160deg,#2E4575,#1B2F52);box-shadow:0 16px 34px rgba(27,47,82,.35)"><svg fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 20h14" stroke="#fff" stroke-width="2"/><rect x="6" y="13" width="3.4" height="5" rx="1" fill="#9AB0DA" stroke="#9AB0DA"/><rect x="10.3" y="9" width="3.4" height="9" rx="1" fill="#fff" stroke="#fff"/><rect x="14.6" y="5" width="3.4" height="13" rx="1" fill="#E8761A" stroke="#E8761A"/></svg></span><b>Drop ta Race</b><small>Analyse de ta course avec PaceMind</small></button>
+        <button type="button" class="il " data-k="course" aria-pressed="false"><span class="c" style="background:linear-gradient(160deg,#fff,#EEF2F9);box-shadow:0 14px 30px rgba(27,47,82,.14)"><svg fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 21V4" stroke="#2F4A7A" stroke-width="2"/><path d="M7 4.5h11l-2.2 3.2L18 11H7Z" fill="#E8761A" stroke="#E8761A" stroke-width="1.5"/></svg></span><b>Ma prochaine course</b><small>Objectifs, documents, stratégie</small></button>
+        <button type="button" class="il " data-k="wellness" aria-pressed="false"><span class="c" style="background:linear-gradient(160deg,#4E9A94,#2F6B6B);box-shadow:0 16px 34px rgba(47,107,107,.32)"><svg fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 20.5s-8-4.6-8-10.4A4.6 4.6 0 0 1 12 7.6a4.6 4.6 0 0 1 8 2.5c0 5.8-8 10.4-8 10.4Z" stroke="#fff" stroke-width="1.9"/><path d="M6.5 12.5h3l1.5-2.5 2 4 1.3-1.5h3" stroke="#FBD98B" stroke-width="1.9"/></svg></span><b>Wellness</b><small>Sommeil, VFC, pas et poids</small></button>
       </div>
-      <div class="float f1"><span class="lg"><img src="logo-nouveau.png" alt=""></span><p style="margin:0"><b>PaceHebdo</b><span>Ta semaine est prête. Dimanche, 20 h.</span></p></div>
-      <div class="float f2"><i><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></i><p style="margin:0"><b>PaceMind</b><span>Footing facile demain, la qualité reste jeudi.</span></p></div>
+      <div class="row">
+        <button type="button" class="il " data-k="coach" aria-pressed="false"><span class="c" style="background:linear-gradient(160deg,#5B77AE,#3A5588);box-shadow:0 16px 36px rgba(58,85,136,.32)"><svg fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 3.5c.7 4.7 2.8 6.8 7.5 7.5-4.7.7-6.8 2.8-7.5 7.5-.7-4.7-2.8-6.8-7.5-7.5 4.7-.7 6.8-2.8 7.5-7.5Z" fill="#fff" stroke="#fff" stroke-width="1.5"/><path d="M18.5 16.5c.3 1.8 1.1 2.6 2.9 2.9-1.8.3-2.6 1.1-2.9 2.9-.3-1.8-1.1-2.6-2.9-2.9 1.8-.3 2.6-1.1 2.9-2.9Z" fill="#E8761A" stroke="#E8761A" stroke-width="1"/></svg></span><b>Mon coach</b><small>Posez vos questions à PaceMind</small></button>
+      </div>
     </div>
+    <div class="det" id="det" role="status" aria-live="polite"><div class="det-t"><b id="det-titre"></b><span id="det-tag"></span></div><p id="det-txt"></p><ul id="det-pts"></ul></div>
+    <a class="acc-cta" href="https://app.pacedrop.app/connect/signup"><i></i>Essayer gratuitement <b>14 jours de PaceDrop+ offerts</b></a>
+    <p class="acc-note">Sans carte · rien à installer · Android, iPhone et navigateur · Intervals.icu, FIT et GPX</p>
   </div>
 </header>
 
@@ -594,5 +640,30 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
   <p>Contact : <a href="mailto:laurent@pacedrop.app">laurent@pacedrop.app</a></p>
 </footer>
 </div>
+<script>
+(function(){
+var D={
+profil:{c:'#3D5F94',t:'Mon profil',g:'Profil, sources, compte',x:'Votre fiche de coureur : ce que PaceDrop sait de vous pour calibrer vos séances.',p:['Poids, FC de repos et FC max, zones de FC et allures de référence','Meilleurs efforts et records, corrigeables à la main','Sources reliées (Intervals.icu, Strava) et réglages du compte']},
+aujourdhui:{c:'#E8761A',t:"Aujourd'hui",g:'Séance du jour',x:"Ce qui est prévu aujourd'hui, expliqué en clair, ou la sortie que vous improvisez.",p:['La séance du calendrier, étape par étape','Jour de repos ou sortie improvisée : le plan s\u2019ajuste','Après la sortie, PaceMind en fait le débrief']},
+plan:{c:'#3A5588',t:'Plan & Calendrier',g:'PaceMap · PaceCalendar',x:'Un plan qui trouve son cours : quatre blocs structurent la préparation.',p:['Source, Crue, Torrent, Delta : chaque bloc donne son ton aux séances','Une séance sautée ne se rattrape pas','Envoi des séances sur votre montre avec PaceDrop+']},
+core:{c:'#2F6B6B',t:'PaceCore',g:'Renfo guidé',x:'Du renforcement guidé de 20 à 30 minutes, sans matériel.',p:['Une séance guidée par semaine en gratuit','Illimité avec PaceDrop+']},
+drop:{c:'#1B2F52',t:'Drop ta Race',g:'Analyse de course',x:'Déposez votre course : PaceMind l\u2019analyse.',p:['Un débrief toujours construit de la même façon','Résumé, zones, points forts, points à travailler, suite du plan']},
+course:{c:'#E8761A',t:'Ma prochaine course',g:'Objectifs, documents, stratégie',x:'Tout pour préparer votre prochaine ligne d\u2019arrivée.',p:['Prévision de temps et stratégie de course','Vos documents de course au même endroit','Discussion avec PaceMind (PaceDrop+)']},
+wellness:{c:'#2F6B6B',t:'Wellness',g:'PaceForm · PaceRecup',x:'Votre état de forme au quotidien.',p:['Sommeil, VFC, pas et poids au même endroit','Forme, fatigue et projection de course']},
+coach:{c:'#3A5588',t:'Mon coach',g:'PaceMind · Relier Claude',x:'Posez vos questions à PaceMind, qui connaît vos séances.',p:['Des réponses fondées sur vos propres séances','Reliez votre Claude : il lit vos données et propose des changements']}
+};
+var det=document.getElementById('det'),bs=document.querySelectorAll('#ilots .il');
+function show(k){var d=D[k];if(!d||!det)return;
+det.style.borderTopColor=d.c;
+document.getElementById('det-titre').textContent=d.t;
+document.getElementById('det-tag').textContent=d.g;
+document.getElementById('det-txt').textContent=d.x;
+var ul=document.getElementById('det-pts');ul.textContent='';
+d.p.forEach(function(t){var li=document.createElement('li');li.textContent=t;ul.appendChild(li)});
+bs.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-k')===k?'true':'false')});}
+bs.forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-k'))})});
+show('aujourdhui');
+})();
+</script>
 </body>
 </html>
