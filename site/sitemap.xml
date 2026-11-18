@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://pacedrop.app/</loc><lastmod>2026-11-13</lastmod></url>
   <url><loc>https://pacedrop.app/outils/allures/</loc><lastmod>2026-11-13</lastmod></url>
-  <url><loc>https://pacedrop.app/tuto/creer-son-compte/</loc><lastmod>2026-11-18</lastmod></url>
+  <url><loc>https://pacedrop.app/tuto/creer-son-compte/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://pacedrop.app/tuto/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://pacedrop.app/tuto/relier-intervals-icu/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://pacedrop.app/tuto/relier-garmin-suunto-polar/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://pacedrop.app/tuto/importer-fichier-fit/</loc><lastmod>2026-11-19</lastmod></url>
   <url><loc>https://pacedrop.app/privacy</loc></url>
   <url><loc>https://pacedrop.app/mentions</loc></url>
 </urlset>
