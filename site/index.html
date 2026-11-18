@@ -196,6 +196,14 @@ section.s{padding:112px 0 0}
 .two p{font-size:17px;margin:0 0 14px}
 .note{margin-top:14px;padding:14px 16px;border-radius:14px;background:#e3f2f7;color:#1c5a6b;font-size:16px;line-height:1.5}
 .note.warm{background:#fdeadb;color:#8a4410}
+.vlink{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 16px;border-radius:12px;background:#e8761a;color:#fff;font-weight:700;font-size:16px;text-decoration:none}
+.vlink:hover{background:#d76a12}
+.tutos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:26px 0 0}
+.tutos a{display:block;padding:18px 20px;border-radius:20px;background:#fff;border:2px solid #dde5f0;text-decoration:none;color:#1b2f52}
+.tutos a:hover{border-color:#4b76a8}
+.tutos small{display:block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#35598f}
+.tutos b{display:block;margin:4px 0 4px;font-size:19px;line-height:1.25}
+.tutos span{font-size:15px;color:#56657a}
 .alt{margin-top:22px;padding:22px 26px;border-radius:22px;border:2px dashed #aebfd8;font-size:18px;line-height:1.5;color:#2b3d5a;background:rgba(255,255,255,.6)}
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;align-items:stretch}
 .pc{position:relative;background:#fff;border:2px solid #dde5f0;border-radius:28px;padding:30px}
@@ -535,13 +543,21 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
     <p class="sub">Pas besoin d'installer quoi que ce soit pour essayer : tout fonctionne dans le navigateur.</p>
 
     <div class="steps">
-      <div class="stp"><b>1</b><div><h3>Importez une sortie</h3><p>Déposez un fichier FIT, ou lancez PaceGo avec le GPS de votre téléphone.</p></div></div>
+      <div class="stp"><b>1</b><div><h3>Importez une sortie</h3><p>Déposez un fichier FIT, ou lancez PaceGo avec le GPS de votre téléphone.</p><a class="vlink" href="/tuto/importer-fichier-fit/">▶ Voir le tuto : importer un fichier FIT</a></div></div>
       <div class="stp"><b>2</b><div><h3>Lisez votre débrief</h3><p>PaceMind analyse la séance et la compare à ce qui était prévu.</p></div></div>
       <div class="stp"><b>3</b><div><h3>Suivez votre semaine</h3><p>Le plan s'ajuste après chaque séance et peut partir sur votre montre.</p></div></div>
     </div>
 
+    <div class="tutos">
+      <a href="/tuto/creer-son-compte/"><small>Tuto 1 · 49 s</small><b>Créer son compte</b><span>Inscription et profil avec PaceMind</span></a>
+      <a href="/tuto/relier-intervals-icu/"><small>Tuto 2 · 40 s</small><b>Relier sa montre avec Intervals.icu</b><span>Toutes les marques, un seul compte</span></a>
+      <a href="/tuto/relier-garmin-suunto-polar/"><small>Tuto 3 · 50 s</small><b>Garmin, Suunto ou Polar en direct</b><span>Sans passer par Intervals.icu</span></a>
+      <a href="/tuto/importer-fichier-fit/"><small>Tuto 4 · 42 s</small><b>Importer un fichier FIT</b><span>Pour toute autre montre</span></a>
+    </div>
+
     <details class="guide">
     <summary>Guide complet : installer l'appli et relier votre montre</summary>
+    <p style="margin:14px 0 0;font-size:17px">Première fois ? <a href="/tuto/creer-son-compte/">Voir comment créer son compte PaceDrop en vidéo</a>.</p>
     <div class="steps">
       <div class="stp">
         <b>1</b>
@@ -565,6 +581,7 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
             <li>Confirmez l'e-mail reçu, puis renseignez votre profil : sport principal, poids, date de naissance.</li>
           </ol>
           <div class="note">Les libellés peuvent légèrement changer, Intervals.icu fait évoluer son site.</div>
+          <a class="vlink" href="/tuto/relier-intervals-icu/">▶ Voir le tuto vidéo</a>
         </div>
       </div>
 
@@ -578,6 +595,7 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
             <li>Lancez une synchronisation : vos dernières sorties apparaissent dans le calendrier.</li>
           </ol>
           <div class="note warm">Branchez la montre directement. Les sorties qui viennent de Strava dans Intervals.icu ne sont pas transmises à PaceDrop.</div>
+          <a class="vlink" href="/tuto/relier-intervals-icu/">▶ Voir le tuto vidéo</a>
         </div>
       </div>
 
@@ -592,13 +610,14 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
             <li>Collez l'identifiant et la clé, puis validez. Vos séances s'importent.</li>
           </ol>
           <div class="note">La clé est chiffrée par PaceDrop et ne s'affiche plus ensuite. Vous pouvez la révoquer à tout moment.</div>
+          <a class="vlink" href="/tuto/relier-intervals-icu/">▶ Voir le tuto vidéo</a>
         </div>
       </div>
     </div>
 
     </details>
 
-    <div class="alt"><strong>Pas envie de créer un compte Intervals.icu ?</strong> Déposez simplement un fichier FIT dans PaceDrop. Et sans montre, lancez PaceGo avec le GPS de votre téléphone.</div>
+    <div class="alt"><strong>Pas envie de créer un compte Intervals.icu ?</strong> Avec une montre Garmin, Suunto ou Polar, <a href="/tuto/relier-garmin-suunto-polar/">reliez-la directement à PaceDrop</a>. Sinon, <a href="/tuto/importer-fichier-fit/">déposez simplement un fichier FIT</a>. Et sans montre, lancez PaceGo avec le GPS de votre téléphone.</div>
   </div>
 </section>
 
