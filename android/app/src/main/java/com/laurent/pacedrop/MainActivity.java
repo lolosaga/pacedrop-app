@@ -1,5 +1,7 @@
 package com.laurent.pacedrop;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.Manifest;
 import android.content.Intent;
@@ -63,7 +65,60 @@ public class MainActivity extends BridgeActivity {
         voix.speak(texte, TextToSpeech.QUEUE_FLUSH, null, "pd");
     }
 
+    /** Jeton Firebase de cet appareil (vide tant que Firebase n'est pas configuré ou que le jeton n'est pas arrivé). */
+    private volatile String jetonPush = "";
+
+    private void preparerNotifications() {
+        // Canal « Mes séances » : « Bravo pour ta séance », avec le bruit et la vibration par défaut.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager gestionnaire = getSystemService(NotificationManager.class);
+            if (gestionnaire != null) {
+                NotificationChannel canal = new NotificationChannel("seances", "Mes séances", NotificationManager.IMPORTANCE_HIGH);
+                canal.setDescription("Ta séance est prête à être analysée.");
+                gestionnaire.createNotificationChannel(canal);
+            }
+        }
+        // Android 13+ : la permission d'afficher des notifications se demande.
+        if (Build.VERSION.SDK_INT >= 33
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.POST_NOTIFICATIONS }, 4102);
+        }
+        // Le jeton Firebase : sans fichier google-services.json, Firebase n'est pas démarré et on n'en tient pas compte.
+        try {
+            com.google.firebase.messaging.FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener(jeton -> jetonPush = jeton == null ? "" : jeton);
+        } catch (Exception ignore) {
+            jetonPush = "";
+        }
+    }
+
+    /** Une notification touchée ouvre la page visée (clé « url » : un chemin du site, jamais une adresse extérieure). */
+    private void ouvrirDepuisNotification(Intent intent) {
+        if (intent == null || intent.getExtras() == null) return;
+        String url = intent.getStringExtra("url");
+        if (url == null || !url.startsWith("/") || url.startsWith("//")) return;
+        final WebView web = getBridge() != null ? getBridge().getWebView() : null;
+        if (web == null) return;
+        String courante = web.getUrl();
+        if (courante == null) return;
+        try {
+            Uri base = Uri.parse(courante);
+            final String cible = base.getScheme() + "://" + base.getAuthority() + url;
+            web.postDelayed(() -> web.loadUrl(cible), 600);
+        } catch (Exception ignore) { }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ouvrirDepuisNotification(intent);
+    }
+
     private class PontIdentifiants {
+        /** Le jeton Firebase de l'appareil : la page l'envoie au serveur pour recevoir « Bravo pour ta séance ». */
+        @JavascriptInterface
+        public String jetonPush() { return jetonPush; }
+
         /** Lit un texte à voix haute (synthèse vocale d'Android, en français) : la WebView n'a pas speechSynthesis. */
         @JavascriptInterface
         public void parler(final String texte) { runOnUiThread(() -> parlerNatif(texte)); }
@@ -268,6 +323,9 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preparerNotifications();
+        // Ouverte depuis une notification (appli fermée) : la page visée s'ouvre une fois le site chargé.
+        getWindow().getDecorView().postDelayed(() -> ouvrirDepuisNotification(getIntent()), 2500);
         // Taille du texte alignée sur le rendu dans Chrome (115 %).
         if (getBridge() != null && getBridge().getWebView() != null) {
             getBridge().getWebView().getSettings().setTextZoom(115);

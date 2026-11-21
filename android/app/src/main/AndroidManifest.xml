@@ -32,7 +32,10 @@
             android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
         </provider>
-    </application>
+            <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_stat_pacedrop" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/notif_pacedrop" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="seances" />
+</application>
 
     <!-- Permissions -->
 
