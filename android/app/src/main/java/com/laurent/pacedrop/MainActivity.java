@@ -20,7 +20,10 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.credentials.CreateCredentialResponse;
 import androidx.credentials.CreatePasswordRequest;
@@ -288,6 +291,16 @@ public class MainActivity extends BridgeActivity {
         WindowInsetsControllerCompat controleur = WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
         controleur.setAppearanceLightStatusBars(true);
         controleur.setAppearanceLightNavigationBars(true);
+        // Clavier : en plein écran (bord à bord) Android ne redimensionne plus la fenêtre, le clavier se pose par-dessus la saisie.
+        // On réserve sa hauteur en bas du contenu (moins la barre de navigation, déjà gérée par les marges de Capacitor), sans
+        // consommer les marges : la zone de saisie remonte au-dessus du clavier, comme dans une messagerie.
+        final View contenu = findViewById(android.R.id.content);
+        ViewCompat.setOnApplyWindowInsetsListener(contenu, (vue, marges) -> {
+            Insets clavier = marges.getInsets(WindowInsetsCompat.Type.ime());
+            Insets barres = marges.getInsets(WindowInsetsCompat.Type.systemBars());
+            vue.setPadding(0, 0, 0, Math.max(0, clavier.bottom - barres.bottom));
+            return marges;
+        });
         // Bouton retour : revient à la page précédente du site, et ne quitte
         // l'appli que depuis la première page.
         getOnBackPressedDispatcher().addCallback(
