@@ -88,7 +88,6 @@ public class MainActivity extends BridgeActivity {
         // Le jeton Firebase : sans fichier google-services.json, Firebase n'est pas démarré et on n'en tient pas compte.
         demanderJetonPush(0);
     }
-    }
 
     /** Demande le jeton à Firebase ; SERVICE_NOT_AVAILABLE est passager (réseau, services Google qui s'éveillent) : on redemande. */
     private void demanderJetonPush(final int essai) {
