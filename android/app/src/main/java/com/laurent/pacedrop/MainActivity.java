@@ -67,6 +67,8 @@ public class MainActivity extends BridgeActivity {
 
     /** Jeton Firebase de cet appareil (vide tant que Firebase n'est pas configuré ou que le jeton n'est pas arrivé). */
     private volatile String jetonPush = "";
+    /** Pourquoi le jeton manque (pour le diagnostic du serveur) : texte de l'erreur Firebase, vide si tout va bien. */
+    private volatile String erreurPush = "";
 
     private void preparerNotifications() {
         // Canal « Mes séances » : « Bravo pour ta séance », avec le bruit et la vibration par défaut.
@@ -86,9 +88,18 @@ public class MainActivity extends BridgeActivity {
         // Le jeton Firebase : sans fichier google-services.json, Firebase n'est pas démarré et on n'en tient pas compte.
         try {
             com.google.firebase.messaging.FirebaseMessaging.getInstance().getToken()
-                .addOnSuccessListener(jeton -> jetonPush = jeton == null ? "" : jeton);
-        } catch (Exception ignore) {
+                .addOnCompleteListener(tache -> {
+                    if (tache.isSuccessful() && tache.getResult() != null) {
+                        jetonPush = tache.getResult();
+                        erreurPush = "";
+                    } else {
+                        Exception e = tache.getException();
+                        erreurPush = e == null ? "jeton vide" : e.toString();
+                    }
+                });
+        } catch (Exception e) {
             jetonPush = "";
+            erreurPush = e.toString();
         }
     }
 
@@ -118,6 +129,9 @@ public class MainActivity extends BridgeActivity {
         /** Le jeton Firebase de l'appareil : la page l'envoie au serveur pour recevoir « Bravo pour ta séance ». */
         @JavascriptInterface
         public String jetonPush() { return jetonPush; }
+
+        @JavascriptInterface
+        public String jetonPushErreur() { return erreurPush; }
 
         /** Lit un texte à voix haute (synthèse vocale d'Android, en français) : la WebView n'a pas speechSynthesis. */
         @JavascriptInterface
