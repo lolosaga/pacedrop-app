@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "276304228188",
+    "project_id": "pacedrop-dd681",
+    "storage_bucket": "pacedrop-dd681.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276304228188:android:0fef2d10e05dbd82429b99",
+        "android_client_info": {
+          "package_name": "com.laurent.pacedrop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClCOgf_vjVcNdN2qX3dqbZkwhCfk4Ofnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
