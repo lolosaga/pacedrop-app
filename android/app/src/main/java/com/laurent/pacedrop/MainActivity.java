@@ -86,6 +86,12 @@ public class MainActivity extends BridgeActivity {
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.POST_NOTIFICATIONS }, 4102);
         }
         // Le jeton Firebase : sans fichier google-services.json, Firebase n'est pas démarré et on n'en tient pas compte.
+        demanderJetonPush(0);
+    }
+    }
+
+    /** Demande le jeton à Firebase ; SERVICE_NOT_AVAILABLE est passager (réseau, services Google qui s'éveillent) : on redemande. */
+    private void demanderJetonPush(final int essai) {
         try {
             com.google.firebase.messaging.FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(tache -> {
@@ -94,7 +100,10 @@ public class MainActivity extends BridgeActivity {
                         erreurPush = "";
                     } else {
                         Exception e = tache.getException();
-                        erreurPush = e == null ? "jeton vide" : e.toString();
+                        erreurPush = (e == null ? "jeton vide" : e.toString()) + " (essai " + (essai + 1) + ")";
+                        if (essai < 8) {
+                            getWindow().getDecorView().postDelayed(() -> demanderJetonPush(essai + 1), 15000L * (essai + 1));
+                        }
                     }
                 });
         } catch (Exception e) {
