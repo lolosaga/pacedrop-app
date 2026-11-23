@@ -1,11 +1,25 @@
 name: APK Android
 
-# Se lance à chaque envoi sur main, ou à la main depuis l'onglet Actions.
+# Se lance quand la partie native change (android, plugins, config Capacitor, icônes, page hors ligne) ou à la main
+# depuis l'onglet Actions. Les écrans viennent du serveur : un changement du site vitrine ou d'un fichier texte ne recompile rien.
 # Résultat : l'APK de test (signé avec la clé de debug) est dans « Artifacts » en bas de la page du run.
 on:
   push:
     branches: [main]
+    paths:
+      - "android/**"
+      - "ios/**"
+      - "package.json"
+      - "package-lock.json"
+      - "capacitor.config.json"
+      - "assets/**"
+      - "resources/**"
+      - "www/**"
   workflow_dispatch:
+
+concurrency:
+  group: apk-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -13,6 +27,7 @@ permissions:
 jobs:
   apk:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
